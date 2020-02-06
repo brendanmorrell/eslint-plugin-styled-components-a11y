@@ -30,7 +30,7 @@ module.exports = {
     // "no-interactive-element-to-noninteractive-role": require("./rules/no-interactive-element-to-noninteractive-role"),
     'no-noninteractive-element-interactions': require('./rules/no-noninteractive-element-interactions'),
     // "no-noninteractive-element-to-interactive-role": require("./rules/no-noninteractive-element-to-interactive-role"),
-    // "no-noninteractive-tabindex": require("./rules/no-noninteractive-tabindex"),
+    'no-noninteractive-tabindex': require('./rules/no-noninteractive-tabindex'),
     'no-onchange': require('./rules/no-onchange'),
     'no-redundant-roles': require('./rules/no-redundant-roles'),
     'no-static-element-interactions': require('./rules/no-static-element-interactions'),
@@ -163,14 +163,14 @@ module.exports = {
         //     td: ["gridcell"]
         //   }
         // ],
-        // "jsx-a11y/no-noninteractive-tabindex": [
-        //   "error",
-        //   {
-        //     tags: [],
-        //     roles: ["tabpanel"],
-        //     allowExpressionValues: true
-        //   }
-        // ],
+        'jsx-a11y/no-noninteractive-tabindex': [
+          'error',
+          {
+            tags: [],
+            roles: ['tabpanel'],
+            allowExpressionValues: true,
+          },
+        ],
         'jsx-a11y/no-onchange': 'error',
         'jsx-a11y/no-redundant-roles': 'error',
         'jsx-a11y/no-static-element-interactions': [
