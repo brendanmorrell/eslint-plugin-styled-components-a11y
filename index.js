@@ -29,7 +29,7 @@ module.exports = {
     // "no-distracting-elements": require("./rules/no-distracting-elements"),
     // "no-interactive-element-to-noninteractive-role": require("./rules/no-interactive-element-to-noninteractive-role"),
     'no-noninteractive-element-interactions': require('./rules/no-noninteractive-element-interactions'),
-    // "no-noninteractive-element-to-interactive-role": require("./rules/no-noninteractive-element-to-interactive-role"),
+    'no-noninteractive-element-to-interactive-role': require('./rules/no-noninteractive-element-to-interactive-role'),
     'no-noninteractive-tabindex': require('./rules/no-noninteractive-tabindex'),
     'no-onchange': require('./rules/no-onchange'),
     'no-redundant-roles': require('./rules/no-redundant-roles'),
@@ -137,32 +137,16 @@ module.exports = {
             img: ['onError', 'onLoad'],
           },
         ],
-        // "jsx-a11y/no-noninteractive-element-to-interactive-role": [
-        //   "error",
-        //   {
-        //     ul: [
-        //       "listbox",
-        //       "menu",
-        //       "menubar",
-        //       "radiogroup",
-        //       "tablist",
-        //       "tree",
-        //       "treegrid"
-        //     ],
-        //     ol: [
-        //       "listbox",
-        //       "menu",
-        //       "menubar",
-        //       "radiogroup",
-        //       "tablist",
-        //       "tree",
-        //       "treegrid"
-        //     ],
-        //     li: ["menuitem", "option", "row", "tab", "treeitem"],
-        //     table: ["grid"],
-        //     td: ["gridcell"]
-        //   }
-        // ],
+        'jsx-a11y/no-noninteractive-element-to-interactive-role': [
+          'error',
+          {
+            ul: ['listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid'],
+            ol: ['listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid'],
+            li: ['menuitem', 'option', 'row', 'tab', 'treeitem'],
+            table: ['grid'],
+            td: ['gridcell'],
+          },
+        ],
         'jsx-a11y/no-noninteractive-tabindex': [
           'error',
           {
