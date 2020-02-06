@@ -25,8 +25,8 @@ module.exports = {
     // "media-has-caption": require("./rules/media-has-caption"),
     // "mouse-events-have-key-events": require("./rules/mouse-events-have-key-events"),
     // "no-access-key": require("./rules/no-access-key"),
-    // "no-autofocus": require("./rules/no-autofocus"),
-    // "no-distracting-elements": require("./rules/no-distracting-elements"),
+    'no-autofocus': require('./rules/no-autofocus'),
+    'no-distracting-elements': require('./rules/no-distracting-elements'),
     'no-interactive-element-to-noninteractive-role': require('./rules/no-interactive-element-to-noninteractive-role'),
     'no-noninteractive-element-interactions': require('./rules/no-noninteractive-element-interactions'),
     'no-noninteractive-element-to-interactive-role': require('./rules/no-noninteractive-element-to-interactive-role'),
@@ -109,8 +109,8 @@ module.exports = {
         // "jsx-a11y/media-has-caption": "error",
         // "jsx-a11y/mouse-events-have-key-events": "error",
         // "jsx-a11y/no-access-key": "error",
-        // "jsx-a11y/no-autofocus": "error",
-        // "jsx-a11y/no-distracting-elements": "error",
+        'jsx-a11y/no-autofocus': 'error',
+        'jsx-a11y/no-distracting-elements': 'error',
         'jsx-a11y/no-interactive-element-to-noninteractive-role': [
           'error',
           {
