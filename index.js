@@ -12,7 +12,7 @@ module.exports = {
     // "aria-role": require("./rules/aria-role"),
     // "aria-unsupported-elements": require("./rules/aria-unsupported-elements"),
     // "autocomplete-valid": require("./rules/autocomplete-valid"),
-    "click-events-have-key-events": require("./rules/click-events-have-key-events")
+    'click-events-have-key-events': require('./rules/click-events-have-key-events'),
     // "control-has-associated-label": require("./rules/control-has-associated-label"),
     // "heading-has-content": require("./rules/heading-has-content"),
     // "html-has-lang": require("./rules/html-has-lang"),
@@ -33,7 +33,7 @@ module.exports = {
     // "no-noninteractive-tabindex": require("./rules/no-noninteractive-tabindex"),
     // "no-onchange": require("./rules/no-onchange"),
     // "no-redundant-roles": require("./rules/no-redundant-roles"),
-    // "no-static-element-interactions": require("./rules/no-static-element-interactions"),
+    'no-static-element-interactions': require('./rules/no-static-element-interactions'),
     // "role-has-required-aria-props": require("./rules/role-has-required-aria-props"),
     // "role-supports-aria-props": require("./rules/role-supports-aria-props"),
     // scope: require("./rules/scope"),
@@ -41,11 +41,11 @@ module.exports = {
   },
   configs: {
     recommended: {
-      plugins: ["jsx-a11y"],
+      plugins: ['jsx-a11y'],
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
-        }
+          jsx: true,
+        },
       },
       rules: {
         // "jsx-a11y/accessible-emoji": "error",
@@ -58,7 +58,7 @@ module.exports = {
         // "jsx-a11y/aria-role": "error",
         // "jsx-a11y/aria-unsupported-elements": "error",
         // "jsx-a11y/autocomplete-valid": "error",
-        "jsx-a11y/click-events-have-key-events": "error"
+        'jsx-a11y/click-events-have-key-events': 'error',
         // "jsx-a11y/control-has-associated-label": [
         //   "off",
         //   {
@@ -173,32 +173,25 @@ module.exports = {
         // ],
         // "jsx-a11y/no-onchange": "error",
         // "jsx-a11y/no-redundant-roles": "error",
-        // "jsx-a11y/no-static-element-interactions": [
-        //   "error",
-        //   {
-        //     allowExpressionValues: true,
-        //     handlers: [
-        //       "onClick",
-        //       "onMouseDown",
-        //       "onMouseUp",
-        //       "onKeyPress",
-        //       "onKeyDown",
-        //       "onKeyUp"
-        //     ]
-        //   }
-        // ],
+        'jsx-a11y/no-static-element-interactions': [
+          'error',
+          {
+            allowExpressionValues: true,
+            handlers: ['onClick', 'onMouseDown', 'onMouseUp', 'onKeyPress', 'onKeyDown', 'onKeyUp'],
+          },
+        ],
         // "jsx-a11y/role-has-required-aria-props": "error",
         // "jsx-a11y/role-supports-aria-props": "error",
         // "jsx-a11y/scope": "error",
         // "jsx-a11y/tabindex-no-positive": "error"
-      }
+      },
     },
     strict: {
-      plugins: ["jsx-a11y"],
+      plugins: ['jsx-a11y'],
       parserOptions: {
         ecmaFeatures: {
-          jsx: true
-        }
+          jsx: true,
+        },
       },
       rules: {
         // "jsx-a11y/accessible-emoji": "error",
@@ -211,7 +204,7 @@ module.exports = {
         // "jsx-a11y/aria-role": "error",
         // "jsx-a11y/aria-unsupported-elements": "error",
         // "jsx-a11y/autocomplete-valid": "error",
-        "jsx-a11y/click-events-have-key-events": "error"
+        // 'jsx-a11y/click-events-have-key-events': 'error',
         // "jsx-a11y/control-has-associated-label": [
         //   "off",
         //   {
@@ -284,7 +277,7 @@ module.exports = {
         // "jsx-a11y/role-supports-aria-props": "error",
         // "jsx-a11y/scope": "error",
         // "jsx-a11y/tabindex-no-positive": "error"
-      }
-    }
-  }
+      },
+    },
+  },
 };
