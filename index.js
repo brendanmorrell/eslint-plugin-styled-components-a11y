@@ -9,7 +9,7 @@ module.exports = {
     // "aria-activedescendant-has-tabindex": require("./rules/aria-activedescendant-has-tabindex"),
     // "aria-props": require("./rules/aria-props"),
     // "aria-proptypes": require("./rules/aria-proptypes"),
-    // "aria-role": require("./rules/aria-role"),
+    // // "aria-role": require("./rules/aria-role"),
     // "aria-unsupported-elements": require("./rules/aria-unsupported-elements"),
     // "autocomplete-valid": require("./rules/autocomplete-valid"),
     'click-events-have-key-events': require('./rules/click-events-have-key-events'),
@@ -31,8 +31,8 @@ module.exports = {
     'no-noninteractive-element-interactions': require('./rules/no-noninteractive-element-interactions'),
     // "no-noninteractive-element-to-interactive-role": require("./rules/no-noninteractive-element-to-interactive-role"),
     // "no-noninteractive-tabindex": require("./rules/no-noninteractive-tabindex"),
-    // "no-onchange": require("./rules/no-onchange"),
-    // "no-redundant-roles": require("./rules/no-redundant-roles"),
+    'no-onchange': require('./rules/no-onchange'),
+    'no-redundant-roles': require('./rules/no-redundant-roles'),
     'no-static-element-interactions': require('./rules/no-static-element-interactions'),
     'role-has-required-aria-props': require('./rules/role-has-required-aria-props'),
     // // "role-supports-aria-props": require("./rules/role-supports-aria-props"),
@@ -55,7 +55,7 @@ module.exports = {
         // "jsx-a11y/aria-activedescendant-has-tabindex": "error",
         // "jsx-a11y/aria-props": "error",
         // "jsx-a11y/aria-proptypes": "error",
-        // "jsx-a11y/aria-role": "error",
+        // // "jsx-a11y/aria-role": "error",
         // "jsx-a11y/aria-unsupported-elements": "error",
         // "jsx-a11y/autocomplete-valid": "error",
         'jsx-a11y/click-events-have-key-events': 'error',
@@ -171,8 +171,8 @@ module.exports = {
         //     allowExpressionValues: true
         //   }
         // ],
-        // "jsx-a11y/no-onchange": "error",
-        // "jsx-a11y/no-redundant-roles": "error",
+        'jsx-a11y/no-onchange': 'error',
+        'jsx-a11y/no-redundant-roles': 'error',
         'jsx-a11y/no-static-element-interactions': [
           'error',
           {

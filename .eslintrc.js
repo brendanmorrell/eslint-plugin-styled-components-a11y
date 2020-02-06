@@ -30,6 +30,7 @@ module.exports = {
     }
   },
   rules: {
+    ""
     "my-eslint-rules/click-events-have-key-events": "warn",
     "my-eslint-rules/another": "warn",
     "no-nested-ternary": 0,
@@ -57,6 +58,7 @@ module.exports = {
     ],
     "class-methods-use-this": 0,
     "import/no-unresolved": [2, { caseSensitive: false }],
+    "jsx-ally/no-onchange": 'error',
     "jsx-a11y/label-has-for": [
       2,
       {

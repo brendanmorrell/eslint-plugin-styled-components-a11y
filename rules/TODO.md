@@ -2,3 +2,4 @@
 
 - tabindex-no-positive
 - role-supports-aria-props
+- aria-role
