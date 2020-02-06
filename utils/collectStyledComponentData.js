@@ -12,6 +12,14 @@ const checkIfArrowFunctionAttrs = tagNode => {
   return type === 'ArrowFunctionExpression';
 };
 
+const propertyToJsxAttribute = ({ key, value }) => {
+  return {
+    type: 'JSXAttribute',
+    name: { type: `JSX${key.type}}`, name: key.name },
+    value: value,
+  };
+};
+
 module.exports = function(styledComponentsDict) {
   return {
     TaggedTemplateExpression(node) {
@@ -32,11 +40,7 @@ module.exports = function(styledComponentsDict) {
           } else {
             attrsPropertiesArr = node.tag.arguments[0].properties;
           }
-          attrs = attrsPropertiesArr;
-          /*  attrsPropertiesArr.map(x => ({
-            key: x.key.name,
-            value: x.value.value
-          })); */
+          attrs = attrsPropertiesArr.map(propertyToJsxAttribute);
         }
         styledComponentsDict[scName] = { name: scName, attrs, tag };
       }

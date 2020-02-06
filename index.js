@@ -4,7 +4,7 @@ module.exports = {
   rules: {
     // "accessible-emoji": require("./rules/accessible-emoji"),
     // "alt-text": require("./rules/alt-text"),
-    // "anchor-has-content": require("./rules/anchor-has-content"),
+    'anchor-has-content': require('./rules/anchor-has-content'),
     // "anchor-is-valid": require("./rules/anchor-is-valid"),
     // "aria-activedescendant-has-tabindex": require("./rules/aria-activedescendant-has-tabindex"),
     // "aria-props": require("./rules/aria-props"),
@@ -28,7 +28,7 @@ module.exports = {
     // "no-autofocus": require("./rules/no-autofocus"),
     // "no-distracting-elements": require("./rules/no-distracting-elements"),
     // "no-interactive-element-to-noninteractive-role": require("./rules/no-interactive-element-to-noninteractive-role"),
-    "no-noninteractive-element-interactions": require("./rules/no-noninteractive-element-interactions"),
+    'no-noninteractive-element-interactions': require('./rules/no-noninteractive-element-interactions'),
     // "no-noninteractive-element-to-interactive-role": require("./rules/no-noninteractive-element-to-interactive-role"),
     // "no-noninteractive-tabindex": require("./rules/no-noninteractive-tabindex"),
     // "no-onchange": require("./rules/no-onchange"),
@@ -50,7 +50,7 @@ module.exports = {
       rules: {
         // "jsx-a11y/accessible-emoji": "error",
         // "jsx-a11y/alt-text": "error",
-        // "jsx-a11y/anchor-has-content": "error",
+        'jsx-a11y/anchor-has-content': 'error',
         // "jsx-a11y/anchor-is-valid": "error",
         // "jsx-a11y/aria-activedescendant-has-tabindex": "error",
         // "jsx-a11y/aria-props": "error",
@@ -117,25 +117,25 @@ module.exports = {
         //     tr: ["none", "presentation"]
         //   }
         // ],
-        "jsx-a11y/no-noninteractive-element-interactions": [
-          "error",
+        'jsx-a11y/no-noninteractive-element-interactions': [
+          'error',
           {
             handlers: [
-              "onClick",
-              "onError",
-              "onLoad",
-              "onMouseDown",
-              "onMouseUp",
-              "onKeyPress",
-              "onKeyDown",
-              "onKeyUp"
+              'onClick',
+              'onError',
+              'onLoad',
+              'onMouseDown',
+              'onMouseUp',
+              'onKeyPress',
+              'onKeyDown',
+              'onKeyUp',
             ],
-            alert: ["onKeyUp", "onKeyDown", "onKeyPress"],
-            body: ["onError", "onLoad"],
-            dialog: ["onKeyUp", "onKeyDown", "onKeyPress"],
-            iframe: ["onError", "onLoad"],
-            img: ["onError", "onLoad"]
-          }
+            alert: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
+            body: ['onError', 'onLoad'],
+            dialog: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
+            iframe: ['onError', 'onLoad'],
+            img: ['onError', 'onLoad'],
+          },
         ],
         // "jsx-a11y/no-noninteractive-element-to-interactive-role": [
         //   "error",
