@@ -18,7 +18,7 @@ module.exports = {
     'html-has-lang': require('./rules/html-has-lang'),
     // "iframe-has-title": require("./rules/iframe-has-title"),
     // "img-redundant-alt": require("./rules/img-redundant-alt"),
-    // "interactive-supports-focus": require("./rules/interactive-supports-focus"),
+    'interactive-supports-focus': require('./rules/interactive-supports-focus'),
     'label-has-associated-control': require('./rules/label-has-associated-control'),
     'label-has-for': require('./rules/label-has-for'),
     lang: require('./rules/lang'),
@@ -90,20 +90,12 @@ module.exports = {
         'jsx-a11y/html-has-lang': 'error',
         // "jsx-a11y/iframe-has-title": "error",
         // "jsx-a11y/img-redundant-alt": "error",
-        // "jsx-a11y/interactive-supports-focus": [
-        //   "error",
-        //   {
-        //     tabbable: [
-        //       "button",
-        //       "checkbox",
-        //       "link",
-        //       "searchbox",
-        //       "spinbutton",
-        //       "switch",
-        //       "textbox"
-        //     ]
-        //   }
-        // ],
+        'jsx-a11y/interactive-supports-focus': [
+          'error',
+          {
+            tabbable: ['button', 'checkbox', 'link', 'searchbox', 'spinbutton', 'switch', 'textbox'],
+          },
+        ],
         'jsx-a11y/label-has-associated-control': 'error',
         'jsx-a11y/label-has-for': 'off',
         'jsx-a11y/lang': 'error',
