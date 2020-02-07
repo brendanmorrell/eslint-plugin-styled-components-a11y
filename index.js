@@ -15,13 +15,13 @@ module.exports = {
     'click-events-have-key-events': require('./rules/click-events-have-key-events'),
     // "control-has-associated-label": require("./rules/control-has-associated-label"),
     // "heading-has-content": require("./rules/heading-has-content"),
-    // "html-has-lang": require("./rules/html-has-lang"),
+    'html-has-lang': require('./rules/html-has-lang'),
     // "iframe-has-title": require("./rules/iframe-has-title"),
     // "img-redundant-alt": require("./rules/img-redundant-alt"),
     // "interactive-supports-focus": require("./rules/interactive-supports-focus"),
-    // "label-has-associated-control": require("./rules/label-has-associated-control"),
-    // "label-has-for": require("./rules/label-has-for"),
-    // lang: require("./rules/lang"),
+    'label-has-associated-control': require('./rules/label-has-associated-control'),
+    'label-has-for': require('./rules/label-has-for'),
+    lang: require('./rules/lang'),
     'media-has-caption': require('./rules/media-has-caption'),
     // //'mouse-events-have-key-events': require('./rules/mouse-events-have-key-events'),
     // // "no-access-key": require("./rules/no-access-key"),
@@ -87,7 +87,7 @@ module.exports = {
         //   }
         // ],
         // "jsx-a11y/heading-has-content": "error",
-        // "jsx-a11y/html-has-lang": "error",
+        'jsx-a11y/html-has-lang': 'error',
         // "jsx-a11y/iframe-has-title": "error",
         // "jsx-a11y/img-redundant-alt": "error",
         // "jsx-a11y/interactive-supports-focus": [
@@ -104,8 +104,9 @@ module.exports = {
         //     ]
         //   }
         // ],
-        // "jsx-a11y/label-has-associated-control": "error",
-        // "jsx-a11y/label-has-for": "off",
+        'jsx-a11y/label-has-associated-control': 'error',
+        'jsx-a11y/label-has-for': 'off',
+        'jsx-a11y/lang': 'error',
         'jsx-a11y/media-has-caption': 'error',
         // //'jsx-a11y/mouse-events-have-key-events': 'error',
         'jsx-a11y/no-access-key': 'error',
