@@ -1,9 +1,25 @@
 /* eslint-disable global-require */
+// const makeRule = require('./utils/makeRule');
+const makeRule = require('./utils/makeRule');
 
 module.exports = {
   rules: {
+    'async-func-name': {
+      create: function(context) {
+        return {
+          FunctionDeclaration(node) {
+            if (node.async && !/Async$/.test(node.id.name)) {
+              context.report({
+                node,
+                message: "Async function name must end in 'Async'",
+              });
+            }
+          },
+        };
+      },
+    },
     // // "accessible-emoji": require("./rules/accessible-emoji"),
-    'alt-text': require('./rules/alt-text'),
+    'alt-text': makeRule('alt-text'),
     'anchor-has-content': require('./rules/anchor-has-content'),
     'anchor-is-valid': require('./rules/anchor-is-valid'),
     'aria-activedescendant-has-tabindex': require('./rules/aria-activedescendant-has-tabindex'),
