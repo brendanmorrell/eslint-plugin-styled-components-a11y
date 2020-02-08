@@ -8,10 +8,10 @@ module.exports = name => ({
   create(context) {
     const nodeParserPath = path.join(__dirname, 'nodeParsers', ruleNameToTypeDict[name]);
     const rule = rules[name];
-    const styledComponentsDict = {};
+    const styledComponents = {};
     return {
-      ...collectStyledComponentData(styledComponentsDict),
-      ...require(nodeParserPath)(context, styledComponentsDict, rule),
+      ...collectStyledComponentData(styledComponents),
+      ...require(nodeParserPath)(context, styledComponents, rule),
     };
   },
 });

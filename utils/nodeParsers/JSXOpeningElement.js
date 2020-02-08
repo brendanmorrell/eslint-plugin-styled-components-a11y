@@ -1,9 +1,9 @@
 const mergeStyledAttrsWithNodeAttrs = require('../mergeStyledAttrsWithNodeAttrs');
 
-module.exports = (context, styledComponentsDict, rule) => ({
+module.exports = (context, styledComponents, rule) => ({
   JSXOpeningElement(node) {
     const originalName = node.name.name;
-    const styledComponent = styledComponentsDict[originalName];
+    const styledComponent = styledComponents[originalName];
     if (styledComponent) {
       const { tag, attrs } = styledComponent;
       const originalNodeAttr = node.attributes;
