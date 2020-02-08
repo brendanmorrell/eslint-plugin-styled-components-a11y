@@ -2,7 +2,7 @@ module.exports = function(styledComponentsDict) {
   return {
     TaggedTemplateExpression(node) {
       const scName = node.parent.id.name;
-      let attrs = {};
+      let attrs = [];
       let tag = '';
       if (node.tag.type === 'CallExpression') {
         const isAttrs = checkIfAttrs(node.tag);
@@ -18,7 +18,11 @@ module.exports = function(styledComponentsDict) {
           } else {
             attrsPropertiesArr = node.tag.arguments[0].properties;
           }
-          attrs = attrsPropertiesArr.map(propertyToJsxAttribute);
+
+          attrs = attrsPropertiesArr.map(x => ({
+            key: x.key.name,
+            value: x.value.value,
+          }));
         }
         styledComponentsDict[scName] = { name: scName, attrs, tag };
       }
@@ -48,12 +52,4 @@ function checkIfFunctionAttrs(tagNode) {
 function checkIfArrowFunctionAttrs(tagNode) {
   const type = tagNode.arguments[0].type;
   return type === 'ArrowFunctionExpression';
-}
-
-function propertyToJsxAttribute({ key, value }) {
-  return {
-    type: 'JSXAttribute',
-    name: { type: `JSX${key.type}}`, name: key.name },
-    value: value,
-  };
 }
