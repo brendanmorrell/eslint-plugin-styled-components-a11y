@@ -35,7 +35,7 @@ module.exports = {
     'no-onchange': makeRule('no-onchange'),
     'no-redundant-roles': makeRule('no-redundant-roles'),
     'no-static-element-interactions': makeRule('no-static-element-interactions'),
-    'role-has-makeRuled-aria-props': makeRule('role-has-makeRuled-aria-props'),
+    'role-has-required-aria-props': makeRule('role-has-required-aria-props'),
     // // "role-supports-aria-props": makeRule("role-supports-aria-props"),
     scope: makeRule('scope'),
     // //'tabindex-no-positive': makeRule('tabindex-no-positive'),
