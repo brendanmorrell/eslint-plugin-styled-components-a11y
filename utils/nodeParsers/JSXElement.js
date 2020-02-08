@@ -1,6 +1,4 @@
-const { rules } = require('eslint-plugin-jsx-a11y');
-
-module.exports = (context, styledComponentsDict) => ({
+module.exports = (context, styledComponentsDict, rule) => ({
   JSXElement(node) {
     const originalName = node.openingElement.name.name;
     const styledComponent = styledComponentsDict[originalName];
