@@ -34,5 +34,5 @@ module.exports = {
   'role-supports-aria-props': 'noop',
   'alt-text': 'JSXOpeningElement',
   scope: 'JSXAttribute',
-  'tabindex-no-positive': 'noop',
+  'tabindex-no-positive': 'JSXAttribute',
 };
