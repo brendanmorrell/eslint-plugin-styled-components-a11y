@@ -1,7 +1,4 @@
-const generate = require('@babel/generator').default;
-
-module.exports = attributesAst => {
-  const output = generate(attributesAst, { plugins: ['jsx', 'estree'] });
-  const [, match] = output.match(/as=(.+?)\W/) || ['', ''];
-  return match.replace(/^{/, '').replace(/}$/, '');
+module.exports = attributes => {
+  const [asProp] = attributes.filter(x => x.name.name === 'as').map(x => x.value.value);
+  return asProp;
 };

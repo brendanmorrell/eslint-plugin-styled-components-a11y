@@ -1,5 +1,6 @@
 const mergeStyledAttrsWithNodeAttrs = require('../mergeStyledAttrsWithNodeAttrs');
 const getAsProp = require('../getAsProp');
+
 module.exports = (context, styledComponents, rule) => ({
   JSXElement(node) {
     try {
@@ -9,7 +10,7 @@ module.exports = (context, styledComponents, rule) => ({
         const { tag, attrs } = styledComponent;
         const originalNodeAttr = node.openingElement.attributes;
         const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
-        const asProp = getAsProp(attrs);
+        const asProp = getAsProp(allAttrs);
         node.openingElement.attributes = allAttrs;
         node.openingElement.name.name = asProp || tag;
         rule.create(context).JSXElement(node);

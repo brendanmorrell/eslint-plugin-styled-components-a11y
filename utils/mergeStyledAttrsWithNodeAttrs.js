@@ -1,7 +1,7 @@
 const { parse } = require('@babel/parser');
 
 module.exports = (styledAttrs, nodeAttrs) => {
-  const jsxString = `<div ${styledAttrs.map(keyValuePairToProps)}/>`;
+  const jsxString = `<div ${styledAttrs.map(keyValuePairToProps).join(' ')}/>`;
   const ast = parse(jsxString, { plugins: ['jsx', 'estree'] });
   const astAttributes = ast.program.body[0].expression.openingElement.attributes;
   return nodeAttrs.concat(astAttributes);
