@@ -7,13 +7,13 @@ module.exports = (context, styledComponents, rule) => ({
       const styledComponent = styledComponents[originalName];
       if (styledComponent) {
         const { tag, attrs } = styledComponent;
-        // const originalNodeAttr = node.openingElement.attributes;
-        // const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
-        // node.openingElement.attributes = allAttrs;
+        const originalNodeAttr = node.openingElement.attributes;
+        const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
+        node.openingElement.attributes = allAttrs;
         node.openingElement.name.name = tag;
         rule.create(context).JSXElement(node);
         node.openingElement.name.name = originalName;
-        // node.openingElement.attributes = originalNodeAttr;
+        node.openingElement.attributes = originalNodeAttr;
       }
     } catch {}
   },
