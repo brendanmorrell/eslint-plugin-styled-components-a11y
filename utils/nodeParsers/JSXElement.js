@@ -1,3 +1,5 @@
+const mergeStyledAttrsWithNodeAttrs = require('../mergeStyledAttrsWithNodeAttrs');
+
 module.exports = (context, styledComponents, rule) => ({
   JSXElement(node) {
     try {
