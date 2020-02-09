@@ -12,3 +12,7 @@
 ## cant get regular rule to fire even
 
 - autocomplete-valid (add rule/file when ready)
+
+## look into
+
+- media-has-caption with attrs (child elmeent is track)
