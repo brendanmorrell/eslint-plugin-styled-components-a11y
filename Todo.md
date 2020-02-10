@@ -18,6 +18,4 @@
 ## bugs/improvements
 
 - JSXAttribute for attr:
-  - runs once for each prop instead of just once
-  - does not run if zero props added
   - location is set to entire component. would be better at the attrs obj
