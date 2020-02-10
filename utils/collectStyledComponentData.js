@@ -24,6 +24,11 @@ module.exports = function(styledComponentsDict) {
             value: x.value.value,
           }));
         }
+        if (node.callee.name === 'styled') {
+          const ancestorScName = node.arguments[0].name;
+          attrs = styledComponentsDict[ancestorScName].attrs;
+          tag = styledComponentsDict[ancestorScName].tag;
+        }
         styledComponentsDict[scName] = { name: scName, attrs, tag };
       }
       if (node.tag.type === 'MemberExpression') {
