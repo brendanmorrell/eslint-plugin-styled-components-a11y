@@ -9,7 +9,6 @@ module.exports = function(styledComponentsDict) {
           const ancestorScName = node.tag.arguments[0].name;
           attrs = styledComponentsDict[ancestorScName].attrs;
           tag = styledComponentsDict[ancestorScName].tag;
-          context.report(node, u.inspect({ ancestorScName, styledComponentsDict }));
         } else if (checkIfAttrs(node.tag)) {
           let attrsPropertiesArr = [];
           tag = node.tag.callee.object.property.name;
