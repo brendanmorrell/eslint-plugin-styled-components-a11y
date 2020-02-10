@@ -3,6 +3,7 @@ const makeRule = require('./utils/makeRule');
 
 module.exports = {
   rules: {
+    exports: require('./utils/exports'),
     'accessible-emoji': makeRule('accessible-emoji'),
     'alt-text': makeRule('alt-text'),
     'anchor-has-content': makeRule('anchor-has-content'),
