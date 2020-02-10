@@ -1,4 +1,5 @@
 const mergeStyledAttrsWithNodeAttrs = require('../mergeStyledAttrsWithNodeAttrs');
+const getAsProp = require('../getAsProp');
 
 module.exports = (context, styledComponents, rule) => ({
   JSXAttribute(node) {
@@ -10,7 +11,8 @@ module.exports = (context, styledComponents, rule) => ({
         const originalNodeAttr = node.parent.attributes;
         const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
         node.parent.attributes = allAttrs;
-        node.parent.name.name = tag;
+        const asProp = getAsProp(allAttrs);
+        node.parent.name.name = asProp || tag;
         rule.create(context).JSXAttribute(node);
         node.parent.name.name = parentName;
         node.parent.attributes = originalNodeAttr;
