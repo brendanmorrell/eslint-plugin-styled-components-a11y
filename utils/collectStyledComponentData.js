@@ -5,8 +5,12 @@ module.exports = function(styledComponentsDict) {
       let attrs = [];
       let tag = '';
       if (node.tag.type === 'CallExpression') {
-        const isAttrs = checkIfAttrs(node.tag);
-        if (isAttrs) {
+        if (node.tag.callee.name === 'styled') {
+          const ancestorScName = node.tag.arguments[0].name;
+          attrs = styledComponentsDict[ancestorScName].attrs;
+          tag = styledComponentsDict[ancestorScName].tag;
+          context.report(node, u.inspect({ ancestorScName, styledComponentsDict }));
+        } else if (checkIfAttrs(node.tag)) {
           let attrsPropertiesArr = [];
           tag = node.tag.callee.object.property.name;
           const isFunctionAttrs = checkIfFunctionAttrs(node.tag) || checkIfArrowFunctionAttrs(node.tag);
@@ -23,11 +27,6 @@ module.exports = function(styledComponentsDict) {
             key: x.key.name,
             value: x.value.value,
           }));
-        }
-        if (node.callee.name === 'styled') {
-          const ancestorScName = node.arguments[0].name;
-          attrs = styledComponentsDict[ancestorScName].attrs;
-          tag = styledComponentsDict[ancestorScName].tag;
         }
         styledComponentsDict[scName] = { name: scName, attrs, tag };
       }
