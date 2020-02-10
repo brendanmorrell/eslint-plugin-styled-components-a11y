@@ -31,7 +31,7 @@ module.exports = {
   'no-redundant-roles': 'JSXOpeningElement',
   'no-static-element-interactions': 'JSXOpeningElement',
   'role-has-required-aria-props': 'JSXAttribute',
-  'role-supports-aria-props': 'noop',
+  'role-supports-aria-props': 'JSXOpeningElement',
   'alt-text': 'JSXOpeningElement',
   scope: 'JSXAttribute',
   'tabindex-no-positive': 'JSXAttribute',
