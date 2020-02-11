@@ -10,6 +10,7 @@ const expectedError = {
 const ruleName = 'scope';
 const rule = makeRule(ruleName);
 
+// ## VALID
 // <Div />
 const div = makeStyledTestCases();
 // <Div foo />
@@ -26,9 +27,17 @@ const thScopeColSpread = makeStyledTestCases.withStyledAttrs({
   props: 'scope="col" { ...props}',
   attrs: '{ scope: "col", ...props }',
 });
-console.log('TCL: thScopeColSpread', thScopeColSpread);
+
+// ## INVALID
+// <Div scope {...props} />
+const divScope = makeStyledTestCases.withStyledAttrs({
+  props: 'scope',
+  attrs: '{ scope: true }',
+  errors: [expectedError],
+});
+console.log('TCL: divScope', divScope);
 
 ruleTester.run(ruleName, rule, {
   valid: [...div, ...divFoo, ...thScope, ...thScopeRow, ...thScopeFoo, ...thScopeColSpread],
-  invalid: /* invalidTests */ [],
+  invalid: divScope,
 });

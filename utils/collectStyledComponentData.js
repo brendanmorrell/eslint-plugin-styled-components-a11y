@@ -35,12 +35,14 @@ module.exports = function(styledComponentsDict) {
           } else {
             attrsPropertiesArr = node.tag.arguments[0].properties;
           }
-
-          attrs = attrsPropertiesArr.map(x => ({
-            key: x.key.name,
-            // this is pretty useless. would need to generate code from any template expression for this to really work
-            value: x.value.type === 'TemplateLiteral' ? x.value.quasis[0].value.raw : x.value.value,
-          }));
+          // filter out spread elements (which have no key nor value)
+          attrs = attrsPropertiesArr
+            .filter(x => x.key)
+            .map(x => ({
+              key: x.key.name,
+              // this is pretty useless. would need to generate code from any template expression for this to really work
+              value: x.value.type === 'TemplateLiteral' ? x.value.quasis[0].value.raw : x.value.value,
+            }));
         }
         styledComponentsDict[scName] = { name: scName, attrs, tag };
       }
