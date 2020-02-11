@@ -9,60 +9,66 @@ const expectedError = {
   type: 'JSXAttribute',
 };
 
-const attrsToProps = attrs => Object.entries(attrs).map(([key, value]) =>`${key}=${typeof value === 'string' ? `"${value}"` : `{${value}}`}`).join(' ')
-const attrsToAttrsObj = attrs => `{${Object.entries(attrs).map(([key, value]) =>`${key}: ${typeof value === 'string' ? `"${value}"` : value}`).join(', ')}}`
+const attrsToProps = attrs =>
+  Object.entries(attrs)
+    .map(([key, value]) => `${key}=${typeof value === 'string' ? `"${value}"` : `{${value}}`}`)
+    .join(' ');
+const attrsToAttrsObj = attrs =>
+  `{${Object.entries(attrs)
+    .map(([key, value]) => `${key}: ${typeof value === 'string' ? `"${value}"` : value}`)
+    .join(', ')}}`;
 
-
-const regular = ({ tag = 'div', attrs ={}, children ='children' } = {}) => `
+const regular = ({ tag = 'div', attrs = {}, children = 'children' } = {}) => `
   const STYLED = styled.${tag}\`\`;
   const Func = () => <STYLED ${attrsToProps(attrs)}>${children}</STYLED>;
 `;
 
-
-const withStyledAttrs = ({ tag = 'div', attrs ={}, children ='children' } = {}) => `
+const withStyledAttrs = ({ tag = 'div', attrs = {}, children = 'children' } = {}) => `
   const STYLED = styled.${tag}.attrs(${attrsToAttrsObj(attrs)})\`\`;
   const Func = () => <STYLED>${children}</STYLED>;
 `;
 
-const withStyledComponent = ({ tag = 'div', attrs ={}, children ='children' } = {}) => `
+const withStyledComponent = ({ tag = 'div', attrs = {}, children = 'children' } = {}) => `
   const STYLED = styled.${tag}.attrs(${attrsToAttrsObj(attrs)})\`\`;
   const NESTED = styled(STYLED)\`\`;
   const Func = () => <NESTED>${children}</NESTED>;
 `;
 
-const withStyledComponentAsOther = ({ tag = 'div', attrs ={}, children ='children' } = {}) => `
+const withStyledComponentAsOther = ({ tag = 'div', attrs = {}, children = 'children' } = {}) => `
   const STYLED = styled.${tag === 'button' ? 'div' : 'button'}.attrs(${attrsToAttrsObj(attrs)})\`\`;
   const NESTED = styled(STYLED)\`\`;
   const Func = () => <NESTED as="${tag}">${children}</NESTED>;
 `;
 
+const testAllSituations = args =>
+  [regular, withStyledAttrs, withStyledComponent, withStyledComponentAsOther].map(x => x(args));
+
+const test = { tag: 'span', attrs: { tabIndex: 0 } };
 
 
+// const invalid = x => `
+// const H = styled.div\`\`;
+// const Component = () => <H tabIndex=${x} />
+// `;
+// const invalid2 = x => `
+// const H = styled.div.attrs({ tabIndex:${x} })\`\`;
+// const Component = () => <H />
+// `;
+// const invalid3 = x => `
+// const H = styled.div.attrs({ tabIndex:${x} })\`\`;
+// const F = styled(H)\`\`
+// const Component = () => <F />
+// `;
 
+// const really = `
+// const H = styled.div.attrs({ tabIndex: \`1\` })\`\`;
+// const F = styled(H)\`\`
+// const Component = () => <F />
+// `;
+// const ruleName = 'scope'
+// const rule = makeRule(ruleName);
 
-const invalid = x => `
-const H = styled.div\`\`;
-const Component = () => <H tabIndex=${x} />
-`;
-const invalid2 = x => `
-const H = styled.div.attrs({ tabIndex:${x} })\`\`;
-const Component = () => <H />
-`;
-const invalid3 = x => `
-const H = styled.div.attrs({ tabIndex:${x} })\`\`;
-const F = styled(H)\`\`
-const Component = () => <F />
-`;
-
-const really = `
-const H = styled.div.attrs({ tabIndex: \`1\` })\`\`;
-const F = styled(H)\`\`
-const Component = () => <F />
-`;
-const ruleName = 'scope'
-const rule = makeRule(ruleName);
-
-
+const add
 
 ruleTester.run(ruleName, rule, {
   valid: [
