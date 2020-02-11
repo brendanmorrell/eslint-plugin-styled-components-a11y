@@ -1,3 +1,17 @@
+function checkIfAttrs(tagNode) {
+  return tagNode.callee.property.name === 'attrs';
+}
+
+function checkIfFunctionAttrs(tagNode) {
+  const type = tagNode.arguments[0].type;
+  return type === 'FunctionExpression';
+}
+
+function checkIfArrowFunctionAttrs(tagNode) {
+  const type = tagNode.arguments[0].type;
+  return type === 'ArrowFunctionExpression';
+}
+
 module.exports = function(styledComponentsDict) {
   return {
     TaggedTemplateExpression(node) {
@@ -43,17 +57,3 @@ module.exports = function(styledComponentsDict) {
     },
   };
 };
-
-function checkIfAttrs(tagNode) {
-  return tagNode.callee.property.name === 'attrs';
-}
-
-function checkIfFunctionAttrs(tagNode) {
-  const type = tagNode.arguments[0].type;
-  return type === 'FunctionExpression';
-}
-
-function checkIfArrowFunctionAttrs(tagNode) {
-  const type = tagNode.arguments[0].type;
-  return type === 'ArrowFunctionExpression';
-}

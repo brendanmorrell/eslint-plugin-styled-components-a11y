@@ -1,87 +1,34 @@
 const { RuleTester } = require('eslint');
 const makeRule = require('../../utils/makeRule');
-const parserOptionsMapper = require('../utils/parserOptionsMapper');
-const toStyled = require('../utils/toStyled');
 const ruleTester = new RuleTester();
+const makeStyledTestCases = require('../utils/makeStyledTestCases');
 
 const expectedError = {
   message: 'The scope prop can only be used on <th> elements.',
   type: 'JSXAttribute',
 };
+const ruleName = 'scope';
+const rule = makeRule(ruleName);
 
-const attrsToProps = attrs =>
-  Object.entries(attrs)
-    .map(([key, value]) => `${key}=${typeof value === 'string' ? `"${value}"` : `{${value}}`}`)
-    .join(' ');
-const attrsToAttrsObj = attrs =>
-  `{${Object.entries(attrs)
-    .map(([key, value]) => `${key}: ${typeof value === 'string' ? `"${value}"` : value}`)
-    .join(', ')}}`;
-
-const regular = ({ tag = 'div', attrs = {}, children = 'children' } = {}) => `
-  const STYLED = styled.${tag}\`\`;
-  const Func = () => <STYLED ${attrsToProps(attrs)}>${children}</STYLED>;
-`;
-
-const withStyledAttrs = ({ tag = 'div', attrs = {}, children = 'children' } = {}) => `
-  const STYLED = styled.${tag}.attrs(${attrsToAttrsObj(attrs)})\`\`;
-  const Func = () => <STYLED>${children}</STYLED>;
-`;
-
-const withStyledComponent = ({ tag = 'div', attrs = {}, children = 'children' } = {}) => `
-  const STYLED = styled.${tag}.attrs(${attrsToAttrsObj(attrs)})\`\`;
-  const NESTED = styled(STYLED)\`\`;
-  const Func = () => <NESTED>${children}</NESTED>;
-`;
-
-const withStyledComponentAsOther = ({ tag = 'div', attrs = {}, children = 'children' } = {}) => `
-  const STYLED = styled.${tag === 'button' ? 'div' : 'button'}.attrs(${attrsToAttrsObj(attrs)})\`\`;
-  const NESTED = styled(STYLED)\`\`;
-  const Func = () => <NESTED as="${tag}">${children}</NESTED>;
-`;
-
-const testAllSituations = args =>
-  [regular, withStyledAttrs, withStyledComponent, withStyledComponentAsOther].map(x => x(args));
-
-const test = { tag: 'span', attrs: { tabIndex: 0 } };
-
-
-// const invalid = x => `
-// const H = styled.div\`\`;
-// const Component = () => <H tabIndex=${x} />
-// `;
-// const invalid2 = x => `
-// const H = styled.div.attrs({ tabIndex:${x} })\`\`;
-// const Component = () => <H />
-// `;
-// const invalid3 = x => `
-// const H = styled.div.attrs({ tabIndex:${x} })\`\`;
-// const F = styled(H)\`\`
-// const Component = () => <F />
-// `;
-
-// const really = `
-// const H = styled.div.attrs({ tabIndex: \`1\` })\`\`;
-// const F = styled(H)\`\`
-// const Component = () => <F />
-// `;
-// const ruleName = 'scope'
-// const rule = makeRule(ruleName);
-
-const add
+// <Div />
+const div = makeStyledTestCases();
+// <Div foo />
+const divFoo = makeStyledTestCases({ props: 'foo', attrs: '{ foo: true }' });
+// <Th scope />
+const thScope = makeStyledTestCases({ tag: 'th', props: 'scope', attrs: '{ scope: true }' });
+// <Th scope="row" />
+const thScopeRow = makeStyledTestCases({ tag: 'th', props: 'scope="row"', attrs: `{ scope: 'row' }` });
+// <Th scope={foo} />
+const thScopeFoo = makeStyledTestCases({ tag: 'th', props: 'scope={foo}', attrs: '{ scope: foo }' });
+// <Th scope="col" {...props} />
+const thScopeColSpread = makeStyledTestCases.withStyledAttrs({
+  tag: 'th',
+  props: 'scope="col" { ...props}',
+  attrs: '{ scope: "col", ...props }',
+});
+console.log('TCL: thScopeColSpread', thScopeColSpread);
 
 ruleTester.run(ruleName, rule, {
-  valid: [
-    { code: '<div />;' },
-    { code: '<div foo />;' },
-    { code: '<th scope />' },
-    { code: '<th scope="row" />' },
-    { code: '<th scope={foo} />' },
-    { code: '<th scope={"col"} {...props} />' },
-    { code: '<Foo scope="bar" {...props} />' },
-    { code: '<Foo scope="bar" {...props} />` },
-  ]
-    .map(toStyled)
-    .map(parserOptionsMapper),
-  invalid: [{ code: '<div scope />', errors: [expectedError] }].map(parserOptionsMapper),
+  valid: [...div, ...divFoo, ...thScope, ...thScopeRow, ...thScopeFoo, ...thScopeColSpread],
+  invalid: /* invalidTests */ [],
 });
