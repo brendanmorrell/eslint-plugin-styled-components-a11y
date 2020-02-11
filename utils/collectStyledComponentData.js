@@ -24,7 +24,8 @@ module.exports = function(styledComponentsDict) {
 
           attrs = attrsPropertiesArr.map(x => ({
             key: x.key.name,
-            value: x.value.value,
+            // this is pretty useless. would need to generate code from any template expression for this to really work
+            value: x.value.type === 'TemplateLiteral' ? x.value.quasis[0].value.raw : x.value.value,
           }));
         }
         styledComponentsDict[scName] = { name: scName, attrs, tag };
