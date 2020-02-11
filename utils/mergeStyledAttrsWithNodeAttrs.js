@@ -1,4 +1,5 @@
 const { parse } = require('@babel/parser');
+const keyValuePairToProps = require('./keyValuePairToProps');
 
 module.exports = (styledAttrs, nodeAttrs) => {
   const jsxString = `<div ${styledAttrs.map(keyValuePairToProps).join(' ')}/>`;
@@ -6,7 +7,3 @@ module.exports = (styledAttrs, nodeAttrs) => {
   const astAttributes = ast.program.body[0].expression.openingElement.attributes;
   return nodeAttrs.concat(astAttributes);
 };
-
-function keyValuePairToProps({ key, value }) {
-  return `${key}=${typeof value === 'string' ? `"${value}"` : `{${value}}`} `;
-}

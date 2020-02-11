@@ -19,3 +19,4 @@
 
 - JSXAttribute for attr:
   - location is set to entire component. would be better at the attrs obj
+- the value for template literals is definitely bullshit. need to evaluate the tree to 
