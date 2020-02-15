@@ -1,53 +1,39 @@
 const parserOptionsMapper = require('./parserOptionsMapper');
 
-const regular = ({ tag = 'div', attrs = '{}', props = '', children = 'children', errors } = {}) =>
-  [
-    {
-      code: `
+const makeRuleMaker = func => ({ tag = 'div', attrs = '{}', props = '', children = 'children', errors } = {}) => {
+  const args = { tag, attrs, props, children, errors };
+  const code = func(args);
+  return [{ code, errors }].map(parserOptionsMapper)[0];
+};
+
+const regular = ({ tag, props, children }) =>
+  `
   const STYLED = styled.${tag}\`\`;
   const Func = () => <STYLED ${props}>${children}</STYLED>;
-`,
-      errors,
-    },
-  ].map(parserOptionsMapper);
+`;
 
-const withStyledAttrs = ({ tag = 'div', attrs = '{}', children = 'children', errors } = {}) =>
-  [
-    {
-      code: `
+const withStyledAttrs = ({ tag, attrs, children }) =>
+  `
   const STYLED = styled.${tag}.attrs(${attrs})\`\`;
   const Func = () => <STYLED>${children}</STYLED>;
-`,
-      errors,
-    },
-  ].map(parserOptionsMapper);
+`;
 
-const withStyledComponent = ({ tag = 'div', attrs = '{}', children = 'children', errors } = {}) =>
-  [
-    {
-      code: `
+const withStyledComponent = ({ tag, attrs, children }) =>
+  `
   const STYLED = styled.${tag}.attrs(${attrs})\`\`;
   const NESTED = styled(STYLED)\`\`;
   const Func = () => <NESTED>${children}</NESTED>;
-`,
-      errors,
-    },
-  ].map(parserOptionsMapper);
+`;
 
-const withStyledComponentAsOther = ({ tag = 'div', attrs = '{}', children = 'children', errors } = {}) =>
-  [
-    {
-      code: `
+const withStyledComponentAsOther = ({ tag, attrs, children }) =>
+  `
   const STYLED = styled.${tag === 'button' ? 'div' : 'button'}.attrs(${attrs})\`\`;
   const NESTED = styled(STYLED)\`\`;
   const Func = () => <NESTED as="${tag}">${children}</NESTED>;
-`,
-      errors,
-    },
-  ].map(parserOptionsMapper);
+`;
 
 const makeStyledTestCases = args =>
-  [regular, withStyledAttrs, withStyledComponent, withStyledComponentAsOther].map(x => x(args)[0]);
+  [regular, withStyledAttrs, withStyledComponent, withStyledComponentAsOther].map(makeRuleMaker).map(x => x(args));
 
 makeStyledTestCases.regular = regular;
 makeStyledTestCases.withStyledAttrs = withStyledAttrs;

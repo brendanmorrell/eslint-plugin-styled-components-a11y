@@ -4,8 +4,7 @@ const ruleTester = new RuleTester();
 const makeStyledTestCases = require('../utils/makeStyledTestCases');
 
 const expectedError = {
-  message: ' positive integer values for tabIndex.',
-  type: 'JSXAttribute',
+  message: 'Visible, non-interactive elements with click handlers must have at least one keyboard listener.',
 };
 
 const ruleName = 'click-events-have-key-events';
@@ -126,6 +125,87 @@ const divClickRoleNone = makeStyledTestCases({
   props: 'onClick={() => 0} role="none"',
 });
 
+//  ## INVALID
+
+// <div onClick={() => 0} />
+const divJustClick = makeStyledTestCases({
+  attrs: '{ onClick:() => 0 }',
+  props: 'onClick={() => 0}',
+  errors: [expectedError],
+});
+
+// <div onClick={() => 0} role={undefined} />
+const divJustClickUndefinedRole = makeStyledTestCases({
+  attrs: '{ onClick:() => 0, role: undefined }',
+  props: 'onClick={() => 0} role={undefined}',
+  errors: [expectedError],
+});
+
+// TODO fix this. doesnt error for some reason
+// <div onClick={() => 0} {...props} />
+const divJustClickSpread = makeStyledTestCases({
+  attrs: '{ onClick:() => 0, ...props }',
+  props: 'onClick={() => 0} {...props}',
+  errors: [expectedError],
+});
+// <section onClick={() => 0} />
+const sectionClick = makeStyledTestCases({
+  tag: 'section',
+  attrs: '{ onClick:() => 0 }',
+  props: 'onClick={() => 0}',
+  errors: [expectedError],
+});
+// <main onClick={() => 0} />
+const mainClick = makeStyledTestCases({
+  tag: 'main',
+  attrs: '{ onClick:() => 0 }',
+  props: 'onClick={() => 0}',
+  errors: [expectedError],
+});
+// <article onClick={() => 0} />
+const articleClick = makeStyledTestCases({
+  tag: 'article',
+  attrs: '{ onClick:() => 0 }',
+  props: 'onClick={() => 0}',
+  errors: [expectedError],
+});
+// <header onClick={() => 0} />
+const headerClick = makeStyledTestCases({
+  tag: 'header',
+  attrs: '{ onClick:() => 0 }',
+  props: 'onClick={() => 0}',
+  errors: [expectedError],
+});
+// <footer onClick={() => 0} />
+const footerClick = makeStyledTestCases({
+  tag: 'footer',
+  attrs: '{ onClick:() => 0 }',
+  props: 'onClick={() => 0}',
+  errors: [expectedError],
+});
+
+// <div onClick={() => 0} aria-hidden={false} />
+const divClickAriaHiddenFalse = makeStyledTestCases({
+  attrs: `{ onClick:() => 0, 'aria-hidden':false }`,
+  props: 'onClick={() => 0} aria-hidden={false}',
+  errors: [expectedError],
+});
+
+// <a onClick={() => 0} />
+const anchorClick = makeStyledTestCases({
+  tag: 'a',
+  attrs: '{ onClick:() => 0 }',
+  props: 'onClick={() => 0}',
+  errors: [expectedError],
+});
+// <a tabIndex="0" onClick={() => 0} />
+const anchorClickTabIndex = makeStyledTestCases({
+  tag: 'a',
+  attrs: '{ onClick:() => 0, tabIndex: "0" }',
+  props: 'onClick={() => 0} tabIndex="0"',
+  errors: [expectedError],
+});
+
 ruleTester.run(ruleName, rule, {
   valid: [
     ...clickKeyDown,
@@ -150,24 +230,16 @@ ruleTester.run(ruleName, rule, {
     ...divClickPresentation,
     ...divClickRoleNone,
   ],
-  invalid: [],
+  invalid: [
+    ...divJustClick,
+    ...divJustClickUndefinedRole,
+    // ...divJustClickSpread,
+    ...sectionClick,
+    ...mainClick,
+    ...articleClick,
+    ...footerClick,
+    ...divClickAriaHiddenFalse,
+    ...anchorClick,
+    ...anchorClickTabIndex,
+  ],
 });
-// ].map(parserOptionsMapper),
-// invalid: [
-//   { code: '<div onClick={() => 0} />;', errors: [expectedError] },
-//   {
-//     code: '<div onClick={() => 0} role={undefined} />;',
-//     errors: [expectedError],
-//   },
-//   { code: '<div onClick={() => 0} {...props} />;', errors: [expectedError] },
-//   { code: '<section onClick={() => 0} />;', errors: [expectedError] },
-//   { code: '<main onClick={() => 0} />;', errors: [expectedError] },
-//   { code: '<article onClick={() => 0} />;', errors: [expectedError] },
-//   { code: '<header onClick={() => 0} />;', errors: [expectedError] },
-//   { code: '<footer onClick={() => 0} />;', errors: [expectedError] },
-//   {
-//     code: '<div onClick={() => 0} aria-hidden={false} />;',
-//     errors: [expectedError],
-//   },
-//   { code: '<a onClick={() => 0} />', errors: [expectedError] },
-//   { code: '<a tabIndex="0" onClick={() => 0} />', errors: [expectedError] },
