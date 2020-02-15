@@ -19,4 +19,6 @@
 
 - JSXAttribute for attr:
   - location is set to entire component. would be better at the attrs obj
-- the value for template literals is definitely bullshit. need to evaluate the tree to 
+- the value for template literals is definitely bullshit. need to evaluate the tree to figure out how to handle
+- need a way to make sure plugin doesnt crash eslint regardless of parsing difficulties
+- need to set tests to handle more varietes of keys/values, specifically should have at least handle everything surrounded by all types of string quotes
