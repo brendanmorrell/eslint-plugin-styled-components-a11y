@@ -1,7 +1,7 @@
 const mergeStyledAttrsWithNodeAttrs = require('../mergeStyledAttrsWithNodeAttrs');
 const getAsProp = require('../getAsProp');
-
-module.exports = (context, styledComponents, rule) => ({
+const { inspect } = require('util');
+module.exports = (context, styledComponents, rule, name) => ({
   JSXElement(node) {
     try {
       const originalName = node.openingElement.name.name;

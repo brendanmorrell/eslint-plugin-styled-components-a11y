@@ -3,6 +3,7 @@ const path = require('path');
 
 const collectStyledComponentData = require('./collectStyledComponentData');
 const ruleNameToTypeDict = require('./ruleNameToTypeDict');
+const { inspect } = require('util');
 
 module.exports = name => ({
   create(context) {
@@ -10,8 +11,8 @@ module.exports = name => ({
     const rule = rules[name];
     const styledComponents = {};
     return {
-      ...collectStyledComponentData(styledComponents),
-      ...require(nodeParserPath)(context, styledComponents, rule),
+      ...collectStyledComponentData(styledComponents, context, name,
+      ...require(nodeParserPath)(context, styledComponents, rule, name),
     };
   },
 });
