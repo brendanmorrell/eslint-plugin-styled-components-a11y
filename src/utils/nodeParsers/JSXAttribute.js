@@ -31,14 +31,18 @@ module.exports = (context, styledComponents, rule, name) => ({
 
         allAttrs.forEach(atr => {
           const originalAtrLoc = atr.loc;
-          const originalAtrParentName = atr.parent.name.name;
+          const originalParent = atr.parent;
+          if (!atr.parent) atr.parent = node;
           try {
-            atr.loc = originalAtrLoc || node.parent.loc;
+            atr.loc = node.loc;
             atr.parent.name.name = asProp || tag;
-            rule.create(context).JSXAttribute(atr);
+
+            const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee));
+            rule.create(context).JSXAttribute(atr, func);
           } finally {
             atr.loc = originalAtrLoc;
-            atr.parent.name.name = originalAtrParentName;
+            atr.parent = originalParent;
+            node.name.name = originalName;
           }
         });
       }
