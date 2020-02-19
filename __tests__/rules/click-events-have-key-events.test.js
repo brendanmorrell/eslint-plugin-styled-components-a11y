@@ -2,7 +2,6 @@ const { RuleTester } = require('eslint');
 const makeRule = require('../../utils/makeRule');
 const ruleTester = new RuleTester();
 const makeStyledTestCases = require('../utils/makeStyledTestCases');
-
 const expectedError = {
   message: 'Visible, non-interactive elements with click handlers must have at least one keyboard listener.',
 };
@@ -233,7 +232,7 @@ ruleTester.run(ruleName, rule, {
   invalid: [
     ...divJustClick,
     ...divJustClickUndefinedRole,
-    // ...divJustClickSpread,
+    ...divJustClickSpread,
     ...sectionClick,
     ...mainClick,
     ...articleClick,

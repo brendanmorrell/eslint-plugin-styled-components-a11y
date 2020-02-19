@@ -11,7 +11,7 @@ module.exports = name => ({
     const rule = rules[name];
     const styledComponents = {};
     return {
-      ...collectStyledComponentData(styledComponents, context, name,
+      ...collectStyledComponentData(styledComponents, context, name),
       ...require(nodeParserPath)(context, styledComponents, rule, name),
     };
   },
