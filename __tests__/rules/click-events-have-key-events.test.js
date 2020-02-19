@@ -1,5 +1,5 @@
 const { RuleTester } = require('eslint');
-const makeRule = require('../../utils/makeRule');
+const makeRule = require('../../src/utils/makeRule');
 const ruleTester = new RuleTester();
 const makeStyledTestCases = require('../utils/makeStyledTestCases');
 const expectedError = {

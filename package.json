@@ -2,9 +2,11 @@
   "name": "eslint-plugin-my-eslint-rules",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "jest ./__tests__/index.test.js"
+    "start": "npx babel src --watch --out-dir dist",
+    "test": "jest ./__tests__/index.test.js",
+    "build": "npx babel src --out-dir dist"
   },
   "keywords": [],
   "author": "",
@@ -23,5 +25,11 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "jest": "^25.1.0",
     "jsx-ast-utils": "^2.2.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/preset-env": "^7.8.4"
   }
 }
