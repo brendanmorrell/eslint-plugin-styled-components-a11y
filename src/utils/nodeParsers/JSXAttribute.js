@@ -27,13 +27,19 @@ module.exports = (context, styledComponents, rule, name) => ({
         const { tag, attrs } = styledComponent;
         const originalNodeAttr = node.attributes;
         const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
+        const asProp = getAsProp(allAttrs);
 
         allAttrs.forEach(atr => {
-          const atrName = atr.name.name;
           const originalAtrLoc = atr.loc;
-          atr.loc = node.parent.loc;
-          rule.create(context).JSXAttribute(atr);
-          atr.loc = originalAtrLoc;
+          const originalAtrParentName = atr.parent.name.name;
+          try {
+            atr.loc = originalAtrLoc || node.parent.loc;
+            atr.parent.name.name = asProp || tag;
+            rule.create(context).JSXAttribute(atr);
+          } finally {
+            atr.loc = originalAtrLoc;
+            atr.parent.name.name = originalAtrParentName;
+          }
         });
       }
     } catch {}

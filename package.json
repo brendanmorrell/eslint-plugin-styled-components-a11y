@@ -2,7 +2,7 @@
   "name": "eslint-plugin-my-eslint-rules",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/index.js",
+  "main": "index.js",
   "scripts": {
     "start": "npx babel src --watch --out-dir dist",
     "test": "jest ./__tests__/index.test.js",

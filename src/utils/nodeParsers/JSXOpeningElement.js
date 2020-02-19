@@ -10,13 +10,16 @@ module.exports = (context, styledComponents, rule, name) => ({
       if (styledComponent) {
         const { tag, attrs } = styledComponent;
         const originalNodeAttr = node.attributes;
-        const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
-        const asProp = getAsProp(allAttrs);
-        node.attributes = allAttrs;
-        node.name.name = asProp || tag;
-        rule.create(context).JSXOpeningElement(node);
-        node.name.name = originalName;
-        node.attributes = originalNodeAttr;
+        try {
+          const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
+          const asProp = getAsProp(allAttrs);
+          node.attributes = allAttrs;
+          node.name.name = asProp || tag;
+          rule.create(context).JSXOpeningElement(node);
+        } finally {
+          node.name.name = originalName;
+          node.attributes = originalNodeAttr;
+        }
       }
     } catch {}
   },

@@ -1,5 +1,5 @@
 const { RuleTester } = require('eslint');
-const makeRule = require('../../dist/utils/makeRule');
+const makeRule = require('../../src/utils/makeRule');
 const ruleTester = new RuleTester();
 const makeStyledTestCases = require('../utils/makeStyledTestCases');
 
@@ -35,8 +35,10 @@ const divScope = makeStyledTestCases({
   attrs: '{ scope: true }',
   errors: [expectedError],
 });
+
+console.log(divScope[1]);
 // divScope.forEach(({ code }) => console.log(code));
 ruleTester.run(ruleName, rule, {
   valid: [...div, ...divFoo, ...thScope, ...thScopeRow, ...thScopeFoo, ...thScopeColSpread],
-  invalid: divScope,
+  invalid: [divScope[1]],
 });
