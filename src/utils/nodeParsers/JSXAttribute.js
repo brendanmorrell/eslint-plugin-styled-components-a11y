@@ -20,6 +20,7 @@ module.exports = (context, styledComponents, rule, name) => ({
   //   } catch {}
   // },
   JSXOpeningElement(node) {
+    const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee));
     try {
       const originalName = node.name.name;
       const styledComponent = styledComponents[originalName];
@@ -37,7 +38,6 @@ module.exports = (context, styledComponents, rule, name) => ({
             atr.loc = node.loc;
             atr.parent.name.name = asProp || tag;
 
-            const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee));
             rule.create(context).JSXAttribute(atr, func);
           } finally {
             atr.loc = originalAtrLoc;
