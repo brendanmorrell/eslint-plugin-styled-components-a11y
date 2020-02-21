@@ -1,16 +1,17 @@
-function checkIfAttrs(tagNode) {
-  return tagNode.callee.property.name === 'attrs';
-}
+const isStyledTemplateExpression = node => node.tag.type === 'CallExpression';
 
-function checkIfFunctionAttrs(tagNode) {
-  const type = tagNode.arguments[0].type;
-  return type === 'FunctionExpression';
-}
+const isPlainSTE = node => node.tag.callee.name === 'styled';
 
-function checkIfArrowFunctionAttrs(tagNode) {
-  const type = tagNode.arguments[0].type;
-  return type === 'ArrowFunctionExpression';
-}
+const isStyledFunc = node => node.tag.type === 'MemberExpression' && node.tag.object.name === 'styled';
+
+const isAttrs = ({ tag }) => {
+  return tag.callee.property.name === 'attrs';
+};
+
+const isFuncAttrs = ({ tag }) => {
+  const type = tag.arguments[0].type;
+  return type === 'FunctionExpression' ? 'func' : type === 'ArrowFunctionExpression' ? 'arrow' : '';
+};
 
 module.exports = function(styledComponentsDict) {
   return {
@@ -18,18 +19,17 @@ module.exports = function(styledComponentsDict) {
       const scName = node.parent.id.name;
       let attrs = [];
       let tag = '';
-      if (node.tag.type === 'CallExpression') {
-        if (node.tag.callee.name === 'styled') {
+      if (isStyledTemplateExpression(node)) {
+        if (isPlainSTE(node)) {
           const ancestorScName = node.tag.arguments[0].name;
           attrs = styledComponentsDict[ancestorScName].attrs;
           tag = styledComponentsDict[ancestorScName].tag;
-        } else if (checkIfAttrs(node.tag)) {
+        } else if (isAttrs(node)) {
           let attrsPropertiesArr = [];
           tag = node.tag.callee.object.property.name;
-          const isFunctionAttrs = checkIfFunctionAttrs(node.tag) || checkIfArrowFunctionAttrs(node.tag);
-          if (checkIfArrowFunctionAttrs(node.tag)) {
+          if (isFuncAttrs(node) === 'arrow') {
             attrsPropertiesArr = node.tag.arguments[0].body.properties;
-          } else if (checkIfFunctionAttrs(node.tag)) {
+          } else if (isFuncAttrs(node) === 'func') {
             attrsPropertiesArr = node.tag.arguments[0].body.body.find(x => x.type === 'ReturnStatement').argument
               .properties;
           } else {
@@ -46,15 +46,13 @@ module.exports = function(styledComponentsDict) {
         }
         styledComponentsDict[scName] = { name: scName, attrs, tag };
       }
-      if (node.tag.type === 'MemberExpression') {
-        if (node.tag.object.name === 'styled') {
-          tag = node.tag.property.name;
-          styledComponentsDict[scName] = {
-            name: scName,
-            tag,
-            attrs,
-          };
-        }
+      if (isStyledFunc(node)) {
+        tag = node.tag.property.name;
+        styledComponentsDict[scName] = {
+          name: scName,
+          tag,
+          attrs,
+        };
       }
     },
   };
