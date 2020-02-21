@@ -36,7 +36,6 @@ const divScope = makeStyledTestCases({
   errors: [expectedError],
 });
 
-// divScope.forEach(({ code }) => console.log(code));
 ruleTester.run(ruleName, rule, {
   valid: [...div, ...divFoo, ...thScope, ...thScopeRow, ...thScopeFoo, ...thScopeColSpread],
   invalid: divScope,
