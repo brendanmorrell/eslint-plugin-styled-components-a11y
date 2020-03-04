@@ -1,11 +1,10 @@
-## recheck but seem unnecessary until attrs worked out
+## recheck
 
 - aria-role
 - aria-props
 - aria-proptypes
 - no-access-key
 - mouse-events-have-key-events
-- accessible-emoji
 
 ## cant get regular rule to fire even
 
@@ -13,7 +12,7 @@
 
 ## look into
 
-- media-has-caption with attrs (child elmeent is track)
+- media-has-caption with attrs (child element is track)
 
 ## bugs/improvements
 
@@ -22,3 +21,10 @@
 - the value for template literals is definitely bullshit. need to evaluate the tree to figure out how to handle
 - need a way to make sure plugin doesnt crash eslint regardless of parsing difficulties
 - need to set tests to handle more varietes of keys/values, specifically should have at least handle everything surrounded by all types of string quotes
+
+## tests to revisit (first four mimic actual tests instead of npm docs. alt-text has no invalid)
+
+- alt-text
+- click-events-have-jey-events
+- scope
+- tabindex-no-positive

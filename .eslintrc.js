@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['eslint-config-airbnb', 'prettier', 'prettier/react'],
+  extends: ['eslint-config-airbnb', 'prettier', 'prettier/react', 'my-eslint-rules'],
   env: {
     es6: true,
     browser: true,
@@ -24,7 +24,6 @@ module.exports = {
   },
   rules: {
     'no-nested-ternary': 0,
-    'react-hooks/rules-of-hooks': 'error',
     'react/prop-types': 0,
     'no-underscore-dangle': 0,
     'no-param-reassign': 0,
@@ -48,7 +47,7 @@ module.exports = {
     ],
     'class-methods-use-this': 0,
     'import/no-unresolved': [2, { caseSensitive: false }],
-    'jsx-ally/no-onchange': 'error',
+    // 'jsx-ally/no-onchange': 'error',
     'jsx-a11y/label-has-for': [
       2,
       {

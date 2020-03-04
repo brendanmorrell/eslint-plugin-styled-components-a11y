@@ -1,5 +1,5 @@
 module.exports = {
-  'accessible-emoji': 'noop',
+  'accessible-emoji': 'JSXOpeningElement',
   'anchor-has-content': 'JSXOpeningElement',
   'anchor-is-valid': 'JSXOpeningElement',
   'aria-activedescendant-has-tabindex': 'JSXOpeningElement',

@@ -1,9 +1,9 @@
 const { rules } = require('eslint-plugin-jsx-a11y');
 const path = require('path');
 
+const { inspect } = require('util');
 const collectStyledComponentData = require('./collectStyledComponentData');
 const ruleNameToTypeDict = require('./ruleNameToTypeDict');
-const { inspect } = require('util');
 
 module.exports = name => ({
   create(context) {
