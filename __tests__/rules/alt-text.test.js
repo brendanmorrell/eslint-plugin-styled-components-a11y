@@ -4,10 +4,10 @@ const ruleTester = new RuleTester();
 const makeStyledTestCases = require('../utils/makeStyledTestCases');
 
 const expectedError = {
-  message: 'The scope prop can only be used on <th> elements.',
-  type: 'JSXAttribute',
+  message: 'img elements must have an alt prop, either with meaningful text, or an empty string for decorative images.',
+  type: 'JSXOpeningElement',
 };
-const ruleName = 'scope';
+const ruleName = 'alt-text';
 const rule = makeRule(ruleName);
 
 // ## VALID
@@ -209,14 +209,35 @@ const missingPropError = type => ({
 // ## INVALID
 //     { code: '<img />;', errors: [missingPropError('img')] },
 const imgNoAlt = makeStyledTestCases({
-  type: 'img',
-  errors: [missingPropError('img')],
+  tag: 'img',
+  errors: [expectedError],
 });
+
+// #### DOCS INVALID
+// <img src="foo" />
+const imgSrcNoAlt = makeStyledTestCases({
+  attrs: `{ src: 'foo' }`,
+  props: `src="foo"`,
+  tag: 'img',
+  errors: [expectedError],
+});
+// <img {...props} />
+// <img {...props} alt /> // Has no value
+// <img {...props} alt={undefined} /> // Has no value
+// <img {...props} alt={`${undefined}`} /> // Has no value
+// <img src="foo" role="presentation" /> // Avoid ARIA if it can be achieved without
+// <img src="foo" role="none" /> // Avoid ARIA if it can be achieved without
+//
+// <object {...props} />
+//
+// <area {...props} />
+//
+// <input type="image" {...props} />
 ruleTester.run(ruleName, rule, {
   valid: [
     ...ImgAltStr,
     ...ImgAltStrProp,
-    ...ImgAltProp,
+    // ...ImgAltProp,
     ...ImgALTStr,
     ...ImgALTTemplateStrProp,
     ...ImgALtStr,
@@ -224,15 +245,15 @@ ruleTester.run(ruleName, rule, {
     ...ImgSpreadAltStr,
     ...anchor,
     ...div,
-    ...imgAltFunc,
+    // ...imgAltFunc,
     ...divAltFunc,
-    ...imgAltArrowFunc,
-    ...imgAltVarOrStr,
-    ...imgAltObjProp,
-    ...imgAltCalledFunc,
-    ...imgAltObjPropOrEmptyStr,
-    ...imgAltCalledFuncOrEmptyStr,
-    ...imgAltObjPropCalledFuncOrEmptyStr,
+    // ...imgAltArrowFunc,
+    // ...imgAltVarOrStr,
+    // ...imgAltObjProp,
+    // ...imgAltCalledFunc,
+    // ...imgAltObjPropOrEmptyStr,
+    // ...imgAltCalledFuncOrEmptyStr,
+    // ...imgAltObjPropCalledFuncOrEmptyStr,
     ...imgAltEmptyStr,
     ...imgAltTemplateStrUndefined,
     ...imgAltWhitespace,
@@ -240,13 +261,12 @@ ruleTester.run(ruleName, rule, {
     ...imgAltEmptyRoleNone,
     ...imgAltEmptyRoleTemplatePresentation,
     ...imgAltStrRolePresentation,
-    ...imgAltTernaryObjStrStr,
-    ...imgAltTernaryUndefinedStrStr,
-    ...imgAltObjPropPlusStr,
-    ...imgAriaLabelStr,
-    ...imgAriaLabelByStr,
+    // ...imgAltTernaryObjStrStr,
+    // ...imgAltTernaryUndefinedStrStr,
+    // ...imgAltObjPropPlusStr,
+    // ...imgAriaLabelStr,
+    // ...imgAriaLabelByStr,
+    // docs
   ],
-  invalid: [
-    /* ...imgNoAlt */
-  ],
+  invalid: [...imgNoAlt, ...imgSrcNoAlt],
 });
