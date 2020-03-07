@@ -10,13 +10,16 @@ const isFuncAttrs = ({ tag }) => {
   const { type } = tag.arguments[0];
   return type === 'FunctionExpression' ? 'func' : type === 'ArrowFunctionExpression' ? 'arrow' : '';
 };
+const { inspect } = require('util');
 
-module.exports = styledComponentsDict => ({
+module.exports = (styledComponentsDict, context, name) => ({
   TaggedTemplateExpression(node) {
     const scName = node.parent.id.name;
     let attrs = [];
     let tag = '';
-    // const A = styled.div`` || styled.attrs(...).div``
+    const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee || node));
+
+    // const A = styled.div`` || styled.div.attrs(...)``
     if (isStyledTemplateExpression(node)) {
       if (isPlainSTE(node)) {
         const ancestorScName = node.tag.arguments[0].name;
