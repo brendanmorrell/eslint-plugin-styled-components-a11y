@@ -17,8 +17,7 @@ module.exports = (styledComponentsDict, context, name) => ({
     const scName = node.parent.id.name;
     let attrs = [];
     let tag = '';
-    const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee || node));
-
+    const func = inspectee => name.includes('anchor-is-valid') && context.report(node, inspect(inspectee || node));
     // const A = styled.div`` || styled.div.attrs(...)``
     if (isStyledTemplateExpression(node)) {
       if (isPlainSTE(node)) {
@@ -45,7 +44,14 @@ module.exports = (styledComponentsDict, context, name) => ({
           .map(x => ({
             key: x.key.name || x.key.value,
             // this is pretty useless. would need to generate code from any template expression for this to really work
-            value: x.value.type === 'TemplateLiteral' ? x.value.quasis[0].value.raw : x.value.value,
+            value:
+              x.value.type === 'TemplateLiteral'
+                ? x.value.quasis[0].value.raw
+                : x.value.type === 'Identifier'
+                ? x.value.name === 'undefined'
+                  ? undefined
+                  : x.value.name
+                : x.value.value,
           }));
       }
       styledComponentsDict[scName] = { name: scName, attrs, tag };
