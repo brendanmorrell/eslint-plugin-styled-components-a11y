@@ -12,6 +12,7 @@
 
 ## look into
 
+- attrs and props with using children directly like in anchor-has-content, e.g. attrs: {children: () => <Bar aria-hidden>}
 - media-has-caption with attrs (child element is track)
 
 ## bugs/improvements
