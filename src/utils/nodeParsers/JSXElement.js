@@ -3,7 +3,7 @@ const getAsProp = require('../getAsProp');
 const { inspect } = require('util');
 module.exports = (context, styledComponents, rule, name) => ({
   JSXElement(node) {
-    const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee));
+    const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee || node));
     try {
       const originalName = node.openingElement.name.name;
       const styledComponent = styledComponents[originalName];

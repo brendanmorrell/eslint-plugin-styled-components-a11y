@@ -3,10 +3,37 @@ const makeRule = require('../../src/utils/makeRule');
 const ruleTester = new RuleTester();
 const makeStyledTestCases = require('../utils/makeStyledTestCases');
 
-const expectedError = {
-  message: 'img elements must have an alt prop, either with meaningful text, or an empty string for decorative images.',
+const missingPropError = type => ({
+  message: `${type} elements must have an alt prop, either with meaningful text, or an empty string for decorative images.`,
+  type: 'JSXOpeningElement',
+});
+
+const altValueError = type => ({
+  message: `Invalid alt value for ${type}. \
+Use alt="" for presentational images.`,
+  type: 'JSXOpeningElement',
+});
+
+const ariaLabelValueError =
+  'The aria-label attribute must have a value. The alt attribute is preferred over aria-label for images.';
+const ariaLabelledbyValueError =
+  'The aria-labelledby attribute must have a value. The alt attribute is preferred over aria-labelledby for images.';
+
+const preferAltError = {
+  message:
+    'Prefer alt="" over a presentational role. First rule of aria is to not use aria if it can be achieved via native HTML.',
   type: 'JSXOpeningElement',
 };
+
+const objectError =
+  'Embedded <object> elements must have alternative text by providing inner text, aria-label or aria-labelledby props.';
+
+const areaError =
+  'Each area of an image map must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` prop.';
+
+const inputImageError =
+  '<input> elements with type="image" must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` prop.';
+
 const ruleName = 'alt-text';
 const rule = makeRule(ruleName);
 
@@ -201,16 +228,11 @@ const imgAriaLabelByStr = makeStyledTestCases({
   tag: 'img',
 });
 
-const missingPropError = type => ({
-  message: `${type} elements must have an alt prop, either with meaningful text, or an empty string for decorative images.`,
-  type: 'JSXOpeningElement',
-});
-
 // ## INVALID
 //     { code: '<img />;', errors: [missingPropError('img')] },
 const imgNoAlt = makeStyledTestCases({
   tag: 'img',
-  errors: [expectedError],
+  errors: [missingPropError('img')],
 });
 
 // #### DOCS INVALID
@@ -219,20 +241,74 @@ const imgSrcNoAlt = makeStyledTestCases({
   attrs: `{ src: 'foo' }`,
   props: `src="foo"`,
   tag: 'img',
-  errors: [expectedError],
+  errors: [missingPropError('img')],
 });
 // <img {...props} />
-// <img {...props} alt /> // Has no value
+const imgPropsSpread = makeStyledTestCases({
+  attrs: `{ ...props }`,
+  props: `{ ...props }`,
+  tag: 'img',
+  errors: [missingPropError('img')],
+});
+// <img {...props} alt /> // Has no value (this one doesnt work with any but the first test since you can't set an abject key with no value. using true doesn't trigger the same error so the tests fail)
+const [imgPropsSpreadEmptyAlt] = makeStyledTestCases({
+  props: ` {...props} alt `,
+  tag: 'img',
+  errors: [altValueError('img')],
+});
 // <img {...props} alt={undefined} /> // Has no value
+const imgPropsSpreadUndefinedAlt = makeStyledTestCases({
+  attrs: `{ ...props, alt:undefined }`,
+  props: ` {...props} alt={undefined} `,
+  tag: 'img',
+  errors: [altValueError('img')],
+});
+// TODO this one does not work bnecause of the template
 // <img {...props} alt={`${undefined}`} /> // Has no value
+const imgPropsSpreadUndefinedAltTemplate = makeStyledTestCases({
+  attrs: '{ ...props, alt:`${undefined}` }',
+  props: ' {...props} alt={`${undefined}`} ',
+  tag: 'img',
+  errors: [altValueError('img')],
+});
 // <img src="foo" role="presentation" /> // Avoid ARIA if it can be achieved without
+const imgSrcRolePresentation = makeStyledTestCases({
+  attrs: '{ src:"foo", role:"presentation" }',
+  props: ' src="foo" role="presentation"',
+  tag: 'img',
+  errors: [preferAltError],
+});
 // <img src="foo" role="none" /> // Avoid ARIA if it can be achieved without
-//
+const imgSrcRoleNone = makeStyledTestCases({
+  attrs: '{ src:"foo", role:"none" }',
+  props: ' src="foo" role="none"',
+  tag: 'img',
+  errors: [preferAltError],
+});
+
 // <object {...props} />
-//
+const objectPropsSpread = makeStyledTestCases({
+  attrs: '{ ...props }',
+  props: ' { ...props } ',
+  tag: 'object',
+  errors: [objectError],
+});
 // <area {...props} />
-//
+const areaPropsSpread = makeStyledTestCases({
+  attrs: '{ ...props }',
+  props: ' { ...props } ',
+  tag: 'area',
+  errors: [areaError],
+});
+
 // <input type="image" {...props} />
+const inputTypeImagePropsSpread = makeStyledTestCases({
+  attrs: '{ type: "image", ...props }',
+  props: ' type="image" { ...props } ',
+  tag: 'input',
+  errors: [inputImageError],
+});
+
 ruleTester.run(ruleName, rule, {
   valid: [
     ...ImgAltStr,
@@ -268,5 +344,16 @@ ruleTester.run(ruleName, rule, {
     // ...imgAriaLabelByStr,
     // docs
   ],
-  invalid: [...imgNoAlt, ...imgSrcNoAlt],
+  invalid: [
+    ...imgNoAlt,
+    ...imgSrcNoAlt,
+    ...imgPropsSpread,
+    imgPropsSpreadEmptyAlt,
+    ...imgPropsSpreadUndefinedAlt,
+    ...imgSrcRolePresentation,
+    ...imgSrcRoleNone,
+    ...objectPropsSpread,
+    ...areaPropsSpread,
+    ...inputTypeImagePropsSpread,
+  ],
 });

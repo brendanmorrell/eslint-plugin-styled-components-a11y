@@ -20,7 +20,7 @@ module.exports = (context, styledComponents, rule, name) => ({
   //   } catch {}
   // },
   JSXOpeningElement(node) {
-    const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee));
+    const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee || node));
     try {
       const originalName = node.name.name;
       const styledComponent = styledComponents[originalName];
