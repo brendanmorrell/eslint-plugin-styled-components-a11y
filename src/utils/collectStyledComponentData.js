@@ -1,15 +1,3 @@
-
-const { parse } = require('@babel/parser');
-const generate = require('@babel/generator').default;
-
-const make
-const code = 'class Example {}';
-const ast = parse(code);
-
-const output = generate(ast, { plugins: ['jsx', 'estree'] });
-console.log(output);
-
-
 const isStyledTemplateExpression = node => node.tag.type === 'CallExpression';
 
 const isPlainSTE = node => node.tag.callee.name === 'styled';
@@ -50,6 +38,7 @@ module.exports = (styledComponentsDict, context, name) => ({
         } else {
           attrsPropertiesArr = node.tag.arguments[0].properties;
         }
+        const arithmeticUnaryOperators = ['+', '-'];
         // filter out spread elements (which have no key nor value)
         attrs = attrsPropertiesArr
           .filter(x => x.key)
@@ -59,6 +48,8 @@ module.exports = (styledComponentsDict, context, name) => ({
             value:
               x.value.type === 'TemplateLiteral'
                 ? x.value.quasis[0].value.raw
+                : x.value.type === 'UnaryExpression' && arithmeticUnaryOperators.includes(x.value.operator)
+                ? +(x.value.operator + x.value.argument.value)
                 : x.value.type === 'Identifier'
                 ? x.value.name === 'undefined'
                   ? undefined
