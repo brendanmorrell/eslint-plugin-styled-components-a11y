@@ -1,3 +1,15 @@
+
+const { parse } = require('@babel/parser');
+const generate = require('@babel/generator').default;
+
+const make
+const code = 'class Example {}';
+const ast = parse(code);
+
+const output = generate(ast, { plugins: ['jsx', 'estree'] });
+console.log(output);
+
+
 const isStyledTemplateExpression = node => node.tag.type === 'CallExpression';
 
 const isPlainSTE = node => node.tag.callee.name === 'styled';
