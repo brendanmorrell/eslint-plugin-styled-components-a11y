@@ -1,6 +1,5 @@
 ## recheck
 
-- aria-role
 - aria-props
 - aria-proptypes
 - no-access-key
@@ -29,3 +28,18 @@
 - click-events-have-jey-events
 - scope
 - tabindex-no-positive
+
+## Post
+
+I've been working on an eslint plugin to solve this issue in my spare time.You can use it now if you clone the repo, but I want to make it more robust/add more tests before releasing it on npm to make sure it's solid enough for production use. If anyone is interested in helping out to expedite the process, here is the repo: https://github.com/brendanmorrell/eslint-plugin-jsx-a11y-styled-components
+
+It handles all 4 methods styled components uses to create components. All of these would show the error `Visible, non-interactive elements with click handlers must have at least one keyboard listener.`
+
+1. const Div = styled.div\`\`;
+   &lt;Div onClick={() => null}/>.
+2. const Div = styled.div.attrs({ onClick: () => null})\`\`;
+   &lt;Div />
+3. const StyledDiv = styled(Div)\`\`;
+   &lt;StyledDiv onClick{() => null} />
+4. const ButtonAsDiv = styled.button\`\`;
+   &lt;ButtonAsDiv as="div" onClick={() => null} />

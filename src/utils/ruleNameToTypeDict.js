@@ -5,7 +5,7 @@ module.exports = {
   'aria-activedescendant-has-tabindex': 'JSXOpeningElement',
   'aria-props': 'noop',
   'aria-proptypes': 'noop',
-  'aria-role': 'noop',
+  'aria-role': 'JSXAttribute',
   'aria-unsupported-elements': 'JSXOpeningElement',
   'autocomplete-valid': 'noop',
   'click-events-have-key-events': 'JSXOpeningElement',
