@@ -11,6 +11,7 @@ const isFuncAttrs = ({ tag }) => {
   return type === 'FunctionExpression' ? 'func' : type === 'ArrowFunctionExpression' ? 'arrow' : '';
 };
 const { inspect } = require('util');
+const { __UNKNOWN_IDENTIFER__ } = require('./constants');
 
 module.exports = (styledComponentsDict, context, name) => ({
   TaggedTemplateExpression(node) {
@@ -53,7 +54,7 @@ module.exports = (styledComponentsDict, context, name) => ({
                 : x.value.type === 'Identifier'
                 ? x.value.name === 'undefined'
                   ? undefined
-                  : x.value.name
+                  : __UNKNOWN_IDENTIFER__
                 : x.value.value,
           }));
       }
