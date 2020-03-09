@@ -3,7 +3,7 @@ module.exports = {
   'anchor-has-content': 'JSXOpeningElement',
   'anchor-is-valid': 'JSXOpeningElement',
   'aria-activedescendant-has-tabindex': 'JSXOpeningElement',
-  'aria-props': 'noop',
+  'aria-props': 'JSXAttribute',
   'aria-proptypes': 'noop',
   'aria-role': 'JSXAttribute',
   'aria-unsupported-elements': 'JSXOpeningElement',
