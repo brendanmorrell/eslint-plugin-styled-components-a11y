@@ -2,23 +2,6 @@ const mergeStyledAttrsWithNodeAttrs = require('../mergeStyledAttrsWithNodeAttrs'
 const getAsProp = require('../getAsProp');
 const { inspect } = require('util');
 module.exports = (context, styledComponents, rule, name) => ({
-  // JSXAttribute(node) {
-  //   try {
-  //     const parentName = node.parent.name.name;
-  //     const styledComponent = styledComponents[parentName];
-  //     if (styledComponent) {
-  //       const { tag, attrs } = styledComponent;
-  //       const originalNodeAttr = node.parent.attributes;
-  //       const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
-  //       node.parent.attributes = allAttrs;
-  //       const asProp = getAsProp(allAttrs);
-  //       node.parent.name.name = asProp || tag;
-  //       rule.create(context).JSXAttribute(node);
-  //       node.parent.name.name = parentName;
-  //       node.parent.attributes = originalNodeAttr;
-  //     }
-  //   } catch {}
-  // },
   JSXOpeningElement(node) {
     const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee || node));
     try {
