@@ -140,7 +140,6 @@ const divJustClickUndefinedRole = makeStyledTestCases({
   errors: [expectedError],
 });
 
-// TODO fix this. doesnt error for some reason
 // <div onClick={() => 0} {...props} />
 const divJustClickSpread = makeStyledTestCases({
   attrs: '{ onClick:() => 0, ...props }',

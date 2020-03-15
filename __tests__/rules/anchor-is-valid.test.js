@@ -54,7 +54,6 @@ const aHrefStrPath = makeStyledTestCases({
   tag: 'a',
 });
 
-// TODO get this working
 // <a href={someValidPath} />
 const aHrefVar = makeStyledTestCases({
   attrs: `{href: someValidPath}`,

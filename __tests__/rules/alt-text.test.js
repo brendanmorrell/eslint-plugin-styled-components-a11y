@@ -263,14 +263,7 @@ const imgPropsSpreadUndefinedAlt = makeStyledTestCases({
   tag: 'img',
   errors: [altValueError('img')],
 });
-// TODO this one does not work bnecause of the template
-// <img {...props} alt={`${undefined}`} /> // Has no value
-const imgPropsSpreadUndefinedAltTemplate = makeStyledTestCases({
-  attrs: '{ ...props, alt:`${undefined}` }',
-  props: ' {...props} alt={`${undefined}`} ',
-  tag: 'img',
-  errors: [altValueError('img')],
-});
+
 // <img src="foo" role="presentation" /> // Avoid ARIA if it can be achieved without
 const imgSrcRolePresentation = makeStyledTestCases({
   attrs: '{ src:"foo", role:"presentation" }',

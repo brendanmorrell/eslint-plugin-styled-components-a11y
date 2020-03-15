@@ -22,9 +22,18 @@
 - need a way to make sure plugin doesnt crash eslint regardless of parsing difficulties
 - need to set tests to handle more varietes of keys/values, specifically should have at least handle everything surrounded by all types of string quotes
 
-## tests to revisit (first four mimic actual tests instead of npm docs. alt-text has no invalid)
+## tests to revisit (first four mimic actual tests instead of npm docs.)
 
 - alt-text
+  - alt-text has a bunch of false positives commented out as well as the below which does not cause an error
+    // TODO this one does not work because of the template string evaluation
+    // <img {...props} alt={`${undefined}`} /> // Has no value
+    const imgPropsSpreadUndefinedAltTemplate = makeStyledTestCases({
+    attrs: '{ ...props, alt:`${undefined}` }',
+    props: ' {...props} alt={`${undefined}`} ',
+    tag: 'img',
+    errors: [altValueError('img')],
+    });
 - click-events-have-jey-events
 - scope
 - tabindex-no-positive

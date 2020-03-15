@@ -1,6 +1,6 @@
 {
-  "name": "eslint-plugin-my-eslint-rules",
-  "version": "1.0.0",
+  "name": "eslint-plugin-styled-components-a11y",
+  "version": "0.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -26,7 +26,8 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
     "jest": "^25.1.0",
-    "jsx-ast-utils": "^2.2.3"
+    "jsx-ast-utils": "^2.2.3",
+    "nodemon": "^2.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
