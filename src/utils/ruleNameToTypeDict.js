@@ -4,7 +4,7 @@ module.exports = {
   'anchor-is-valid': 'JSXOpeningElement',
   'aria-activedescendant-has-tabindex': 'JSXOpeningElement',
   'aria-props': 'JSXAttribute',
-  'aria-proptypes': 'noop',
+  'aria-proptypes': 'JSXAttribute',
   'aria-role': 'JSXAttribute',
   'aria-unsupported-elements': 'JSXOpeningElement',
   'autocomplete-valid': 'noop',
