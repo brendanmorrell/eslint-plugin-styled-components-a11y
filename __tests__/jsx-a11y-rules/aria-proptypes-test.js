@@ -21,11 +21,8 @@ const { validityCheck } = rule;
 
 const ruleTester = new RuleTester();
 
-const errorMessage = (name) => {
-  const {
-    type,
-    values: permittedValues,
-  } = aria.get(name.toLowerCase());
+const errorMessage = name => {
+  const { type, values: permittedValues } = aria.get(name.toLowerCase());
 
   switch (type) {
     case 'tristate':
@@ -50,10 +47,7 @@ tokens from the following: ${permittedValues}.`;
 
 describe('validityCheck', () => {
   it('should false for an unknown expected type', () => {
-    expect(validityCheck(
-      null,
-      null,
-    )).toBe(false);
+    expect(validityCheck(null, null)).toBe(false);
   });
 });
 
