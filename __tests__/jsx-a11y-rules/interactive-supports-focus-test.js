@@ -10,10 +10,7 @@
 
 import includes from 'array-includes';
 import { RuleTester } from 'eslint';
-import {
-  eventHandlers,
-  eventHandlersByType,
-} from 'jsx-ast-utils';
+import { eventHandlers, eventHandlersByType } from 'jsx-ast-utils';
 import { configs } from '../../../src/index';
 import parserOptionsMapper from '../../__util__/parserOptionsMapper';
 import rule from '../../../src/rules/interactive-supports-focus';
@@ -26,10 +23,7 @@ import ruleOptionsMapperFactory from '../../__util__/ruleOptionsMapperFactory';
 const ruleTester = new RuleTester();
 
 function template(strings, ...keys) {
-  return (...values) => keys.reduce(
-    (acc, k, i) => acc + (values[k] || '') + strings[i + 1],
-    strings[0],
-  );
+  return (...values) => keys.reduce((acc, k, i) => acc + (values[k] || '') + strings[i + 1], strings[0]);
 }
 
 const ruleName = 'interactive-supports-focus';
@@ -136,15 +130,7 @@ const interactiveRoles = [
   'treeitem',
 ];
 
-const recommendedRoles = [
-  'button',
-  'checkbox',
-  'link',
-  'searchbox',
-  'spinbutton',
-  'switch',
-  'textbox',
-];
+const recommendedRoles = ['button', 'checkbox', 'link', 'searchbox', 'spinbutton', 'switch', 'textbox'];
 
 const strictRoles = [
   'button',
@@ -158,50 +144,61 @@ const strictRoles = [
   'textbox',
 ];
 
-const staticElements = [
-  'div',
-];
+const staticElements = ['div'];
 
-const triggeringHandlers = [
-  ...eventHandlersByType.mouse,
-  ...eventHandlersByType.keyboard,
-];
+const triggeringHandlers = [...eventHandlersByType.mouse, ...eventHandlersByType.keyboard];
 
-const passReducer = (roles, handlers, messageTemplate) => (
-  staticElements.reduce((elementAcc, element) => (
-    elementAcc.concat(roles.reduce((roleAcc, role) => (
-      roleAcc.concat(handlers.map((handler) => ({
-        code: messageTemplate(element, role, handler),
-      })))
-    ), []))
-  ), [])
-);
+const passReducer = (roles, handlers, messageTemplate) =>
+  staticElements.reduce(
+    (elementAcc, element) =>
+      elementAcc.concat(
+        roles.reduce(
+          (roleAcc, role) =>
+            roleAcc.concat(
+              handlers.map(handler => ({
+                code: messageTemplate(element, role, handler),
+              })),
+            ),
+          [],
+        ),
+      ),
+    [],
+  );
 
-const failReducer = (roles, handlers, messageTemplate) => (
-  staticElements.reduce((elementAcc, element) => (
-    elementAcc.concat(roles.reduce((roleAcc, role) => (
-      roleAcc.concat(handlers.map((handler) => ({
-        code: codeTemplate(element, role, handler),
-        errors: [{
-          type,
-          message: messageTemplate(role),
-        }],
-      })))
-    ), []))
-  ), [])
-);
+const failReducer = (roles, handlers, messageTemplate) =>
+  staticElements.reduce(
+    (elementAcc, element) =>
+      elementAcc.concat(
+        roles.reduce(
+          (roleAcc, role) =>
+            roleAcc.concat(
+              handlers.map(handler => ({
+                code: codeTemplate(element, role, handler),
+                errors: [
+                  {
+                    type,
+                    message: messageTemplate(role),
+                  },
+                ],
+              })),
+            ),
+          [],
+        ),
+      ),
+    [],
+  );
 
 ruleTester.run(`${ruleName}:recommended`, rule, {
   valid: [
     ...alwaysValid,
     ...passReducer(
       interactiveRoles,
-      eventHandlers.filter((handler) => !includes(triggeringHandlers, handler)),
+      eventHandlers.filter(handler => !includes(triggeringHandlers, handler)),
       codeTemplate,
     ),
     ...passReducer(
-      interactiveRoles.filter((role) => !includes(recommendedRoles, role)),
-      eventHandlers.filter((handler) => includes(triggeringHandlers, handler)),
+      interactiveRoles.filter(role => !includes(recommendedRoles, role)),
+      eventHandlers.filter(handler => includes(triggeringHandlers, handler)),
       tabindexTemplate,
     ),
   ]
@@ -210,7 +207,7 @@ ruleTester.run(`${ruleName}:recommended`, rule, {
   invalid: [
     ...failReducer(recommendedRoles, triggeringHandlers, tabbableTemplate),
     ...failReducer(
-      interactiveRoles.filter((role) => !includes(recommendedRoles, role)),
+      interactiveRoles.filter(role => !includes(recommendedRoles, role)),
       triggeringHandlers,
       focusableTemplate,
     ),
@@ -224,12 +221,12 @@ ruleTester.run(`${ruleName}:strict`, rule, {
     ...alwaysValid,
     ...passReducer(
       interactiveRoles,
-      eventHandlers.filter((handler) => !includes(triggeringHandlers, handler)),
+      eventHandlers.filter(handler => !includes(triggeringHandlers, handler)),
       codeTemplate,
     ),
     ...passReducer(
-      interactiveRoles.filter((role) => !includes(strictRoles, role)),
-      eventHandlers.filter((handler) => includes(triggeringHandlers, handler)),
+      interactiveRoles.filter(role => !includes(strictRoles, role)),
+      eventHandlers.filter(handler => includes(triggeringHandlers, handler)),
       tabindexTemplate,
     ),
   ]
@@ -238,7 +235,7 @@ ruleTester.run(`${ruleName}:strict`, rule, {
   invalid: [
     ...failReducer(strictRoles, triggeringHandlers, tabbableTemplate),
     ...failReducer(
-      interactiveRoles.filter((role) => !includes(strictRoles, role)),
+      interactiveRoles.filter(role => !includes(strictRoles, role)),
       triggeringHandlers,
       focusableTemplate,
     ),
