@@ -10,7 +10,7 @@ const ruleName = 'interactive-supports-focus';
 const rule = makeRule(ruleName);
 const expectedError = {
   message: "Elements with the 'button' interactive role must be focusable.",
-  type: 'JSXAttribute',
+  type: 'JSXOpeningElement',
 };
 
 // ## VALID
