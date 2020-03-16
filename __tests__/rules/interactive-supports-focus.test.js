@@ -40,7 +40,7 @@ const spanClick = makeStyledTestCases({
   tag: 'span',
   attrs: `{ onClick:someFunction, role:'button' }`,
   props: 'onClick={someFunction} role="button"',
-  errors: [''],
+  errors: [expectedError],
 });
 
 ruleTester.run(ruleName, rule, {
