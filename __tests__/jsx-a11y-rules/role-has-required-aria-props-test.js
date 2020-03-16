@@ -20,21 +20,18 @@ import rule from '../../../src/rules/role-has-required-aria-props';
 
 const ruleTester = new RuleTester();
 
-const errorMessage = (role) => {
+const errorMessage = role => {
   const requiredProps = Object.keys(roles.get(role).requiredProps);
 
   return {
-    message: `Elements with the ARIA role "${role}" must have the following attributes defined: ${requiredProps}`,
+    message: `Elements with the 'button' interactive role must be focusable.`,
     type: 'JSXAttribute',
   };
 };
 
-
 // Create basic test cases using all valid role types.
-const basicValidityTests = [...roles.keys()].map((role) => {
-  const {
-    requiredProps: requiredPropKeyValues,
-  } = roles.get(role);
+const basicValidityTests = [...roles.keys()].map(role => {
+  const { requiredProps: requiredPropKeyValues } = roles.get(role);
   const requiredProps = Object.keys(requiredPropKeyValues);
   const propChain = requiredProps.join(' ');
 
@@ -55,9 +52,14 @@ ruleTester.run('role-has-required-aria-props', rule, {
     { code: '<div role={role || "foobar"} />' },
     { code: '<div role="row" />' },
     { code: '<span role="checkbox" aria-checked="false" aria-labelledby="foo" tabindex="0"></span>' },
-    { code: '<input role="checkbox" aria-checked="false" aria-labelledby="foo" tabindex="0" {...props} type="checkbox" />' },
+    {
+      code:
+        '<input role="checkbox" aria-checked="false" aria-labelledby="foo" tabindex="0" {...props} type="checkbox" />',
+    },
     { code: '<input type="checkbox" role="switch" />' },
-  ].concat(basicValidityTests).map(parserOptionsMapper),
+  ]
+    .concat(basicValidityTests)
+    .map(parserOptionsMapper),
 
   invalid: [
     // SLIDER
