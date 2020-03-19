@@ -7,17 +7,25 @@ It handles all 4 methods styled components uses to create components. All of the
 
 `Visible, non-interactive elements with click handlers must have at least one keyboard listener.`
 
-`const Div = styled.div\`\`;`
-`<Div onClick={() => null}/>.`
-  
-`const Div = styled.div.attrs({ onClick: () => null})\`\`;`
-`<Div />`
+```
+const Div = styled.div``;
+<Div onClick={() => null}/>
+```
 
-`const StyledDiv = styled(Div)\`\`;`
-`<StyledDiv onClick{() => null} />`
+```  
+const Div = styled.div.attrs({ onClick: () => null})``;
+<Div />
+```
 
-`const ButtonAsDiv = styled.button\`\`;`
-`<ButtonAsDiv as="div" onClick={() => null} />`
+```
+const StyledDiv = styled(Div)``;
+<StyledDiv onClick{() => null} />
+```
+
+```
+const ButtonAsDiv = styled.button``;
+<ButtonAsDiv as="div" onClick={() => null} />
+```
   
 ## Examples
 a working repo can be found at https://github.com/brendanmorrell/styled-components-a11y-example which has a file illustrating the linting rules in action for the above four styled component types for which the library is currently capable of handling
