@@ -26,7 +26,8 @@ const StyledDiv = styled(Div)``;
 const ButtonAsDiv = styled.button``;
 <ButtonAsDiv as="div" onClick={() => null} />
 ```
-  
+![linting examples](https://github.com/brendanmorrell/styled-components-a11y-example/blob/master/example.png)
+
 ## Examples
 a working repo can be found at https://github.com/brendanmorrell/styled-components-a11y-example which has a file illustrating the linting rules in action for the above four styled component types for which the library is currently capable of handling
 
