@@ -1,4 +1,4 @@
-## Available Scripts
+## Eslint Plugin Styled Components A11y
 
 This is a work in progress for linting styled components according to the rules outlined in eslint-plugin-jsx-a11y.
 
