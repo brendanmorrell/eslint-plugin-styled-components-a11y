@@ -17,8 +17,9 @@ const Div = styled.div.attrs({ onClick: () => null})``;
 ```
 
 ```
+const Div = styled.div.attrs({ onClick: () => null})``;
 const StyledDiv = styled(Div)``;
-<StyledDiv onClick{() => null} />
+<StyledDiv />
 ```
 
 ```
