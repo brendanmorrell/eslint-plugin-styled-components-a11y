@@ -37,7 +37,36 @@ a working repo can be found at https://github.com/brendanmorrell/styled-componen
 
 This library is currently a work in progress. At the moment, some of the rules do not fire in all cases, and there is some debugging and testing still to be done.
 
-Also, as the library is not fully packaged and prod ready; you currently have to manually enable each rule in the .eslintrc.js file (as shown in this example repo). Without this, none of the rules will fire. I will post updates to this as I make progress on the project.
+## Usage
+
+Add styled-components-a11y to the plugins section of your .eslintrc configuration file. You can omit the eslint-plugin- prefix:
+
+```
+{
+  "plugins": [
+    "styled-components-a11y"
+  ]
+}
+```
+
+You enable the recommeded rules or strict rules. Add `plugin:styled-components-a11y/recommended` or `plugin:styled-components-a11y/`strict in extends:
+
+```
+{
+  "extends": [
+    "plugin:styled-components-a11y/recommended"
+  ]
+}
+Alternatively, you can configure individual rules under the rules section.
+```
+
+{
+"rules": {
+"styled-components-a11y/rule-name": 2
+}
+}
+
+```
 
 ## Contributing
 
@@ -53,12 +82,14 @@ Here are the broad strokes in order of priority:
    This:
 
 ```
+
 const clickKeyDown = makeStyledTestCases({
- tag: 'a',
-  attrs: '{ onClick:() => 0, onKeyDown: foo }',
-  props: 'onClick={() => 0} onKeyDown={foo}',
- children: 'some text'
+tag: 'a',
+attrs: '{ onClick:() => 0, onKeyDown: foo }',
+props: 'onClick={() => 0} onKeyDown={foo}',
+children: 'some text'
 });
+
 ```
 
 would create an array of objects with the key 'code' having the following strings respectively
@@ -66,32 +97,38 @@ would create an array of objects with the key 'code' having the following string
 - (tag is set to a, props is the string from 'props', and children are present inside styled component)
 
 ```
+
 const FUNC = styled.a``;
 const Component = () => <FUNC onClick={() => 0} onKeyDown={foo}>some text</FUNC>
+
 ```
 
 - (tag is set to a, attrs is the string from 'attrs', and children are present inside styled component)
 
 ```
+
 const FUNC = styled.a.attrs({ onClick:() => 0, onKeyDown: foo })``;
 const Component = () => <Component>some text</Component>
+
 ```
 
 - the same thing but using an extended component
 
 ```
-const FUNC = styled.a.attrs({ onClick:() => 0, onKeyDown: foo })``;
-const Extended = styled(FUNC)``;
+
+const FUNC = styled.a.attrs({ onClick:() => 0, onKeyDown: foo })`; const Extended = styled(FUNC)`;
 const Component = () => <Extended>some text</Extended>
+
 ```
 
 - the same thing but with the as prop (the initial component is just anything other than what you put in as the tag)
 
 ```
-const FUNC = styled.div.attrs({ onClick:() => 0, onKeyDown: foo })``;
-const Extended = styled(FUNC)``;
+
+const FUNC = styled.div.attrs({ onClick:() => 0, onKeyDown: foo })`; const Extended = styled(FUNC)`;
 const Component = () => <Extended as="a">some text</Extended>
-```
+
+````
 
 to test error cases, you add the errors parameter to makeStyledTestCases, which will pass if the correct error fires
 
@@ -99,7 +136,7 @@ See if you can add some more rules. When the rules error out, best bet is to log
 
 ```const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee || node));
 
-```
+````
 
 put the name of the rule in where the example says 'scope' (so it only runs once for that rule instead of on every rule) and call it with either the node you want to log (which is what eslint is parsing. it runs over every node in the code's abstract syntax tree and calls your lining rules), or anything else you want to log. immediately after you run fund (at first, at the top of the file), add a return statement, as sometimes the linter is erroring out, and thus won't log unless you short-circuit it before the error. For example, if i were testing the rule accessible-emoji i would have the following to start:
 
