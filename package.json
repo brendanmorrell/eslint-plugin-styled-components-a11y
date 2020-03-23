@@ -23,7 +23,10 @@
     "eslintplugin",
     "styledcomponents",
     "styles",
-    "styled"
+    "styled",
+    "styled components",
+    "eslint plugin jsx a11y",
+    "css in js"
   ],
   "author": "",
   "license": "ISC",
