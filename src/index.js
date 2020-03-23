@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 const makeRule = require('./utils/makeRule');
 
 module.exports = {
@@ -43,6 +42,7 @@ module.exports = {
   configs: {
     recommended: {
       plugins: ['styled-components-a11y'],
+      extends: ['eslint-config-airbnb'],
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -93,7 +93,7 @@ module.exports = {
         'styled-components-a11y/label-has-for': 'off',
         'styled-components-a11y/media-has-caption': 'error',
         'styled-components-a11y/mouse-events-have-key-events': 'error',
-        'styled-components-a11y/no-access-key': 'error',
+        // 'styled-components-a11y/no-access-key': 'error',
         'styled-components-a11y/no-autofocus': 'error',
         'styled-components-a11y/no-distracting-elements': 'error',
         'styled-components-a11y/no-interactive-element-to-noninteractive-role': [
@@ -157,6 +157,7 @@ module.exports = {
     },
     strict: {
       plugins: ['styled-components-a11y'],
+      extends: ['eslint-config-airbnb'],
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
