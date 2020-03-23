@@ -49,7 +49,7 @@ Add styled-components-a11y to the plugins section of your .eslintrc configuratio
 }
 ```
 
-You enable the recommeded rules or strict rules. Add `plugin:styled-components-a11y/recommended` or `plugin:styled-components-a11y/`strict in extends:
+Enable the recommeded ruleset or the strict ruleset. Add `plugin:styled-components-a11y/recommended` or `plugin:styled-components-a11y/strict` in extends:
 
 ```
 {
@@ -60,12 +60,12 @@ You enable the recommeded rules or strict rules. Add `plugin:styled-components-a
 Alternatively, you can configure individual rules under the rules section.
 ```
 
+```
 {
-"rules": {
-"styled-components-a11y/rule-name": 2
+  "rules": {
+  "styled-components-a11y/rule-name": 2
+  }
 }
-}
-
 ```
 
 ## Contributing
