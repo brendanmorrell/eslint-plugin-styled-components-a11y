@@ -151,9 +151,7 @@ When you reload your editor (this is necessary unfortunately), you should see he
 
 2. the rule currently does not handle imports, only components defined within a single file. I would like to change from the current setup, where i create a dictionary with all the styled components names (eg, if the declaration is ` const Func = styled.div.attrs({foo:'bar'})``; ` the component dictionary i make looks like this `{ Func : { tag: 'div', attrs: {foo:'bar'} }`), to keying off the name of the component and the filename, e.g. change Foo to '/users/brendan/components/Tab\_\_Func'. Look to the eslint rule import/no-cycle for some guidance on how to possibly do this
 
-3. just generally setting up the library so it is easier to run and more polished(e.g., not having to explicitly name all the rules in the eslintrc, added some default rule configurations, etc.)
-
-4. there are a lot of edge cases in terms of both the function and arrow function syntax for attrs (e.g.,
+3. there are a lot of edge cases in terms of both the function and arrow function syntax for attrs (e.g.,
 
 ````
 styled.div.attrs(p => p.large ? ({foo:'bar', baz: p.small ? 1 : 2}))``;```
