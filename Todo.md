@@ -5,9 +5,28 @@
 - no-access-key
 - mouse-events-have-key-events
 
-## cant get regular rule to fire even
+## cant get regular to work correctly
 
-- autocomplete-valid (add rule/file when ready)
+- autocomplete-valid (can't get this to fire.add rule/file when ready)
+- label-has-associated-control (fires when it shouldn't):
+
+```
+function Foo(props) {
+    const {
+        htmlFor,
+        ...otherProps
+    } = props;
+
+   return <label htmlFor={htmlFor} {...otherProps} />
+}
+```
+
+```
+<label>
+  <input type="text" />
+  Surname
+</label>
+```
 
 ## look into
 
