@@ -1,6 +1,6 @@
 const RuleTester = require('eslint').RuleTester;
 const makeRule = require('../../utils/makeRule');
-const parserOptionsMapper = require('../utils/parserOptionsMapper');
+const parserOptionsMapper = require('../../utils/parserOptionsMapper');
 
 const ruleTester = new RuleTester();
 
@@ -14,7 +14,7 @@ const expectedError = {
 
 const test = {
   create(context) {
-    const parserOptionsMapper = require('../utils/parserOptionsMapper');
+    const parserOptionsMapper = require('../../utils/parserOptionsMapper');
     return {
       JSXOpeningElement(node) {
         context.report(node, 'bullsh');
