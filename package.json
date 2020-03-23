@@ -8,7 +8,23 @@
     "test": "jest ./__tests__/index.test.js",
     "build": "npx babel src --out-dir dist"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "eslint",
+    "styled-components",
+    "accessibility",
+    "eslint-plugin",
+    "jsx-a11y",
+    "eslint-plugin-jsx-a11y",
+    "a11y",
+    "emotion",
+    "css-in-js",
+    "jsx",
+    "eslintplugin",
+    "styledcomponents",
+    "styles",
+    "styled"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
