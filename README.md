@@ -31,7 +31,7 @@ const ButtonAsDiv = styled.button``;
 
 ## Examples
 
-a working repo can be found at https://github.com/brendanmorrell/styled-components-a11y-example which has a file illustrating the linting rules in action for the above four styled component types for which the library is currently capable of handling
+a working repo can be found at https://github.com/brendanmorrell/styled-components-a11y-example which has a file illustrating the linting rules in action for the above four styled component types the library is currently capable of handling
 
 ## IMPORTANT
 
@@ -39,7 +39,8 @@ This library is currently a work in progress. At the moment, some of the rules d
 
 ## Usage
 
-Add styled-components-a11y to the plugins section of your .eslintrc configuration file. You can omit the eslint-plugin- prefix:
+Install as a dev dependency using `yarn add eslint-plugin-styled-components-a11y` or `npm i eslint-plugin-styled-components-a11y --save-dev` and
+add styled-components-a11y to the plugins section of your .eslintrc configuration file. You can omit the eslint-plugin- prefix:
 
 ```
 {
