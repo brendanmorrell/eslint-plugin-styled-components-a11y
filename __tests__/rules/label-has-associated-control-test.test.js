@@ -1,56 +1,40 @@
 const { RuleTester } = require('eslint');
 const makeRule = require('../../src/utils/makeRule');
-const parserOptionsMapper = require('../utils/parserOptionsMapper');
-const getSuggestion = require('../utils/getSuggestion.js');
+const ruleTester = new RuleTester();
 const makeStyledTestCases = require('../utils/makeStyledTestCases');
 
 const expectedError = {
-  message: 'A form label must be associated with a control.',
-  type: 'JSXOpeningElement',
+  message: 'The scope prop can only be used on <th> elements.',
+  type: 'JSXAttribute',
 };
-
-const ruleTester = new RuleTester();
 const ruleName = 'label-has-associated-control';
 const rule = makeRule(ruleName);
 
 // ## VALID
-// <label htmlFor={htmlFor}>
+// <label>
 //   Surname
-//   <input type="text" id={htmlFor} />
-// </label>
-const inputInLabel = makeStyledTestCases({
+//   <input type="text" htmlFor={htmlFor} />
+// </label>;
+const label = makeStyledTestCases({
   tag: 'label',
-  attrs: '{ type: "text" }',
+  attrs: `{ type: 'text', htmlFor }`,
   siblings: 'Surname',
-  props: ' type="text" htmlFor={htmlFor} ',
-  children: '<input type="text" id={htmlFor} />',
+  props: 'type="text" htmlFor={htmlFor} ',
+  children: '<input type="text" />',
 });
+
+// <label htmlFor={htmlFor} {...otherProps} />;
 
 // ## INVALID
-// <label {...props} />
-const labelSpreadProps = makeStyledTestCases({
-  tag: 'label',
-  attrs: '{ ...props }',
-  props: '{...props}',
-  errors: [expectedError],
-});
 // <input type="text" />
 // <label>Surname</label>
-const siblingInputLabel = makeStyledTestCases({
-  tag: 'label',
-  siblings: '<input type="text" />',
-  errors: [expectedError],
-});
 
-const code = `
-let STYLED = styled.label\`\`;
-`;
+// <input type="text" id={htmlFor/>
+// <label htmlFor={htmlFor} >Surname</label>
 
-const item = { code };
+// <label {...props} />;
 
 ruleTester.run(ruleName, rule, {
-  valid: [item],
-  invalid: [
-    /* ...labelSpreadProps, ...siblingInputLabel */
-  ],
+  valid: [],
+  invalid: [],
 });
