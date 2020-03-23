@@ -20,6 +20,8 @@
     "emotion",
     "css-in-js",
     "jsx",
+    "aria",
+    "WAI-ARIA",
     "eslintplugin",
     "styledcomponents",
     "styles",
