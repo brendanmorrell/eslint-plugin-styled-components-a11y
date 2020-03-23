@@ -34,22 +34,31 @@ const expectedEveryError = {
   type: 'JSXOpeningElement',
 };
 
-
-const optionsComponents = [{
-  components: ['Label', 'Descriptor'],
-}];
-const optionsRequiredNesting = [{
-  required: 'nesting',
-}];
-const optionsRequiredSome = [{
-  required: { some: ['nesting', 'id'] },
-}];
-const optionsRequiredEvery = [{
-  required: { every: ['nesting', 'id'] },
-}];
-const optionsChildrenAllowed = [{
-  allowChildren: true,
-}];
+const optionsComponents = [
+  {
+    components: ['Label', 'Descriptor'],
+  },
+];
+const optionsRequiredNesting = [
+  {
+    required: 'nesting',
+  },
+];
+const optionsRequiredSome = [
+  {
+    required: { some: ['nesting', 'id'] },
+  },
+];
+const optionsRequiredEvery = [
+  {
+    required: { every: ['nesting', 'id'] },
+  },
+];
+const optionsChildrenAllowed = [
+  {
+    allowChildren: true,
+  },
+];
 
 ruleTester.run('label-has-for', rule, {
   valid: [
@@ -75,7 +84,10 @@ ruleTester.run('label-has-for', rule, {
     { code: '<Descriptor htmlFor={"foo"} />', options: [assign({}, optionsComponents[0], optionsRequiredSome[0])] },
     { code: '<Descriptor htmlFor={foo} />', options: [assign({}, optionsComponents[0], optionsRequiredSome[0])] },
     { code: '<Descriptor htmlFor={`${id}`} />', options: [assign({}, optionsComponents[0], optionsRequiredSome[0])] },
-    { code: '<Descriptor htmlFor="foo">Test!</Descriptor>', options: [assign({}, optionsComponents[0], optionsRequiredSome[0])] },
+    {
+      code: '<Descriptor htmlFor="foo">Test!</Descriptor>',
+      options: [assign({}, optionsComponents[0], optionsRequiredSome[0])],
+    },
     { code: '<label htmlFor="foo" />', options: optionsRequiredSome },
     { code: '<label htmlFor={"foo"} />', options: optionsRequiredSome },
     { code: '<label htmlFor={foo} />', options: optionsRequiredSome },
@@ -85,13 +97,24 @@ ruleTester.run('label-has-for', rule, {
     { code: '<label><input /></label>', options: optionsRequiredNesting },
     { code: '<label htmlFor="input"><input /></label>', options: optionsRequiredEvery },
     { code: '<label><input /></label>', options: optionsChildrenAllowed },
-    { code: '<Descriptor htmlFor="foo">Test!</Descriptor>', options: [assign({}, optionsComponents, optionsChildrenAllowed)] },
+    {
+      code: '<Descriptor htmlFor="foo">Test!</Descriptor>',
+      options: [assign({}, optionsComponents, optionsChildrenAllowed)],
+    },
     { code: '<label>Test!</label>', options: optionsChildrenAllowed },
     { code: '<label htmlFor="foo">Test!</label>', options: optionsChildrenAllowed },
     { code: '<label>{children}</label>', options: optionsChildrenAllowed },
     { code: '<label htmlFor="children">{children}</label>', options: optionsChildrenAllowed },
-    { code: '<label htmlFor={id}>{ labelText }<div><input id={id} type="checkbox" name={id} value={value} /></div></label>', options: optionsRequiredEvery },
-    { code: '<label htmlFor={id}>{ labelText }<div><div><div><div><input id={id} type="checkbox" name={id} value={value} /></div></div></div></div></label>', options: optionsRequiredEvery },
+    {
+      code:
+        '<label htmlFor={id}>{ labelText }<div><input id={id} type="checkbox" name={id} value={value} /></div></label>',
+      options: optionsRequiredEvery,
+    },
+    {
+      code:
+        '<label htmlFor={id}>{ labelText }<div><div><div><div><input id={id} type="checkbox" name={id} value={value} /></div></div></div></div></label>',
+      options: optionsRequiredEvery,
+    },
   ].map(parserOptionsMapper),
   invalid: [
     // DEFAULT ELEMENT 'label' TESTS
@@ -108,7 +131,12 @@ ruleTester.run('label-has-for', rule, {
     { code: '<label htmlFor={foo} />', errors: [expectedEveryError], options: optionsRequiredEvery },
     { code: '<label htmlFor={`${id}`} />', errors: [expectedEveryError], options: optionsRequiredEvery },
     { code: '<label htmlFor="foo">Test!</label>', errors: [expectedEveryError], options: optionsRequiredEvery },
-    { code: '<label htmlFor={id}>{ labelText }<div><div><div><div><div id={id} type="checkbox" name={id} value={value} /></div></div></div></div></label>', errors: [expectedEveryError], options: optionsRequiredEvery },
+    {
+      code:
+        '<label htmlFor={id}>{ labelText }<div><div><div><div><div id={id} type="checkbox" name={id} value={value} /></div></div></div></div></label>',
+      errors: [expectedEveryError],
+      options: optionsRequiredEvery,
+    },
     //
     // // CUSTOM ELEMENT ARRAY OPTION TESTS
     {
@@ -216,7 +244,8 @@ ruleTester.run('label-has-for', rule, {
       options: optionsRequiredEvery,
     },
     {
-      code: '<form><input type="text" id="howmuch" value="1" /><label htmlFor="howmuch">How much ?<span /></label></form>',
+      code:
+        '<form><input type="text" id="howmuch" value="1" /><label htmlFor="howmuch">How much ?<span /></label></form>',
       errors: [expectedEveryError],
       options: optionsRequiredEvery,
     },
