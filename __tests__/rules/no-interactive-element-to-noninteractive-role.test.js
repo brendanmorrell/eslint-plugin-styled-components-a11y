@@ -32,5 +32,5 @@ const buttonArticleRole = makeStyledTestCases({
 
 ruleTester.run(ruleName, rule, {
   valid: [...divArticleRoleWrapperButton],
-  invalid: [buttonArticleRole[1]],
+  invalid: [...buttonArticleRole],
 });
