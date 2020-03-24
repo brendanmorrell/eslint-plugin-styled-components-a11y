@@ -4,6 +4,7 @@
 - aria-proptypes
 - no-access-key
 - mouse-events-have-key-events
+  lang ang html-has-lang appear to be identical. i thus removed lang. make sure rule isn't somehow different
 
 ## cant get regular to work correctly
 

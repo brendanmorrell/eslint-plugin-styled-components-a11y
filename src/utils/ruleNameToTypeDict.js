@@ -17,7 +17,6 @@ module.exports = {
   'interactive-supports-focus': 'JSXOpeningElement',
   'label-has-associated-control': 'JSXElement',
   'label-has-for': 'JSXOpeningElement',
-  lang: 'JSXAttribute',
   'media-has-caption': 'JSXElement',
   'mouse-events-have-key-events': 'noop',
   'no-access-keys': 'noop',

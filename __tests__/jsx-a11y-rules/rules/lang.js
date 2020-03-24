@@ -7,9 +7,9 @@
 // Rule Definition
 // ----------------------------------------------------------------------------
 
-import { propName, elementType, getLiteralPropValue } from 'jsx-ast-utils';
-import { generateObjSchema } from '../util/schemas';
-import ISO_CODES from '../util/attributes/ISO.json';
+const { propName, elementType, getLiteralPropValue } = require('jsx-ast-utils');
+const { generateObjSchema } = require('../util/schemas');
+const ISO_CODES = require('../util/attributes/ISO.json');
 
 const errorMessage = 'lang attribute must have a valid value.';
 
@@ -23,8 +23,8 @@ module.exports = {
     schema: [schema],
   },
 
-  create: (context) => ({
-    JSXAttribute: (node) => {
+  create: context => ({
+    JSXAttribute: node => {
       const name = propName(node);
       if (name && name.toUpperCase() !== 'LANG') {
         return;
@@ -55,8 +55,10 @@ module.exports = {
       const lang = hyphen > -1 ? value.substring(0, hyphen) : value;
       const country = hyphen > -1 ? value.substring(3) : undefined;
 
-      if (ISO_CODES.languages.indexOf(lang) > -1
-        && (country === undefined || ISO_CODES.countries.indexOf(country) > -1)) {
+      if (
+        ISO_CODES.languages.indexOf(lang) > -1 &&
+        (country === undefined || ISO_CODES.countries.indexOf(country) > -1)
+      ) {
         return;
       }
 

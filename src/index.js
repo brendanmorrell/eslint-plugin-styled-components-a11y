@@ -21,7 +21,6 @@ module.exports = {
     'interactive-supports-focus': makeRule('interactive-supports-focus'),
     'label-has-associated-control': makeRule('label-has-associated-control'),
     'label-has-for': makeRule('label-has-for'),
-    lang: makeRule('lang'),
     'media-has-caption': makeRule('media-has-caption'),
     'mouse-events-have-key-events': makeRule('mouse-events-have-key-events'),
     'no-access-key': makeRule('no-access-key'),
