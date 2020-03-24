@@ -19,7 +19,7 @@ module.exports = {
   'label-has-for': 'JSXOpeningElement',
   'media-has-caption': 'JSXElement',
   'mouse-events-have-key-events': 'JSXOpeningElement',
-  'no-access-keys': 'JSXOpeningElement',
+  'no-access-key': 'JSXOpeningElement',
   'no-autofocus': 'JSXAttribute',
   'no-distracting-elements': 'JSXOpeningElement',
   'no-interactive-element-to-noninteractive-role': 'JSXAttribute',
