@@ -11,9 +11,7 @@ const funcs = files.map(file => exec.bind(null, `node ${join(rulesDir, file)}`))
 function getResults(err, data) {
   if (err) return console.log(err);
   const [results] = data.map(lines => lines.join('')).filter(Boolean);
-  console.log(results ? results : `✓ Tests Pass`);
-
-  // printResults(results)
+  console.log(results ? printResults(results) : `✓ Tests Pass`);
   // writeFileSync(join(__dirname, './debug.js'), formatted, 'UTF-8');
 }
 
