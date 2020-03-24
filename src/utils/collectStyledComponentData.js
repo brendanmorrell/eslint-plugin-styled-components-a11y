@@ -48,14 +48,23 @@ module.exports = (styledComponentsDict, context, name) => ({
             // this is pretty useless. would need to generate code from any template expression for this to really work
             value:
               x.value.type === 'TemplateLiteral'
-                ? x.value.quasis[0].value.raw
+                ? // need to grab falsy vals like empty strings, thus the x ? x : identifier instead of x|| identifier
+                  typeof x.value.quasis[0].value.raw === 'undefined'
+                  ? __UNKNOWN_IDENTIFER__
+                  : x.value.quasis[0].value.raw
                 : x.value.type === 'UnaryExpression' && arithmeticUnaryOperators.includes(x.value.operator)
-                ? +(x.value.operator + x.value.argument.value)
+                ? // if simple arithemetic, concat the symbol and the strings (like a negative) and then coerce to a number
+                  +(x.value.operator + x.value.argument.value)
                 : x.value.type === 'Identifier'
                 ? x.value.name === 'undefined'
                   ? undefined
                   : __UNKNOWN_IDENTIFER__
-                : x.value.value || __UNKNOWN_IDENTIFER__,
+                : typeof x.value.value === 'undefined'
+                ? // if property exists, but no value found, just set it to our unknown identifier so it returns truthy and not something specific like a number or boolean or undefined as these are tested in specific ways for different linting rules
+                  // too many options for what this could be, but this can approxinate what is needed for linting
+                  // need to grab falsy vals like empty strings, thus the x ? x : identifier instead of x|| identifier
+                  __UNKNOWN_IDENTIFER__
+                : x.value.value,
           }));
       }
       styledComponentsDict[scName] = { name: scName, attrs, tag };
