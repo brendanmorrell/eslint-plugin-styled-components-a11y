@@ -55,7 +55,7 @@ module.exports = (styledComponentsDict, context, name) => ({
                 ? x.value.name === 'undefined'
                   ? undefined
                   : __UNKNOWN_IDENTIFER__
-                : x.value.value,
+                : x.value.value || __UNKNOWN_IDENTIFER__,
           }));
       }
       styledComponentsDict[scName] = { name: scName, attrs, tag };

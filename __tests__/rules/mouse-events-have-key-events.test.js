@@ -21,27 +21,54 @@ const rule = makeRule(ruleName);
 const expectedError = {};
 
 // ## VALID
-// <div onMouseOver={ () => void 0 } onFocus={ () => void 0 } />
+// <div onMouseOver={() => 0} onFocus={() => 0} />
 const divMouseOverFocus = makeStyledTestCases({
   attrs: '{ onMouseOver:() => 0 , onFocus: () => 0}',
-  props: 'onMouseOver={ () => void 0 } onFocus={ () => void 0 }',
+  props: 'onMouseOver={() => 0} onFocus={() => 0}',
 });
-// <div onMouseOut={ () => void 0 } onBlur={ () => void 0 } />
-// <div onMouseOver={ () => void 0 } onFocus={ () => void 0 } {...otherProps} />
-// <div onMouseOut={ () => void 0 } onBlur={ () => void 0 } {...otherProps} />
+// <div onMouseOut={() => 0} onBlur={() => 0} />
+const divMouseOutBlur = makeStyledTestCases({
+  attrs: '{ onMouseOut:() => 0 , onBlur: () => 0}',
+  props: 'onMouseOut={() => 0} onBlur={() => 0}',
+});
+// <div onMouseOver={() => 0} onFocus={() => 0} {...otherProps} />
+const divMouseOverFocuseSpread = makeStyledTestCases({
+  attrs: '{ onMouseOver:() => 0 , onFocus: () => 0,...props}',
+  props: 'onMouseOver={() => 0} onFocus={() => 0} {...props}',
+});
+// <div onMouseOut={() => 0} onBlur={() => 0} {...otherProps} />
+const divMouseOutBlurSpread = makeStyledTestCases({
+  attrs: '{ onMouseOut:() => 0 , onBlur: () => 0,...props}',
+  props: 'onMouseOut={() => 0} onBlur={() => 0} {...props}',
+});
 
 // ## INVALID
-// <div onMouseOver={ () => void 0 } />
+// <div onMouseOver={() => 0} />
 const divMouseOverNoFocus = makeStyledTestCases({
-  attrs: '{ onMouseOver:() => 0 }',
-  props: 'onMouseOver={ () => void 0 }',
+  attrs: '{ onMouseOver:() => 0}',
+  props: 'onMouseOver={() => 0}',
   errors: [mouseOverError],
 });
-// <div onMouseOut={ () => void 0 } />
-// <div onMouseOver={ () => void 0 } {...otherProps} />
-// <div onMouseOut={ () => void 0 } {...otherProps} />
-return console.log(divMouseOverNoFocus);
+// <div onMouseOut={() => 0} />
+const divMouseOutNoFocus = makeStyledTestCases({
+  attrs: '{ onMouseOut:() => 0}',
+  props: 'onMouseOut={() => 0}',
+  errors: [mouseOutError],
+});
+// <div onMouseOver={() => 0} {...props} />
+const divMouseOutNoFocusSpread = makeStyledTestCases({
+  attrs: '{ onMouseOver:() => 0, ...props }',
+  props: 'onMouseOver={() => 0} {...props}',
+  errors: [mouseOverError],
+});
+// <div onMouseOut={() => 0} {...props} />
+const divMouseOverNoFocusSpread = makeStyledTestCases({
+  attrs: '{ onMouseOut:() => 0, props }',
+  props: 'onMouseOut={() => 0} {..props}',
+  errors: [mouseOutError],
+});
+
 ruleTester.run(ruleName, rule, {
-  valid: [...divMouseOverFocus],
-  invalid: [...divMouseOverNoFocus],
+  valid: [...divMouseOverFocus, ...divMouseOutBlur, ...divMouseOverFocuseSpread, ...divMouseOutBlurSpread],
+  invalid: [...divMouseOverNoFocus, ...divMouseOutNoFocus, ...divMouseOutNoFocusSpread, ...divMouseOutNoFocusSpread],
 });
