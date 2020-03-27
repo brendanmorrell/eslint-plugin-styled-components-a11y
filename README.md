@@ -4,7 +4,9 @@ This is a work in progress for linting styled components according to the rules 
 
 It handles all 4 methods styled components uses to create components. All of these would show the error
 
-`Visible, non-interactive elements with click handlers must have at least one keyboard listener.`
+```diff
+-Visible, non-interactive elements with click handlers must have at least one keyboard listener.`
+```
 
 ```
 const Div = styled.div``;
@@ -31,11 +33,17 @@ const ButtonAsDiv = styled.button``;
 
 ## Examples
 
-a working repo can be found at https://github.com/brendanmorrell/styled-components-a11y-example which has a file illustrating the linting rules in action for the above four styled component types the library is currently capable of handling
+a working repo can be found [here](https://github.com/brendanmorrell/styled-components-a11y-example) at brendanmorrell/styled-components-a11y-example which has a file illustrating the linting rules in action for the above four styled component types the library is currently capable of handling
 
-## IMPORTANT
+### !!! IMPORTANT !!!
 
-This library is currently a work in progress. At the moment, some of the rules do not fire in all cases, and there is some debugging and testing still to be done.
+This library is currently a work in progress. **PLEASE** let me know of any bugs you find so I can more quickly rectify them (or even better, make a PR). Some of the rules do not fire in all cases, and there is some debugging and testing still to be done.
+
+If you like the project and believe in the goal, it would bea **HUGE** help if you could take a second and give it a star on [github](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y), or if you could spread the word on social/with coworkers so we could get more people using it, testing it, and contributing (any bump would help, as this is solely a pet project of mine, and I have limited time to work on it)
+
+Really.
+
+Most modern sites are almost entirely unnavigable for those with special needs. Linters are the primary method of informing developers and enforcing solutions, but with most now using CSS in JS, existing a11y linting has become significantly less useful (personally, 99% of the components I actually need linted are styled); using and promoting solutions to this problem would be a **massive** step toward increasing accessibillity on the web. If you can, please help give us a boost so I can keep working on this, get others to assist, and work toward a more open, accessible internet for everyone.
 
 ## Usage
 
@@ -129,7 +137,7 @@ const Component = () => <Extended>some text</Extended>
 const FUNC = styled.div.attrs({ onClick:() => 0, onKeyDown: foo })`; const Extended = styled(FUNC)`;
 const Component = () => <Extended as="a">some text</Extended>
 
-````
+```
 
 to test error cases, you add the errors parameter to makeStyledTestCases, which will pass if the correct error fires
 
@@ -137,7 +145,7 @@ See if you can add some more rules. When the rules error out, best bet is to log
 
 ```const func = inspectee => name.includes('scope') && context.report(node, inspect(inspectee || node));
 
-````
+```
 
 put the name of the rule in where the example says 'scope' (so it only runs once for that rule instead of on every rule) and call it with either the node you want to log (which is what eslint is parsing. it runs over every node in the code's abstract syntax tree and calls your lining rules), or anything else you want to log. immediately after you run fund (at first, at the top of the file), add a return statement, as sometimes the linter is erroring out, and thus won't log unless you short-circuit it before the error. For example, if i were testing the rule accessible-emoji i would have the following to start:
 
