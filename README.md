@@ -35,7 +35,7 @@ const ButtonAsDiv = styled.button``;
 
 a working repo can be found [here](https://github.com/brendanmorrell/styled-components-a11y-example) at brendanmorrell/styled-components-a11y-example which has a file illustrating the linting rules in action for the above four styled component types the library is currently capable of handling
 
-### !!! IMPORTANT !!!
+# !!! IMPORTANT !!!
 
 This library is currently a work in progress. **PLEASE** let me know of any bugs you find so I can more quickly rectify them (or even better, make a PR). Some of the rules do not fire in all cases, and there is some debugging and testing still to be done.
 
