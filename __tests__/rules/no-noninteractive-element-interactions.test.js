@@ -9,8 +9,7 @@ const makeStyledTestCases = require('../utils/makeStyledTestCases');
 const ruleName = 'no-noninteractive-element-interactions';
 const rule = makeRule(ruleName);
 
-const expectedError = {};
-const errorMessage = 'Non-interactive elements should not be assigned mouse or keyboard event listeners.';
+const expectedError = 'Non-interactive elements should not be assigned mouse or keyboard event listeners.';
 
 // ## VALID
 // <div onClick={() => void 0} role="button" />
@@ -48,14 +47,14 @@ const listItemOnclick = makeStyledTestCases({
   props: 'onClick={() => 0}',
   attrs: '{ onClick:() => 0 }',
   tag: 'li',
-  errors: [errorMessage],
+  errors: [expectedError],
 });
 // <div onClick={() => void 0} role="listitem" />
 const divRoleListItem = makeStyledTestCases({
   props: 'onClick={() => void 0} role="listitem"',
   attrs: "{ onClick:() => 0, role: 'listitem' }",
   tag: 'li',
-  errors: [errorMessage],
+  errors: [expectedError],
 });
 
 ruleTester.run(ruleName, rule, {
