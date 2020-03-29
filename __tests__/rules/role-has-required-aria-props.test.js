@@ -35,5 +35,5 @@ const roleCheckboxNoAriaChecked = makeStyledTestCases({
 
 ruleTester.run(ruleName, rule, {
   valid: roleCheckboxAriaChecked,
-  invalid: [...roleCheckboxNoAriaChecked],
+  invalid: roleCheckboxNoAriaChecked,
 });

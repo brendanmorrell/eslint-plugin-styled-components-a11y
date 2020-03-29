@@ -21,6 +21,6 @@ const marquee = makeStyledTestCases({ tag: 'marquee', errors: [errorMessage('mar
 const blink = makeStyledTestCases({ tag: 'blink', errors: [errorMessage('blink')] });
 
 ruleTester.run(ruleName, rule, {
-  valid: [...div],
+  valid: div,
   invalid: [...marquee, ...blink],
 });
