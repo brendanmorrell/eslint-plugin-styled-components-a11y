@@ -32,6 +32,6 @@ const button = makeStyledTestCases({
 });
 
 ruleTester.run(ruleName, rule, {
-  valid: [...ariaLabelSaveButton],
-  invalid: [...button],
+  valid: ariaLabelSaveButton,
+  invalid: button,
 });

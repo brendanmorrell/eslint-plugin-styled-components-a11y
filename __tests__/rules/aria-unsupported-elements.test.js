@@ -32,6 +32,6 @@ const metaCharsetAriaHidden = makeStyledTestCases({
 });
 
 ruleTester.run(ruleName, rule, {
-  valid: [...metaCharset],
-  invalid: [...metaCharsetAriaHidden],
+  valid: metaCharset,
+  invalid: metaCharsetAriaHidden,
 });
