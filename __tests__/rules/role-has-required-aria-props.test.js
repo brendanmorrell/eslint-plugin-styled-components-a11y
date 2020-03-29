@@ -22,11 +22,18 @@ const roleCheckboxAriaChecked = makeStyledTestCases({
   props: 'role="checkbox" aria-checked="false" aria-labelledby="foo" tabindex="0"',
   attrs: "{ role:'checkbox', 'aria-checked':false, 'aria-labelledby':'foo', tabindex:'0' }",
 });
+
 // ## INVALID
 // <!-- Bad: the checkbox role requires the aria-checked state -->
 // <span role="checkbox" aria-labelledby="foo" tabindex="0"></span>
+const roleCheckboxNoAriaChecked = makeStyledTestCases({
+  tag: 'span',
+  props: 'role="checkbox" aria-labelledby="foo" tabindex="0"',
+  attrs: "{ role:'checkbox', 'aria-labelledby':'foo', tabindex:'0' }",
+  errors: [expectedError('checkbox', 'aria-checked')],
+});
 
 ruleTester.run(ruleName, rule, {
   valid: roleCheckboxAriaChecked,
-  invalid: [],
+  invalid: [...roleCheckboxNoAriaChecked],
 });
