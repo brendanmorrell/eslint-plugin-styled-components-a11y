@@ -37,21 +37,15 @@ const radioGroupAriaRequired = makeStyledTestCases({
 
 // ## INVALID
 // <!-- Bad: the radio role does not support the aria-required property -->
-// <ul role="radio" aria-required aria-labelledby="foo">
-//     <li aria-required tabIndex="-1" role="radio" aria-checked="false">Rainbow Trout</li>
-//     <li aria-required tabIndex="-1" role="radio" aria-checked="false">Brook Trout</li>
-//     <li aria-required tabIndex="0" role="radio" aria-checked="true">Lake Trout</li>
-// </ul>
+//<li aria-required tabIndex="-1" role="radio" aria-checked="false">
+//  Rainbow Trout
+//</li>;
 
 const radioGroupNoAriaRequired = makeStyledTestCases({
-  tag: 'ul',
-  attrs: "{ role:'button', 'aria-required':true,'aria-labelledby':'foo' }",
-  props: 'role="button" aria-required aria-labelledby="foo"',
-  children: `
-            <li aria-required tabIndex="-1" role="radio" aria-checked="false">Rainbow Trout</li>
-            <li aria-required tabIndex="-1" role="radio" aria-checked="false">Brook Trout</li>
-            <li aria-required tabIndex="0" role="radio" aria-checked="true">Lake Trout</li>`,
-  errors: [errorMessage('aria-required', 'button')],
+  tag: 'li',
+  attrs: "{'aria-required':true,tabIndex:'-1', role:'radio', 'aria-checked':false }",
+  props: 'aria-required tabIndex="-1" role="radio" aria-checked="false"',
+  errors: [errorMessage('aria-required', 'radio')],
 });
 
 ruleTester.run(ruleName, rule, {
