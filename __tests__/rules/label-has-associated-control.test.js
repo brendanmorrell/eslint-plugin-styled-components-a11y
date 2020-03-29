@@ -47,7 +47,16 @@ const labelSpreadProps = makeStyledTestCases({
   errors: [expectedError],
 });
 
+// <input type="text" />
+// <label>Surname</label>
+const siblingInputLabel = makeStyledTestCases({
+  tag: 'label',
+  children: 'Surname',
+  siblings: '<input type="text" />',
+  errors: [expectedError],
+});
+
 ruleTester.run(ruleName, rule, {
   valid: [...labelInnerInput, ...labelHtmlFor, ...input],
-  invalid: [...labelSpreadProps],
+  invalid: [...labelSpreadProps, ...siblingInputLabel],
 });
