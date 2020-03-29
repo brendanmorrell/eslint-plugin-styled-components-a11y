@@ -29,6 +29,7 @@ const input = makeStyledTestCases({
   attrs: "{ onClick:() => 0, type:'text' }",
   props: 'type="text" onClick={() => 0}',
 });
+
 // ## INVALID
 // <div onClick={() => 0} />
 const divOnClick = makeStyledTestCases({
