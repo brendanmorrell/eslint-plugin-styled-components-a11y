@@ -52,5 +52,5 @@ const italicTagFullyLabeled = makeStyledTestCases({
 
 ruleTester.run(ruleName, rule, {
   valid: [...spanRoleImgLabelSnowmanUnicode, ...spanRoleImgLabelPandaEmoji, ...spanRoleImgLabelledByPandaEmoji],
-  invalid: [...spanNothingElse],
+  invalid: spanNothingElse,
 });

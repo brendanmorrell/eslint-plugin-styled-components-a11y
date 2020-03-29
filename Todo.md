@@ -1,7 +1,8 @@
 ## recheck
-- no-access-key
-- mouse-events-have-key-events
-  lang ang html-has-lang appear to be identical. i thus removed lang. make sure rule isn't somehow different
+
+- lang and html-has-lang appear to be identical. i thus removed lang. make sure rule isn't somehow different. also, checking if lang valid is not working (i.e.,t lang="foo")
+- aria props
+- alt-text
 
 ## cant get regular to work correctly
 

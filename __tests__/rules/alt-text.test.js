@@ -33,6 +33,8 @@ const areaError =
 
 const inputImageError =
   '<input> elements with type="image" must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` prop.';
+const imgAltTextError =
+  'img elements must have an alt prop, either with meaningful text, or an empty string for decorative images.';
 
 const ruleName = 'alt-text';
 const rule = makeRule(ruleName);
@@ -215,18 +217,6 @@ const imgAltObjPropPlusStr = makeStyledTestCases({
   attrs: '{ alt: plugin.name + " Logo" }',
   tag: 'img',
 });
-// { code: '<img aria-label="foo" />' },
-const imgAriaLabelStr = makeStyledTestCases({
-  props: 'aria-label="foo"',
-  attrs: '{ "aria-label": "foo" }',
-  tag: 'img',
-});
-// { code: '<img aria-labelledby="id1" />' },
-const imgAriaLabelByStr = makeStyledTestCases({
-  props: 'aria-labelledby="id1"',
-  attrs: '{ "aria-labelledby": "id1" }',
-  tag: 'img',
-});
 
 // ## INVALID
 //     { code: '<img />;', errors: [missingPropError('img')] },
@@ -235,7 +225,6 @@ const imgNoAlt = makeStyledTestCases({
   errors: [missingPropError('img')],
 });
 
-// #### DOCS INVALID
 // <img src="foo" />
 const imgSrcNoAlt = makeStyledTestCases({
   attrs: `{ src: 'foo' }`,
@@ -302,11 +291,27 @@ const inputTypeImagePropsSpread = makeStyledTestCases({
   errors: [inputImageError],
 });
 
+// { code: '<img aria-label="foo" />' },
+const imgAriaLabelStr = makeStyledTestCases({
+  props: 'aria-label="foo"',
+  attrs: '{ "aria-label": "foo" }',
+  tag: 'img',
+  errors: [imgAltTextError],
+});
+
+// { code: '<img aria-labelledby="id1" />' },
+const imgAriaLabelByStr = makeStyledTestCases({
+  props: 'aria-labelledby="id1"',
+  attrs: '{ "aria-labelledby": "id1" }',
+  tag: 'img',
+  errors: [imgAltTextError],
+});
+
 ruleTester.run(ruleName, rule, {
   valid: [
     ...ImgAltStr,
     ...ImgAltStrProp,
-    // ...ImgAltProp,
+    ...ImgAltProp,
     ...ImgALTStr,
     ...ImgALTTemplateStrProp,
     ...ImgALtStr,
@@ -314,15 +319,15 @@ ruleTester.run(ruleName, rule, {
     ...ImgSpreadAltStr,
     ...anchor,
     ...div,
-    // ...imgAltFunc,
+    ...imgAltFunc,
     ...divAltFunc,
-    // ...imgAltArrowFunc,
-    // ...imgAltVarOrStr,
-    // ...imgAltObjProp,
-    // ...imgAltCalledFunc,
-    // ...imgAltObjPropOrEmptyStr,
-    // ...imgAltCalledFuncOrEmptyStr,
-    // ...imgAltObjPropCalledFuncOrEmptyStr,
+    ...imgAltArrowFunc,
+    ...imgAltVarOrStr,
+    ...imgAltObjProp,
+    ...imgAltCalledFunc,
+    ...imgAltObjPropOrEmptyStr,
+    ...imgAltCalledFuncOrEmptyStr,
+    ...imgAltObjPropCalledFuncOrEmptyStr,
     ...imgAltEmptyStr,
     ...imgAltTemplateStrUndefined,
     ...imgAltWhitespace,
@@ -330,12 +335,9 @@ ruleTester.run(ruleName, rule, {
     ...imgAltEmptyRoleNone,
     ...imgAltEmptyRoleTemplatePresentation,
     ...imgAltStrRolePresentation,
-    // ...imgAltTernaryObjStrStr,
-    // ...imgAltTernaryUndefinedStrStr,
-    // ...imgAltObjPropPlusStr,
-    // ...imgAriaLabelStr,
-    // ...imgAriaLabelByStr,
-    // docs
+    ...imgAltTernaryObjStrStr,
+    ...imgAltTernaryUndefinedStrStr,
+    ...imgAltObjPropPlusStr,
   ],
   invalid: [
     ...imgNoAlt,
@@ -348,5 +350,7 @@ ruleTester.run(ruleName, rule, {
     ...objectPropsSpread,
     ...areaPropsSpread,
     ...inputTypeImagePropsSpread,
+    ...imgAriaLabelStr,
+    ...imgAriaLabelByStr,
   ],
 });
