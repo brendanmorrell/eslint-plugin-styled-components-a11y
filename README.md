@@ -47,7 +47,7 @@ Most modern sites are almost entirely unnavigable for those with special needs. 
 
 ### Note
 
-1. version 0.0.1 had two major bug fixes, if you have a previous version, please update.
+1. version 0.0.15 had two major bug fixes, if you have a previous version, please update.
 2. As evidence of the importance of styled a11y linting, I ran just this plugin on a prod repo i'm working on, and it uncovered 6,567 errors that were undiscovered using airbnb/jsx-a11y linting rules. once again, please share, star the [github repo](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y), report any bugs, and please conribute so we can increase web accessibility for all!
 
 ## Usage
