@@ -45,6 +45,11 @@ Really.
 
 Most modern sites are almost entirely unnavigable for those with special needs. Linters are the primary method of informing developers and enforcing solutions, but with most now using CSS in JS, existing a11y linting has become significantly less useful (personally, 99% of the components I actually need linted are styled); using and promoting solutions to this problem would be a **massive** step toward increasing accessibillity on the web. If you can, please help give us a boost so I can keep working on this, get others to assist, and work toward a more open, accessible internet for everyone.
 
+### Note
+
+1. version 0.0.911111 had two major bug fixes, if you have a previous version, please update.
+2. As evidence of the importance of styled a11y linting, I ran just this plugin on a prod repo i'm working on, and it uncovered 6,567 errors that were undiscovered using airbnb/jsx-a11y linting rules. once again, please share, star the [github repo](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y), report any bugs, and please conribute so we can increase web accessibility for all!
+
 ## Usage
 
 Install as a dev dependency using `yarn add eslint-plugin-styled-components-a11y` or `npm i eslint-plugin-styled-components-a11y --save-dev` and
@@ -66,8 +71,9 @@ Enable the recommeded ruleset or the strict ruleset. Add `plugin:styled-componen
     "plugin:styled-components-a11y/recommended"
   ]
 }
-Alternatively, you can configure individual rules under the rules section.
 ```
+
+Alternatively, you can configure individual rules under the rules section.
 
 ```
 {
