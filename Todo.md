@@ -42,6 +42,7 @@ function Foo(props) {
 - need a way to make sure plugin doesnt crash eslint regardless of parsing difficulties
 - need to set tests to handle more varietes of keys/values, specifically should have at least handle everything surrounded by all types of string quotes
 - add support for object syntax (const Button = styled.button({ color: 'blue' }));
+- add optional params to change the name from styled
 
 ## tests to revisit (first four mimic actual tests instead of npm docs.)
 
