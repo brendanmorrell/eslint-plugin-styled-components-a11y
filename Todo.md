@@ -33,6 +33,7 @@ function Foo(props) {
 
 - attrs and props with using children directly like in anchor-has-content, e.g. attrs: {children: () => <Bar aria-hidden>}
 - media-has-caption with attrs (child element is track)
+- non styled Component inputs to Styled (like, Link. currently just disregard but maybe there is a way to figure out tag)
 
 ## bugs/improvements
 
