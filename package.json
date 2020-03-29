@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npx babel src --watch --out-dir dist",
-    "test": "jest ./__tests__/index.test.js",
+    "test": "nodemon ./__tests__/index.test.js",
     "build": "npx babel src --out-dir dist"
   },
   "keywords": [
