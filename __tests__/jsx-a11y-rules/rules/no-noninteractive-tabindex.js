@@ -10,11 +10,7 @@
 
 import { dom } from 'aria-query';
 import type { JSXOpeningElement } from 'ast-types-flow';
-import {
-  elementType,
-  getProp,
-  getLiteralPropValue,
-} from 'jsx-ast-utils';
+import { elementType, getProp, getLiteralPropValue } from 'jsx-ast-utils';
 import includes from 'array-includes';
 import type { ESLintContext } from '../../flow/eslint';
 import isInteractiveElement from '../util/isInteractiveElement';
@@ -58,39 +54,26 @@ module.exports = {
         }
         const role = getLiteralPropValue(getProp(node.attributes, 'role'));
 
-
         if (!dom.has(type)) {
           // Do not test higher level JSX components, as we do not know what
           // low-level DOM element this maps to.
           return;
         }
         // Allow for configuration overrides.
-        const {
-          tags,
-          roles,
-          allowExpressionValues,
-        } = (options[0] || {});
+        const { tags, roles, allowExpressionValues } = options[0] || {};
         if (tags && includes(tags, type)) {
           return;
         }
         if (roles && includes(roles, role)) {
           return;
         }
-        if (
-          allowExpressionValues === true
-          && isNonLiteralProperty(attributes, 'role')
-        ) {
+        if (allowExpressionValues === true && isNonLiteralProperty(attributes, 'role')) {
           return;
         }
-        if (
-          isInteractiveElement(type, attributes)
-          || isInteractiveRole(type, attributes)
-        ) {
+        if (isInteractiveElement(type, attributes) || isInteractiveRole(type, attributes)) {
           return;
         }
-        if (
-          tabIndex >= 0
-        ) {
+        if (tabIndex >= 0) {
           context.report({
             node: tabIndexProp,
             message: errorMessage,
