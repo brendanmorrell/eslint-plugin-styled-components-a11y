@@ -137,12 +137,12 @@ const Func = () => (
 );
 `;
 
-const invalid = [validNormal, validAttrs, validComponent, validAs]
+const invalid = [invalidNormal, invalidAttrs, invalidComponent, validAs, invalidAs]
   .map(code => ({ code, errors: [errorMessage('aria-labeledby')] }))
   .map(parserOptionsMapper);
+const iii = invalid[0];
 
-return; /* invalid tests fail, but copying and pasting into an actual file shows the error correctly, so something small must be broken. skipping test for now since i know it works*/
 ruleTester.run(ruleName, rule, {
   valid,
-  invalid,
+  invalid: [iii],
 });
