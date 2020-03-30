@@ -1,6 +1,7 @@
 ## recheck
 
 - lang and html-has-lang appear to be identical. i thus removed lang. make sure rule isn't somehow different. also, checking if lang valid is not working (i.e.,t lang="foo")
+- aria props error fires twice
 
 ## cant get regular to work correctly
 
@@ -26,6 +27,15 @@ function Foo(props) {
 ```
 
 ## look into
+
+- in label-has associated control, this fails but shouldn't
+  const Func = () => (
+  <>
+  <Label>
+  <Input />
+  </Label>
+  </>
+  );
 
 - attrs and props with using children directly like in anchor-has-content, e.g. attrs: {children: () => <Bar aria-hidden>}
 - media-has-caption with attrs (child element is track)

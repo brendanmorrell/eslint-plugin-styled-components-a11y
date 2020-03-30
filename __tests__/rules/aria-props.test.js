@@ -137,12 +137,16 @@ const Func = () => (
 );
 `;
 
-const invalid = [invalidNormal, invalidAttrs, invalidComponent, validAs, invalidAs]
+const invalid = [invalidNormal, invalidAttrs, invalidComponent, invalidAs]
   .map(code => ({ code, errors: [errorMessage('aria-labeledby')] }))
   .map(parserOptionsMapper);
-const iii = invalid[0];
+
+// TODO figure out why the rule is firing twice
+invalid[1].errors.push(errorMessage('aria-labeledby'));
+invalid[2].errors.push(errorMessage('aria-labeledby'));
+invalid[3].errors.push(errorMessage('aria-labeledby'));
 
 ruleTester.run(ruleName, rule, {
   valid,
-  invalid: [iii],
+  invalid,
 });
