@@ -52,7 +52,7 @@ Most modern sites are almost entirely unnavigable for those with special needs. 
 
 ## Usage
 
-Install as a dev dependency using `yarn add eslint-plugin-styled-components-a11y` or `npm i eslint-plugin-styled-components-a11y --save-dev` and
+Install as a dev dependency using `yarn add eslint-plugin-styled-components-a11y -D` or `npm i eslint-plugin-styled-components-a11y --save-dev` and
 add styled-components-a11y to the plugins section of your .eslintrc configuration file. You can omit the eslint-plugin- prefix:
 
 ```
