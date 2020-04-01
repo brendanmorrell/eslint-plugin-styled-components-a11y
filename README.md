@@ -93,7 +93,7 @@ I would absolutely love some help as I only get around to working on this in my 
 
 Here are the broad strokes in order of priority:
 
-1. I want to have all the rules tested at least minimally. I currently have like half of them running tests. For the bare minimum tests, I would like to at least grab all of the pass/fail examples listed for each rule for jsx-a11y (e.g., here https://github.com/evcohen/eslint-plugin-jsx-a11y/blob/master/docs/rules/aria-proptypes.md), and make sure that all the different forms of styled components can handle them (styled.{html tag}, styled.{html tag}.attrs() styled(Component)``, and <Component as="{some other tag}"). I have a helper function that already creates all of these test cases for you. You basically tell it the tag, the attrs, the props, the children, and the error (all of these are strings and are optional). For example, this would create an array of the following strings that you could then run tests on to make sure the correct linter rule fired:
+1. I want to have all the rules running more test cases. Make sure that the test passes with all the different forms styled components can handle  (styled.{html tag}, styled.{html tag}.attrs() styled(Component)``, and <Component as="{some other tag}"). I have a helper function that already creates all of these test cases for you. You basically tell it the tag, the attrs, the props, the children, and the error (all of these are strings and are optional). For example, this would create an array of the following strings that you could then run tests on to make sure the correct linter rule fired:
    This:
 
 ```
