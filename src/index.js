@@ -41,7 +41,7 @@ module.exports = {
   configs: {
     recommended: {
       plugins: ['styled-components-a11y'],
-      extends: ['eslint-config-airbnb'],
+      extends: ['eslint-config-airbnb/rules/react-a11y'],
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -156,7 +156,7 @@ module.exports = {
     },
     strict: {
       plugins: ['styled-components-a11y'],
-      extends: ['eslint-config-airbnb'],
+      extends: ['eslint-config-airbnb/rules/react-a11y'],
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
