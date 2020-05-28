@@ -1,13 +1,17 @@
 {
   "name": "eslint-plugin-styled-components-a11y",
-  "version": "0.0.150001",
+  "version": "0.0.150005",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib",
+    "package.json"
+  ],
   "scripts": {
-    "start": "npx babel src --watch --out-dir dist",
+    "start": "npx babel src --watch --out-dir lib",
     "test": "node ./__tests__/index.test.js",
     "test-watch": "nodemon ./__tests__/index.test.js",
-    "build": "npx babel src --out-dir dist"
+    "build": "npx babel src --out-dir lib"
   },
   "keywords": [
     "react",

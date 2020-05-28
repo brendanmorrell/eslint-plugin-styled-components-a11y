@@ -1,9 +1,9 @@
-const isStyledCallExpression = node => node.tag.type === 'CallExpression';
+const isStyledCallExpression = (node) => node.tag.type === 'CallExpression';
 
-const isStyledFunc = node => node.tag.callee.name === 'styled';
+const isStyledFunc = (node) => node.tag.callee.name === 'styled';
 
-const isPlainSTE = node => node.tag.type === 'MemberExpression' && node.tag.object.name === 'styled';
-const isAttrs = ({ tag }) => tag.callee.property.name === 'attrs';
+const isPlainSTE = (node) => node.tag.type === 'MemberExpression' && node.tag.object.name === 'styled';
+const isAttrs = ({ tag }) => tag.callee.property?.name === 'attrs';
 
 const isFuncAttrs = ({ tag }) => {
   const { type } = tag.arguments[0];
@@ -18,7 +18,7 @@ module.exports = (styledComponentsDict, context, name) => ({
     if (!scName) return;
     let attrs = [];
     let tag = '';
-    const func = inspectee => name.includes('anchor-is-valid') && context.report(node, inspect(inspectee || node));
+    const func = (inspectee) => name.includes('anchor-is-valid') && context.report(node, inspect(inspectee || node));
     // styled(Component)`` || styled.div.attrs(...)``
     if (isStyledCallExpression(node)) {
       // styled(Component)``
@@ -30,13 +30,14 @@ module.exports = (styledComponentsDict, context, name) => ({
         // styled.div.attrs(...)``
       } else if (isAttrs(node)) {
         let attrsPropertiesArr = [];
-        tag = node.tag.callee.object.property.name;
+        tag = node.tag.callee.object.property?.name;
+        if (!tag) return;
         // styled.div.attrs(function() { return {} })``
         if (isFuncAttrs(node) === 'arrow') {
           attrsPropertiesArr = node.tag.arguments[0].body.properties;
           // styled.div.attrs(() => ({}))``
         } else if (isFuncAttrs(node) === 'func') {
-          attrsPropertiesArr = node.tag.arguments[0].body.body.find(x => x.type === 'ReturnStatement').argument
+          attrsPropertiesArr = node.tag.arguments[0].body.body.find((x) => x.type === 'ReturnStatement').argument
             .properties;
           // styled.div.attrs({})``
         } else {
@@ -45,8 +46,8 @@ module.exports = (styledComponentsDict, context, name) => ({
         const arithmeticUnaryOperators = ['+', '-'];
         // filter out spread elements (which have no key nor value)
         attrs = attrsPropertiesArr
-          .filter(x => x.key)
-          .map(x => ({
+          .filter((x) => x.key)
+          .map((x) => ({
             key: x.key.name || x.key.value,
             // this is pretty useless. would need to generate code from any template expression for this to really work
             value:
