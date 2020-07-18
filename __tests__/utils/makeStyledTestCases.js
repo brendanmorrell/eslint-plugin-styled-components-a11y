@@ -1,6 +1,6 @@
 const parserOptionsMapper = require('./parserOptionsMapper');
 
-const makeRuleMaker = func => ({
+const makeRuleMaker = (func) => ({
   tag = 'div',
   attrs = '{}',
   props = '',
@@ -34,6 +34,13 @@ const withStyledComponent = ({ tag, attrs, children, siblings }) =>
   const Func = () => ${children ? `<>${siblings}<NESTED>${children}</NESTED></>` : `<>${siblings}<NESTED /></>`};
 `;
 
+const withStyledComponentImmediatelyChained = ({ tag, attrs, children, siblings }) =>
+  `
+  const STYLED = styled.${tag}\`\`;
+  const NESTED = styled(STYLED).attrs(${attrs})\`\`;
+  const Func = () => ${children ? `<>${siblings}<NESTED>${children}</NESTED></>` : `<>${siblings}<NESTED /></>`};
+`;
+
 const withStyledComponentAsOther = ({ tag, attrs, children, siblings }) =>
   `
   const STYLED = styled.${tag === 'button' ? 'div' : 'button'}.attrs(${attrs})\`\`;
@@ -43,12 +50,15 @@ const withStyledComponentAsOther = ({ tag, attrs, children, siblings }) =>
   };
 `;
 
-const makeStyledTestCases = args =>
-  [regular, withStyledAttrs, withStyledComponent, withStyledComponentAsOther].map(makeRuleMaker).map(x => x(args));
+const makeStyledTestCases = (args) =>
+  [regular, withStyledAttrs, withStyledComponent, withStyledComponentImmediatelyChained, withStyledComponentAsOther]
+    .map(makeRuleMaker)
+    .map((x) => x(args));
 
 makeStyledTestCases.regular = regular;
 makeStyledTestCases.withStyledAttrs = withStyledAttrs;
 makeStyledTestCases.withStyledComponent = withStyledComponent;
+makeStyledTestCases.withStyledComponentImmediatelyChained = withStyledComponentImmediatelyChained;
 makeStyledTestCases.withStyledComponentAsOther = withStyledComponentAsOther;
 
 module.exports = makeStyledTestCases;
