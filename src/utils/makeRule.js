@@ -2,10 +2,13 @@ const { rules } = require('eslint-plugin-jsx-a11y');
 const path = require('path');
 
 const { inspect } = require('util');
-const collectStyledComponentData = require('./collectStyledComponentData');
+const collectStyledComponentData = require(process.env.NODE_ENV === 'test'
+  ? '../../lib/utils/collectStyledComponentData.js'
+  : './collectStyledComponentData');
+
 const ruleNameToTypeDict = require('./ruleNameToTypeDict');
 
-module.exports = name => ({
+module.exports = (name) => ({
   create(context) {
     const nodeParserPath = path.join(__dirname, 'nodeParsers', ruleNameToTypeDict[name]);
     const rule = rules[name];

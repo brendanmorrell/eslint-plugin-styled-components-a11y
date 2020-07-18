@@ -9,7 +9,7 @@
   ],
   "scripts": {
     "start": "npx babel src --watch --out-dir lib",
-    "test": "node ./__tests__/index.test.js",
+    "test": "NODE_ENV=test node ./__tests__/index.test.js",
     "test-watch": "nodemon ./__tests__/index.test.js",
     "build": "npx babel src --out-dir lib"
   },
