@@ -38,28 +38,28 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/generator": "^7.8.7",
     "@babel/parser": "^7.8.4",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3"
+  },
+  "devDependencies": {
+    "@babel/generator": "^7.8.7",
     "aria-query": "^4.0.2",
     "async": "^3.1.1",
     "damerau-levenshtein": "^1.0.6",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^3.1.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.19.1",
     "eslint-plugin-jest": "^22.4.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
-    "jest": "^25.1.0",
     "jsx-ast-utils": "^2.2.3",
-    "nodemon": "^2.0.2"
-  },
-  "devDependencies": {
     "@babel/cli": "^7.8.4",
     "@babel/core": "^7.8.4",
     "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-    "@babel/preset-env": "^7.8.4"
+    "@babel/preset-env": "^7.8.4",
+    "jest": "^25.1.0",
+    "nodemon": "^2.0.2"
   }
 }
