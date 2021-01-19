@@ -1,4 +1,4 @@
-## Eslint Plugin Styled Components A11y
+## Eslint Plugin Styled Components A11y 🤝
 
 This plugin adds the ability to lint styled components according to the rules outlined in eslint-plugin-jsx-a11y.
 
@@ -29,7 +29,16 @@ const ButtonAsDiv = styled.button``;
 <ButtonAsDiv as="div" onClick={() => null} />;
 ```
 
-![linting examples](./linting-styled-components.png)
+![linting examples](./public/linting-styled-components.png)
+
+<div style="display:flex; justify-content:center; align-items:center;">
+<img align="left" src="./public/handshake.png" alt="handshake-emoji" style="margin-right:30px;"/>
+
+### Give the project a [⭐ STAR ⭐](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y) and help increase accessibility for everyone!
+
+<img align="right" src="./public/handshake.png" alt="handshake-emoji" style="margin-left:30px;"/>
+
+</div>
 
 ## Installation
 
@@ -73,20 +82,24 @@ Alternatively, you can configure individual rules under the rules section.
 
 a working repo can be found [here](https://github.com/brendanmorrell/styled-components-a11y-example) at brendanmorrell/styled-components-a11y-example which has a file illustrating the linting rules in action for the above four styled component types the library is currently capable of handling
 
-# !!! IMPORTANT !!!
+# Please [⭐ STAR ⭐](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y), share, report bugs, and contribute!!!
 
-This library is currently a work in progress. **PLEASE** let me know of any bugs you find so I can more quickly rectify them (or even better, make a PR). Some of the rules do not fire in all cases, and there is some debugging and testing still to be done.
+## With your help, we can increase web accessibility for all!
 
-If you like the project and believe in the goal, it would bea **HUGE** help if you could take a second and give it a star on [github](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y), or if you could spread the word on social/with coworkers so we could get more people using it, testing it, and contributing (any bump would help, as this is solely a pet project of mine, and I have limited time to work on it)
+If you like the project and believe in the goal, it would bea **HUGE** help if you could **[give it a star on github](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y)** ans/or spread the word on
+social/with coworkers so we could get more people using it, testing it, and contributing (any bump would help, as this
+is solely a pet project of mine, and I have limited time to work on it).
 
 Really.
 
 Most modern sites are almost entirely unnavigable for those with special needs. Linters are the primary method of informing developers and enforcing solutions, but with most now using CSS in JS, existing a11y linting has become significantly less useful (personally, 99% of the components I actually need linted are styled); using and promoting solutions to this problem would be a **massive** step toward increasing accessibillity on the web. If you can, please help give us a boost so I can keep working on this, get others to assist, and work toward a more open, accessible internet for everyone.
 
+Also, **PLEASE** let me know of any bugs you find so I can more quickly rectify them (or even better, make a PR).
+
 ### Note
 
 1. version 0.0.15 had two major bug fixes, if you have a previous version, please update.
-2. As evidence of the importance of styled a11y linting, I ran just this plugin on a prod repo i'm working on, and it uncovered 6,567 errors that were undiscovered using airbnb/jsx-a11y linting rules. once again, please share, star the [github repo](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y), report any bugs, and please conribute so we can increase web accessibility for all!
+2. As evidence of the importance of styled a11y linting, I ran just this plugin on a prod repo i'm working on, and it uncovered 6,567 errors that were undiscovered using airbnb/jsx-a11y linting rules. once again, please share, star the [github repo](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y), report any bugs, and contribute so we can increase web accessibility for all!
 
 ## Contributing
 
