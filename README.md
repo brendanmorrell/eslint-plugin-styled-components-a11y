@@ -30,6 +30,9 @@ const ButtonAsDiv = styled.button``;
 ```
 
 ![linting examples](./public/linting-styled-components.png)
+<br />
+<br />
+<br />
 
 <div style="display:flex; justify-content:center; align-items:center;">
 
@@ -43,11 +46,7 @@ const ButtonAsDiv = styled.button``;
 <br />
 <br />
 <br />
-<br />
-<br />
-<br />
-<br />
-<br />
+<!-- should figure out how to actually style this section. this is a temp fix -->
 <br />
 <br />
 <br />
