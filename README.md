@@ -1,6 +1,6 @@
 ## Eslint Plugin Styled Components A11y
 
-This is a work in progress for linting styled components according to the rules outlined in eslint-plugin-jsx-a11y.
+This plugin adds the ability to lint styled components according to the rules outlined in eslint-plugin-jsx-a11y.
 
 It handles all 4 methods styled components uses to create components. All of these would show the error
 
@@ -29,7 +29,7 @@ const ButtonAsDiv = styled.button``;
 <ButtonAsDiv as="div" onClick={() => null} />;
 ```
 
-![linting examples](https://github.com/brendanmorrell/styled-components-a11y-example/blob/master/example.png)
+![linting examples](./linting-styled-components.png)
 
 ## Installation
 
