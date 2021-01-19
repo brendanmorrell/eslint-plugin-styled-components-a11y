@@ -39,7 +39,9 @@ const ButtonAsDiv = styled.button``;
 <img align="right" src="./public/handshake.png" alt="handshake-emoji" style="margin-left:30px;"/>
 
 </div>
-
+<br />
+<br />
+<br />
 ## Installation
 
 Install as a dev dependency:
