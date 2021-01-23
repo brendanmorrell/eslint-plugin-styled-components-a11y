@@ -41,6 +41,19 @@ const Func = () => (
   </>
 );
 `;
+
+const validNormalReverseOrder = `
+const Func = () => (
+  <>
+    <StyledDiv id="address_label">Enter your address</StyledDiv>
+    <StyledInput aria-labelledby="address_label" />
+  </>
+);
+
+const StyledDiv = styled.div\`\`;
+const StyledInput = styled.input\`\`;
+`;
+
 const validAttrs = `
 const StyledDiv = styled.div.attrs({ id: 'address_label' })\`\`;
 const StyledInput = styled.input.attrs({ 'aria-labelledby': 'address_label' })\`\`;
@@ -81,7 +94,7 @@ const Func = () => (
 );
 `;
 
-const valid = [validNormal, validAttrs, validComponent, validAs].map(code => ({ code })).map(parserOptionsMapper);
+const valid = [validNormal, validAttrs, validComponent, validAs, validNormalReverseOrder].map(code => ({ code })).map(parserOptionsMapper);
 
 // ## INVALID
 // <div id="address_label">Enter your address</div>
@@ -137,7 +150,22 @@ const Func = () => (
 );
 `;
 
-const invalid = [invalidNormal, invalidAttrs, invalidComponent, invalidAs]
+const invalidInReverseOrder = `
+const Func = () => (
+  <>
+    <StyledNotCompDiv as="div">Enter your address</StyledNotCompDiv>
+    <StyledNotCompInput as="input" aria-labeledby="address_label" />
+  </>
+);
+
+const StyledNotDiv = styled.button.attrs({ id: 'address_label' })\`\`;
+const StyledInput = styled.button.attrs({ 'aria-labeledby': 'address_label' })\`\`;
+
+const StyledNotCompDiv = styled(StyledNotDiv)\`\`;
+const StyledNotCompInput = styled(StyledInput)\`\`;
+`;
+
+const invalid = [invalidNormal, invalidAttrs, invalidComponent, invalidAs, invalidInReverseOrder]
   .map(code => ({ code, errors: [errorMessage('aria-labeledby')] }))
   .map(parserOptionsMapper);
 
@@ -145,6 +173,7 @@ const invalid = [invalidNormal, invalidAttrs, invalidComponent, invalidAs]
 invalid[1].errors.push(errorMessage('aria-labeledby'));
 invalid[2].errors.push(errorMessage('aria-labeledby'));
 invalid[3].errors.push(errorMessage('aria-labeledby'));
+invalid[4].errors.push(errorMessage('aria-labeledby'));
 
 ruleTester.run(ruleName, rule, {
   valid,
