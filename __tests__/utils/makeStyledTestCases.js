@@ -14,7 +14,7 @@ const makeRuleMaker = (func) => ({
 };
 
 const regular = ({ tag, props, children, siblings }) =>
-  `
+`
   const STYLED = styled.${tag}\`\`;
   const Func = () => ${
     children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
@@ -50,15 +50,18 @@ const withStyledComponentAsOther = ({ tag, attrs, children, siblings }) =>
   };
 `;
 
+const withStyledComponentsAsOtherWithComponentDefinedAfterInstantiation = ({ tag, attrs, children, siblings }) =>
+  `
+  const Func = () => ${
+    children ? `<>${siblings}<NESTED as="${tag}">${children}</NESTED></>` : `<>${siblings}<NESTED as="${tag}" /></>`
+  };
+  const STYLED = styled.${tag === 'button' ? 'div' : 'button'}.attrs(${attrs})\`\`;
+  const NESTED = styled(STYLED)\`\`;
+`;
+
 const makeStyledTestCases = (args) =>
-  [regular, withStyledAttrs, withStyledComponent, withStyledComponentImmediatelyChained, withStyledComponentAsOther]
+  [regular, withStyledAttrs, withStyledComponent, withStyledComponentImmediatelyChained, withStyledComponentAsOther, withStyledComponentsAsOtherWithComponentDefinedAfterInstantiation]
     .map(makeRuleMaker)
     .map((x) => x(args));
-
-makeStyledTestCases.regular = regular;
-makeStyledTestCases.withStyledAttrs = withStyledAttrs;
-makeStyledTestCases.withStyledComponent = withStyledComponent;
-makeStyledTestCases.withStyledComponentImmediatelyChained = withStyledComponentImmediatelyChained;
-makeStyledTestCases.withStyledComponentAsOther = withStyledComponentAsOther;
 
 module.exports = makeStyledTestCases;
