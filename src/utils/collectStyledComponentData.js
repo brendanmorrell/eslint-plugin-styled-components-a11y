@@ -52,14 +52,18 @@ module.exports = (styledComponentsDict, context, name) => ({
         const attrsType = getAttrsType(node);
         if (!tag || !attrsType) return;
         // styled.div.attrs(function() { return {} })``
+
+        // TODO all these empty array defaults are a temp fix. Should get a better way of actually trying to see what
+        //  is returned from function attrs in the case they aren't just simple immediate returns, e.g., if else statements
         if (attrsType === 'arrow') {
-          attrsPropertiesArr = attrsNode.body.properties;
+          attrsPropertiesArr = attrsNode?.body?.properties || [];
           // styled.div.attrs(() => ({}))``
         } else if (attrsType === 'func') {
-          attrsPropertiesArr = attrsNode.body.body.find((x) => x.type === 'ReturnStatement').argument.properties;
+          attrsPropertiesArr =
+            attrsNode?.body?.body?.find((x) => x.type === 'ReturnStatement')?.argument?.properties || [];
           // styled.div.attrs({})``
         } else if (attrsType === 'object') {
-          attrsPropertiesArr = attrsNode.properties;
+          attrsPropertiesArr = attrsNode?.properties || [];
         }
         const arithmeticUnaryOperators = ['+', '-'];
         // filter out spread elements (which have no key nor value)
