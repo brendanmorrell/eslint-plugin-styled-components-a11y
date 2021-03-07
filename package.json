@@ -12,7 +12,7 @@
     "test": "NODE_ENV=test node ./__tests__/index.test.js",
     "test-watch": "nodemon ./__tests__/index.test.js",
     "build": "npx babel src --out-dir lib",
-    "push-n-publish": "git add .; git commit -m 'readme updates'; git push origin head; npm version patch; git add .; git commit -m 'bump'; git push origin head;npm run build; npm publish"
+    "push-n-publish": "git add .; git commit -m 'updates'; git push origin head; npm version patch; git add .; git commit -m 'bump'; git push origin head;npm run build; npm publish"
   },
   "keywords": [
     "react",
@@ -44,7 +44,12 @@
     "eslint-plugin-jsx-a11y": "^6.2.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/eslint-parser": "^7.13.8",
     "@babel/generator": "^7.8.7",
+    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
+    "@babel/preset-env": "^7.8.4",
     "aria-query": "^4.0.2",
     "async": "^3.1.1",
     "damerau-levenshtein": "^1.0.6",
@@ -55,12 +60,8 @@
     "eslint-plugin-jest": "^22.4.1",
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
-    "jsx-ast-utils": "^2.2.3",
-    "@babel/cli": "^7.8.4",
-    "@babel/core": "^7.8.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.8.3",
-    "@babel/preset-env": "^7.8.4",
     "jest": "^25.1.0",
+    "jsx-ast-utils": "^2.2.3",
     "nodemon": "^2.0.2"
   }
 }
