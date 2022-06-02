@@ -1,23 +1,28 @@
 const parserOptionsMapper = require('./parserOptionsMapper');
 
-const makeRuleMaker = (func) => ({
-  tag = 'div',
-  attrs = '{}',
-  props = '',
-  children = '',
-  errors,
-  siblings = '',
-} = {}) => {
-  const args = { tag, attrs, props, children, errors, siblings };
-  const code = func(args);
-  return [{ code, errors }].map(parserOptionsMapper)[0];
-};
+const makeRuleMaker =
+  (func) =>
+  ({ tag = 'div', attrs = '{}', props = '', children = '', errors, siblings = '' } = {}) => {
+    const args = { tag, attrs, props, children, errors, siblings };
+    const code = func(args);
+    return [{ code, errors }].map(parserOptionsMapper)[0];
+  };
 
 const regular = ({ tag, props, children, siblings }) =>
-`
+  `
   const STYLED = styled.${tag}\`\`;
   const Func = () => ${
     children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
+  };
+`;
+
+const regularAsObject = ({ tag, props, children, siblings }) =>
+  `
+  const STYLED = {tag: styled.${tag}\`\`};
+  const Func = () => ${
+    children
+      ? `<>${siblings}<STYLED.tag ${props}>${children}</STYLED.tag></>`
+      : `<>${siblings}<STYLED.tag ${props} /></>`
   };
 `;
 
@@ -60,7 +65,15 @@ const withStyledComponentsAsOtherWithComponentDefinedAfterInstantiation = ({ tag
 `;
 
 const makeStyledTestCases = (args) =>
-  [regular, withStyledAttrs, withStyledComponent, withStyledComponentImmediatelyChained, withStyledComponentAsOther, withStyledComponentsAsOtherWithComponentDefinedAfterInstantiation]
+  [
+    regular,
+    regularAsObject,
+    withStyledAttrs,
+    withStyledComponent,
+    withStyledComponentImmediatelyChained,
+    withStyledComponentAsOther,
+    withStyledComponentsAsOtherWithComponentDefinedAfterInstantiation,
+  ]
     .map(makeRuleMaker)
     .map((x) => x(args));
 
