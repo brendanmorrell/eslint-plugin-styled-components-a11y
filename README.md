@@ -41,8 +41,6 @@ const ButtonAsDiv = styled.button``;
 
 <div style="display:flex; justify-content:center; align-items:center;">
 
-<img align="left" src="https://iili.io/h1rZBI.png" alt="handshake-emoji" style="margin-right:30px;"/>
-
 ### Give the project a [⭐ STAR ⭐](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y) and help increase accessibility for everyone!
 
 <img align="left" src="https://iili.io/h1rLLN.png" alt="handshake-emoji" style="margin-right:30px;"/>
