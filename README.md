@@ -34,18 +34,19 @@ const ButtonAsDiv = styled.button``;
 <ButtonAsDiv as="div" onClick={() => null} />;
 ```
 
-![linting examples](/public/linting-styled-components.png)
+![linting examples](https://iili.io/h1rZBI.png)
 <br />
 <br />
 <br />
 
 <div style="display:flex; justify-content:center; align-items:center;">
 
-<img align="left" src="/public/handshake.png" alt="handshake-emoji" style="margin-right:30px;"/>
+<img align="left" src="https://iili.io/h1rZBI.png" alt="handshake-emoji" style="margin-right:30px;"/>
 
 ### Give the project a [⭐ STAR ⭐](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y) and help increase accessibility for everyone!
 
-<img align="right" src="/public/handshake.png" alt="handshake-emoji" style="margin-left:30px;"/>
+<img align="left" src="https://iili.io/h1rLLN.png" alt="handshake-emoji" style="margin-right:30px;"/>
+<img align="right" src="https://iili.io/h1rLLN.png" alt="handshake-emoji" style="margin-left:30px;"/>
 
 </div>
 <br />
