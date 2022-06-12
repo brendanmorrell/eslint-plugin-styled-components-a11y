@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-styled-components-a11y",
-  "version": "0.0.35",
+  "version": "0.0.36",
   "description": "",
   "main": "lib/index.js",
   "files": [
