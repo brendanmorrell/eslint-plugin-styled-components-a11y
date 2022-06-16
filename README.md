@@ -2,7 +2,7 @@
 
 This plugin adds the ability to lint styled components according to the rules outlined in eslint-plugin-jsx-a11y.
 
-It handles all 5 methods styled components uses to create components. All of these would show the error
+It handles all 4 methods styled components uses to create components. All of these would show the error
 
 ```diff
 -Visible, non-interactive elements with click handlers must have at least one keyboard listener.`
@@ -11,11 +11,6 @@ It handles all 5 methods styled components uses to create components. All of the
 ```jsx
 const Div = styled.div``;
 <Div onClick={() => null} />;
-```
-
-```jsx
-const S = { Div: styled.div`` };
-<S.Div onClick={() => null} />;
 ```
 
 ```jsx
