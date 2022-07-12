@@ -1,5 +1,6 @@
 const mergeStyledAttrsWithNodeAttrs = require('../mergeStyledAttrsWithNodeAttrs');
 const getAsProp = require('../getAsProp');
+const mapChainExpressions = require('../mapChainExpressions');
 const { inspect } = require('util');
 
 module.exports = (context, styledComponents, rule, name) => ({
@@ -22,7 +23,7 @@ module.exports = (context, styledComponents, rule, name) => ({
         try {
           const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);
           const asProp = getAsProp(allAttrs);
-          node.attributes = allAttrs;
+          node.attributes = mapChainExpressions(allAttrs);
 
           // Convert JSXMemberExpression to JSXIdentifier, so it'll be properly handled by eslint-plugin-jsx-a11y plugin
           node.name = {
