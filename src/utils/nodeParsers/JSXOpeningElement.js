@@ -1,7 +1,6 @@
 const mergeStyledAttrsWithNodeAttrs = require('../mergeStyledAttrsWithNodeAttrs');
 const getAsProp = require('../getAsProp');
 const { inspect } = require('util');
-const { cloneDeep } = require('lodash');
 
 module.exports = (context, styledComponents, rule, name) => ({
   JSXOpeningElement(node) {
@@ -18,7 +17,7 @@ module.exports = (context, styledComponents, rule, name) => ({
       if (styledComponent) {
         const { tag, attrs } = styledComponent;
         const originalNodeAttr = node.attributes;
-        const originalNodeName = cloneDeep(node.name);
+        const originalNodeName = node.name;
 
         try {
           const allAttrs = mergeStyledAttrsWithNodeAttrs(attrs, originalNodeAttr);

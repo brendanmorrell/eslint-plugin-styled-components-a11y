@@ -24,7 +24,7 @@ module.exports = (styledComponentsDict, context, name) => ({
     let scName = node.parent.id && node.parent.id.name;
 
     if (!scName) {
-      if (isPlainSTE(node) && node.parent.key?.name) {
+      if (isPlainSTE(node) && node.parent.key?.name && node.parent.parent?.parent?.id?.name) {
         scName = `${node.parent.parent.parent.id.name}.${node.parent.key.name}`;
       } else {
         return;
