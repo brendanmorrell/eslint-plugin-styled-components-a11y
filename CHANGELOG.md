@@ -1,3 +1,10 @@
+## 0.0.40 (July 29, 2022)
+
+- Re-added support for styled components defined within objects while fixing the
+  [hang](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/issues/40). `jsx-ast-utils` needed
+  to be upgraded to avoid an error with `ChainingExpressions`, but using the newer version of `jsx-ast-utils`
+  may cause issues in some older environments.
+
 ## 0.0.40 (June 16, 2022)
 
 - Reverted changes from 0.0.37, which were causing eslint to [hang](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/issues/40).
