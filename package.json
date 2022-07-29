@@ -61,7 +61,7 @@
     "eslint-plugin-react": "^7.18.3",
     "eslint-plugin-react-hooks": "^2.4.0",
     "jest": "^25.1.0",
-    "jsx-ast-utils": "^2.2.3",
+    "jsx-ast-utils": "^3.3.2",
     "nodemon": "^2.0.2"
   }
 }
