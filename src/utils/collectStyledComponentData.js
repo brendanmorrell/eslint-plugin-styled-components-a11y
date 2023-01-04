@@ -1,7 +1,14 @@
 const isStyledCallExpression = (node) => node.tag.type === 'CallExpression';
-
 const isStyledFunc = (node) => node.tag.callee?.name === 'styled';
-const isStyledFuncWithAttrs = (node) => node.tag.callee?.object?.callee?.name === 'styled';
+const isStyledFuncComponentArgument = (node) => isStyledFunc(node) && node.tag.arguments?.[0]?.type === 'Identifier';
+const isStyledFuncStringArgument = (node) => isStyledFunc(node) && node.tag.arguments?.[0]?.type === 'Literal';
+
+const isStyledFuncWithAttrs = (node) =>
+  node.tag.callee?.object?.callee?.name === 'styled' && node.tag.callee?.property?.name === 'attrs';
+const isStyledStringArgumentFuncWithAttrs = (node) =>
+  isStyledFuncWithAttrs(node) && node.tag.callee?.object?.arguments?.[0]?.type === 'Literal';
+const isStyledComponentArgumentFuncWithAttrs = (node) =>
+  isStyledFuncWithAttrs(node) && node.tag.callee?.object?.arguments?.[0]?.type === 'Identifier';
 
 const isPlainSTE = (node) => node.tag.type === 'MemberExpression' && node.tag?.object?.name === 'styled';
 const isAttrs = ({ tag }) => tag.callee?.property?.name === 'attrs';
@@ -34,26 +41,35 @@ module.exports = (styledComponentsDict, context, name) => ({
     let attrs = [];
     let tag = '';
     const func = (inspectee) => name.includes('anchor-is-valid') && context.report(node, inspect(inspectee || node));
-    // styled(Component)`` || styled.div.attrs(...)``
+
+    // styled(Component)`` || styled.div.attrs(...)`` || styled('div')``
     if (isStyledCallExpression(node)) {
-      // styled(Component)``
+      // styled(...)``
       if (isStyledFunc(node)) {
-        const ancestorScName = node.tag.arguments[0].name;
-        if (!styledComponentsDict[ancestorScName]) return;
-        ({ attrs } = styledComponentsDict[ancestorScName]);
-        ({ tag } = styledComponentsDict[ancestorScName]);
+        // styled('div')``;
+        if (isStyledFuncStringArgument(node)) {
+          tag = node.tag.arguments?.[0]?.value || '';
+        } else if (isStyledFuncComponentArgument(node)) {
+          // styled(Component)``
+          const ancestorScName = node.tag.arguments[0].name;
+          if (!styledComponentsDict[ancestorScName]) return;
+          ({ attrs } = styledComponentsDict[ancestorScName]);
+          ({ tag } = styledComponentsDict[ancestorScName]);
+        }
       }
-      // styled.div.attrs(...)`` || styled(Component).attrs(...)``
+
+      // styled.div.attrs(...)`` || styled(Component).attrs(...)`` || styled('div').attrs(...)``
       if (isAttrs(node) || isStyledFuncWithAttrs(node)) {
-        const isComponentAttrsCall = isStyledFuncWithAttrs(node);
         let attrsPropertiesArr = [];
         const attrsNode = node.tag.arguments[0];
 
-        if (isComponentAttrsCall) {
+        if (isStyledComponentArgumentFuncWithAttrs(node)) {
           const ancestorScName = node.tag.callee.object.arguments[0].name;
           if (!styledComponentsDict[ancestorScName]) return;
           attrs = styledComponentsDict[ancestorScName].attrs;
           tag = styledComponentsDict[ancestorScName].tag;
+        } else if (isStyledStringArgumentFuncWithAttrs(node)) {
+          tag = node.tag.callee?.object?.arguments?.[0]?.value;
         } else {
           tag = node.tag.callee.object.property?.name;
         }
@@ -103,6 +119,7 @@ module.exports = (styledComponentsDict, context, name) => ({
             })),
         );
       }
+
       styledComponentsDict[scName] = { name: scName, attrs, tag };
     }
     // const A = styled.div``

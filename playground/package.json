@@ -9,7 +9,9 @@
     "styled-components": "^5.1.1"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "reset": "rm -rf node_modules; yarn",
+    "postinstall": "echo \"need to figure out how to use cli to reload vscode\""
   },
   "author": "",
   "license": "ISC",

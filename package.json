@@ -8,9 +8,9 @@
     "package.json"
   ],
   "scripts": {
-    "start": "npx babel src --watch --out-dir lib",
+    "dev": "npx babel src --watch --out-dir lib",
     "test": "NODE_ENV=test node ./__tests__/index.test.js",
-    "test-watch": "nodemon ./__tests__/index.test.js",
+    "test-watch": "NODE_ENV=test nodemon ./__tests__/index.test.js",
     "build": "npx babel src --out-dir lib",
     "push-n-publish": "git add .; git commit -m 'updates'; git push origin head; npm version patch; git add .; git commit -m 'bump'; git push origin head;npm run build; npm publish"
   },

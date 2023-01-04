@@ -14,8 +14,8 @@ const Div = styled.div``;
 ```
 
 ```jsx
-const S = { Div: styled.div`` };
-<S.Div onClick={() => null} />;
+const Div = styled('div')``;
+<Div onClick={() => null} />;
 ```
 
 ```jsx
@@ -32,6 +32,13 @@ const StyledDiv = styled(Div)``;
 ```jsx
 const ButtonAsDiv = styled.button``;
 <ButtonAsDiv as="div" onClick={() => null} />;
+```
+
+Elements can also be defined within objects:
+
+```jsx
+const Component = { Div: styled.div`` };
+<Component.Div onClick={() => null} />;
 ```
 
 ![linting examples](https://iili.io/h1rZBI.png)
@@ -180,7 +187,7 @@ See if you can add some more rules. When the rules error out, best bet is to log
 const func = (inspectee) => name.includes('scope') && context.report(node, inspect(inspectee || node));
 ```
 
-put the name of the rule in where the example says 'scope' (so it only runs once for that rule instead of on every rule) and call it with either the node you want to log (which is what eslint is parsing. it runs over every node in the code's abstract syntax tree and calls your lining rules), or anything else you want to log. immediately after you run func (at first, at the top of the file), add a return statement, as sometimes the linter is erroring out, and thus won't log unless you short-circuit it before the error. For example, if i were testing the rule accessible-emoji i would have the following to start:
+put the name of the rule in where the example says 'scope' (so it only runs once for that rule instead of on every rule) and call it with either the node you want to log (which is what eslint is parsing. it runs over every node in the code's abstract syntax tree and calls your linting rules), or anything else you want to log. immediately after you run func (at first, at the top of the file), add a return statement, as sometimes the linter is erroring out, and thus won't log unless you short-circuit it before the error. For example, if i were testing the rule accessible-emoji i would have the following to start:
 
 ```jsx
 const func = (inspectee) => name.includes('accessible-emoji') && context.report(node, inspect(inspectee || node));
