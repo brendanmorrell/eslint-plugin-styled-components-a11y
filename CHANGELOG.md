@@ -1,4 +1,4 @@
-## 0.1.0 (January 4th, 2023)
+## 0.1.0 (January 6th, 2023)
 
 - added support for components defined with string syntax (`styled('div')` instead of `styled.div`) as requested
   [here](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/issues/47). Added test cases for this syntax.
