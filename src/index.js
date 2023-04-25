@@ -21,6 +21,7 @@ module.exports = {
     'interactive-supports-focus': makeRule('interactive-supports-focus'),
     'label-has-associated-control': makeRule('label-has-associated-control'),
     'label-has-for': makeRule('label-has-for'),
+    lang: makeRule('lang'),
     'media-has-caption': makeRule('media-has-caption'),
     'mouse-events-have-key-events': makeRule('mouse-events-have-key-events'),
     'no-access-key': makeRule('no-access-key'),
@@ -41,14 +42,12 @@ module.exports = {
   configs: {
     recommended: {
       plugins: ['styled-components-a11y'],
-      extends: ['eslint-config-airbnb/rules/react-a11y'],
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
         },
       },
       rules: {
-        'styled-components-a11y/accessible-emoji': 'error',
         'styled-components-a11y/alt-text': 'error',
         'styled-components-a11y/anchor-has-content': 'error',
         'styled-components-a11y/anchor-is-valid': 'error',
@@ -99,6 +98,7 @@ module.exports = {
           'error',
           {
             tr: ['none', 'presentation'],
+            canvas: ['img'],
           },
         ],
         'styled-components-a11y/no-noninteractive-element-interactions': [
@@ -129,6 +129,7 @@ module.exports = {
             li: ['menuitem', 'option', 'row', 'tab', 'treeitem'],
             table: ['grid'],
             td: ['gridcell'],
+            fieldset: ['radiogroup', 'presentation'],
           },
         ],
         'styled-components-a11y/no-noninteractive-tabindex': [
@@ -139,7 +140,6 @@ module.exports = {
             allowExpressionValues: true,
           },
         ],
-        'styled-components-a11y/no-onchange': 'error',
         'styled-components-a11y/no-redundant-roles': 'error',
         'styled-components-a11y/no-static-element-interactions': [
           'error',
@@ -156,14 +156,12 @@ module.exports = {
     },
     strict: {
       plugins: ['styled-components-a11y'],
-      extends: ['eslint-config-airbnb/rules/react-a11y'],
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
         },
       },
       rules: {
-        'styled-components-a11y/accessible-emoji': 'error',
         'styled-components-a11y/alt-text': 'error',
         'styled-components-a11y/anchor-has-content': 'error',
         'styled-components-a11y/anchor-is-valid': 'error',
@@ -213,7 +211,7 @@ module.exports = {
             ],
           },
         ],
-        'styled-components-a11y/label-has-for': 'error',
+        'styled-components-a11y/label-has-for': 'off',
         'styled-components-a11y/label-has-associated-control': 'error',
         'styled-components-a11y/media-has-caption': 'error',
         'styled-components-a11y/mouse-events-have-key-events': 'error',
@@ -231,7 +229,6 @@ module.exports = {
         ],
         'styled-components-a11y/no-noninteractive-element-to-interactive-role': 'error',
         'styled-components-a11y/no-noninteractive-tabindex': 'error',
-        'styled-components-a11y/no-onchange': 'error',
         'styled-components-a11y/no-redundant-roles': 'error',
         'styled-components-a11y/no-static-element-interactions': 'error',
         'styled-components-a11y/role-has-required-aria-props': 'error',
