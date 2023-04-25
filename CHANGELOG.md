@@ -1,3 +1,8 @@
+## 1.0.0 (January 6th, 2023)
+
+- removed eslint conflig airbnb from the plugin so it is more directly aligned with eslint-plugin-jsx-a11y as requested
+  [here](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/issues/18). Merged [here](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/51).
+
 ## 0.1.0 (January 6th, 2023)
 
 - added support for components defined with string syntax (`styled('div')` instead of `styled.div`) as requested
