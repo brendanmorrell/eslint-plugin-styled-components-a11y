@@ -42,6 +42,7 @@ module.exports = {
   configs: {
     recommended: {
       plugins: ['styled-components-a11y'],
+      extends: ['plugin:jsx-a11y/recommended'],
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
@@ -156,6 +157,7 @@ module.exports = {
     },
     strict: {
       plugins: ['styled-components-a11y'],
+      extends: ['plugin:jsx-a11y/strict'],
       parserOptions: {
         ecmaFeatures: {
           jsx: true,
