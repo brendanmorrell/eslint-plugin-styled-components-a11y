@@ -1,4 +1,9 @@
-## 2.0.0 (January 6th, 2023)
+## 2.0.1 (April 27th, 2023)
+
+- [added](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/commit/769b31661d399141d0ab242485b7a33f3f513e1e) extends plugin:jsx-a11y to index configuration now that airbnb config is removed, fixing issue with missing
+  rules from react-ally/aribnb config as mentioned [here](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/issues/52).
+
+## 2.0.0 (April 25th, 2023)
 
 - removed eslint conflig airbnb from the plugin so it is more directly aligned with eslint-plugin-jsx-a11y as requested
   [here](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/issues/18). Merged [here](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/51).
