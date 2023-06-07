@@ -10,6 +10,13 @@ module.exports = {
     es6: true,
     browser: true,
   },
+  settings: {
+    "jsx-a11y": {
+      components: {
+        ImgComponent: 'img',
+      },
+    },
+  },
   rules: {
     'react/jsx-filename-extension': 0,
   },

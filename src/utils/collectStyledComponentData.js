@@ -3,8 +3,7 @@ const isStyledFunc = (node) => node.tag.callee?.name === 'styled';
 const isStyledFuncComponentArgument = (node) => isStyledFunc(node) && node.tag.arguments?.[0]?.type === 'Identifier';
 const isStyledFuncStringArgument = (node) => isStyledFunc(node) && node.tag.arguments?.[0]?.type === 'Literal';
 
-const isStyledFuncWithAttrs = (node) =>
-  node.tag.callee?.object?.callee?.name === 'styled' && node.tag.callee?.property?.name === 'attrs';
+const isStyledFuncWithAttrs = (node) => node.tag.callee?.object?.callee?.name === 'styled' && isAttrs(node);
 const isStyledStringArgumentFuncWithAttrs = (node) =>
   isStyledFuncWithAttrs(node) && node.tag.callee?.object?.arguments?.[0]?.type === 'Literal';
 const isStyledComponentArgumentFuncWithAttrs = (node) =>
@@ -44,17 +43,32 @@ module.exports = (styledComponentsDict, context, name) => ({
 
     // styled(Component)`` || styled.div.attrs(...)`` || styled('div')``
     if (isStyledCallExpression(node)) {
-      // styled(...)``
-      if (isStyledFunc(node)) {
-        // styled('div')``;
-        if (isStyledFuncStringArgument(node)) {
-          tag = node.tag.arguments?.[0]?.value || '';
-        } else if (isStyledFuncComponentArgument(node)) {
-          // styled(Component)``
-          const ancestorScName = node.tag.arguments[0].name;
-          if (!styledComponentsDict[ancestorScName]) return;
+      // styled('div')``;
+      if (isStyledFuncStringArgument(node)) {
+        tag = node.tag.arguments?.[0]?.value || '';
+      }
+
+      // styled(Component)`` || styled(Component).attrs(...)``
+      if (isStyledFuncComponentArgument(node) || isStyledComponentArgumentFuncWithAttrs(node)) {
+        const ancestorScName = isStyledFuncComponentArgument(node)
+          ? node.tag.arguments[0].name
+          : node.tag.callee.object.arguments[0].name;
+
+        /**
+         * enable checking custom components
+         * @see https://github.com/jsx-eslint/eslint-plugin-jsx-a11y#usage
+         */
+        const componentMap = context.settings?.['jsx-a11y']?.components ?? {};
+
+        // styled(StyledComponent)`` || styled(StyledComponent).attrs(...)``
+        if (styledComponentsDict[ancestorScName]) {
           ({ attrs } = styledComponentsDict[ancestorScName]);
           ({ tag } = styledComponentsDict[ancestorScName]);
+        }
+
+        // styled(CustomComponent)`` || styled(CustomComponent).attrs(...)``
+        if (componentMap[ancestorScName]) {
+          tag = componentMap[ancestorScName];
         }
       }
 
@@ -63,14 +77,9 @@ module.exports = (styledComponentsDict, context, name) => ({
         let attrsPropertiesArr = [];
         const attrsNode = node.tag.arguments[0];
 
-        if (isStyledComponentArgumentFuncWithAttrs(node)) {
-          const ancestorScName = node.tag.callee.object.arguments[0].name;
-          if (!styledComponentsDict[ancestorScName]) return;
-          attrs = styledComponentsDict[ancestorScName].attrs;
-          tag = styledComponentsDict[ancestorScName].tag;
-        } else if (isStyledStringArgumentFuncWithAttrs(node)) {
+        if (isStyledStringArgumentFuncWithAttrs(node)) {
           tag = node.tag.callee?.object?.arguments?.[0]?.value;
-        } else {
+        } else if (!isStyledComponentArgumentFuncWithAttrs(node)) {
           tag = node.tag.callee.object.property?.name;
         }
         const attrsType = getAttrsType(node);

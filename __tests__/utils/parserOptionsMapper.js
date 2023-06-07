@@ -6,7 +6,7 @@ const defaultParserOptions = {
   },
 };
 
-module.exports = function parserOptionsMapper({ code, errors, options = [], parserOptions = {} }) {
+module.exports = function parserOptionsMapper({ code, errors, options = [], parserOptions = {}, settings = {} }) {
   return {
     code,
     errors,
@@ -15,5 +15,6 @@ module.exports = function parserOptionsMapper({ code, errors, options = [], pars
       ...defaultParserOptions,
       ...parserOptions,
     },
+    settings,
   };
 };

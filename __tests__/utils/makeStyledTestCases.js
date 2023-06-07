@@ -1,11 +1,22 @@
 const parserOptionsMapper = require('./parserOptionsMapper');
 
+const getCustomComponentName = tag => tag.toUpperCase();
+
 const makeRuleMaker =
   (func) =>
   ({ tag = 'div', attrs = '{}', props = '', children = '', errors, siblings = '' } = {}) => {
     const args = { tag, attrs, props, children, errors, siblings };
     const code = func(args);
-    return [{ code, errors }].map(parserOptionsMapper)[0];
+
+    const settings = {
+      "jsx-a11y": {
+        components: {
+          [getCustomComponentName(tag)]: tag,
+        },
+      },
+    };
+
+    return [{ code, errors, settings }].map(parserOptionsMapper)[0];
   };
 
 const regular = ({ tag, props, children, siblings }) =>
@@ -113,6 +124,20 @@ const withStringArgumentStyledComponentsAsOtherWithComponentDefinedAfterInstanti
   const NESTED = styled(STYLED)\`\`;
 `;
 
+const withCustomComponent = ({ tag, props, children, siblings }) =>
+  `
+  const STYLED = styled(${getCustomComponentName(tag)})\`\`;
+  const Func = () => ${
+    children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
+  };
+`;
+
+const withCustomComponentAttrs = ({ tag, attrs, children, siblings }) =>
+  `
+  const STYLED = styled(${getCustomComponentName(tag)}).attrs(${attrs})\`\`;
+  const Func = () => ${children ? `<>${siblings}<STYLED>${children}</STYLED></>` : `<>${siblings}<STYLED /></>`};
+`;
+
 const makeStyledTestCases = (args) =>
   [
     regular,
@@ -128,6 +153,8 @@ const makeStyledTestCases = (args) =>
     withStringArgumentStyledComponentAsOther,
     withStyledComponentsAsOtherWithComponentDefinedAfterInstantiation,
     withStringArgumentStyledComponentsAsOtherWithComponentDefinedAfterInstantiation,
+    withCustomComponent,
+    withCustomComponentAttrs,
   ]
     .map(makeRuleMaker)
     .map((x) => x(args));
