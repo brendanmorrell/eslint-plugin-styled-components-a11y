@@ -33,8 +33,6 @@ const areaError =
 
 const inputImageError =
   '<input> elements with type="image" must have a text alternative through the `alt`, `aria-label`, or `aria-labelledby` prop.';
-const imgAltTextError =
-  'img elements must have an alt prop, either with meaningful text, or an empty string for decorative images.';
 
 const ruleName = 'alt-text';
 const rule = makeRule(ruleName);
@@ -222,14 +220,12 @@ const imgAriaLabelStr = makeStyledTestCases({
   props: 'aria-label="foo"',
   attrs: '{ "aria-label": "foo" }',
   tag: 'img',
-  errors: [imgAltTextError],
 });
 // { code: '<img aria-labelledby="id1" />' },
 const imgAriaLabelByStr = makeStyledTestCases({
   props: 'aria-labelledby="id1"',
   attrs: '{ "aria-labelledby": "id1" }',
   tag: 'img',
-  errors: [imgAltTextError],
 });
 
 // ## INVALID
