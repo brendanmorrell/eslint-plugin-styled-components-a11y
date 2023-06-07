@@ -10,7 +10,7 @@ const ruleName = 'no-access-key';
 const rule = makeRule(ruleName);
 
 const errorMessage =
-  'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard comments used by screenreader and keyboard only users create a11y complications.';
+  'No access key attribute allowed. Inconsistencies between keyboard shortcuts and keyboard commands used by screenreaders and keyboard-only users create a11y complications.';
 
 // ## VALID
 const noAccessKey = makeStyledTestCases();
