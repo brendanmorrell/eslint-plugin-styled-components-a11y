@@ -9,7 +9,7 @@ const makeStyledTestCases = require('../utils/makeStyledTestCases');
 const ruleName = 'no-static-element-interactions';
 const rule = makeRule(ruleName);
 
-const expectedError = 'Static HTML elements with event handlers require a role.';
+const expectedError = 'Avoid non-native interactive elements. If using native HTML is not possible, add an appropriate role and support for tabbing, mouse, keyboard, and touch inputs to an interactive content element.';
 
 // ## VALID
 // <button onClick={() => 0} className="foo" />

@@ -4,7 +4,7 @@ const ruleTester = new RuleTester();
 const makeStyledTestCases = require('../utils/makeStyledTestCases');
 
 const expectedError = {
-  message: 'An element that manages focus with `aria-activedescendant` must be tabbable',
+  message: 'An element that manages focus with `aria-activedescendant` must have a tabindex',
   type: 'JSXOpeningElement',
 };
 
@@ -72,6 +72,24 @@ const inputAriaActivedescendantJsxVarTabIndexZero = makeStyledTestCases({
   props: 'aria-activedescendant={someID} tabIndex={0}',
   tag: 'input',
 });
+// <div aria-activedescendant={someID} tabIndex={-1} />
+const divAriaActiveDescendantNegativeTabIndex = makeStyledTestCases({
+  attrs: "{ 'aria-activedescendant':someID, tabIndex:-1 }",
+  props: 'aria-activedescendant={someID} tabIndex={-1}',
+  tag: 'div',
+});
+// <div aria-activedescendant={someID} tabIndex="-1" />
+const divAriaActiveDescendantNegativeTabIndexString = makeStyledTestCases({
+  attrs: `{ 'aria-activedescendant':someID, tabIndex:"-1" }`,
+  props: 'aria-activedescendant={someID} tabIndex="-1"',
+  tag: 'div',
+});
+// <input aria-activedescendant={someID} tabIndex={-1} />
+const inputAriaActiveDescendantNegative = makeStyledTestCases({
+  attrs: `{ 'aria-activedescendant':someID, tabIndex:-1 }`,
+  props: 'aria-activedescendant={someID} tabIndex={-1}',
+  tag: 'input',
+});
 
 //  ##INVALID
 // <div aria-activedescendant={someID} />
@@ -79,27 +97,6 @@ const divAriaActiveDescendant = makeStyledTestCases({
   attrs: "{ 'aria-activedescendant':someID }",
   props: 'aria-activedescendant={someID}',
   tag: 'div',
-  errors: [expectedError],
-});
-// <div aria-activedescendant={someID} tabIndex={-1} />
-const divAriaActiveDescendantNegativeTabIndex = makeStyledTestCases({
-  attrs: "{ 'aria-activedescendant':someID, tabIndex:-1 }",
-  props: 'aria-activedescendant={someID} tabIndex={-1}',
-  tag: 'div',
-  errors: [expectedError],
-});
-// <div aria-activedescendant={someID} tabIndex="-1" />
-const divAriaActiveDescendantNegativeTabIndexString = makeStyledTestCases({
-  attrs: `{ 'aria-activedescendant':someID, tabIndex:"-1" }`,
-  props: 'aria-activedescendant={someID} tabIndex="-1"',
-  tag: 'div',
-  errors: [expectedError],
-});
-// <input aria-activedescendant={someID} tabIndex={-1} />
-const inputAriaActiveDescendantNegative = makeStyledTestCases({
-  attrs: `{ 'aria-activedescendant':someID, tabIndex:-1 }`,
-  props: 'aria-activedescendant={someID} tabIndex={-1}',
-  tag: 'input',
   errors: [expectedError],
 });
 
@@ -117,11 +114,11 @@ ruleTester.run(ruleName, rule, {
     ...divAriaActivedescendantJsxVarTabIndexOne,
     ...inputAriaActivedescendantJsxVar,
     ...inputAriaActivedescendantJsxVarTabIndexZero,
-  ],
-  invalid: [
-    ...divAriaActiveDescendant,
     ...divAriaActiveDescendantNegativeTabIndex,
     ...divAriaActiveDescendantNegativeTabIndexString,
     ...inputAriaActiveDescendantNegative,
+  ],
+  invalid: [
+    ...divAriaActiveDescendant,
   ],
 });
