@@ -1,3 +1,8 @@
+## 2.1.0 (June 16th, 2023)
+
+- [added](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/commit/9861ed1849117677cabea80a45cda5a392d6cc70)
+  Adds support for checking as specified element for [Custom Components](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/53).
+
 ## 2.0.1 (April 27th, 2023)
 
 - [added](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/commit/769b31661d399141d0ab242485b7a33f3f513e1e) extends plugin:jsx-a11y to index configuration now that airbnb config is removed, fixing issue with missing
