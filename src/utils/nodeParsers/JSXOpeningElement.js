@@ -35,7 +35,8 @@ module.exports = (context, styledComponents, rule, name) => ({
             range: originalNodeName.range,
             parent: originalNodeName.parent,
           };
-
+          // if we haven't discovered what type of tag the component is based off, bail
+          if (!(asProp || tag)) return;
           rule.create(context).JSXOpeningElement(node);
         } finally {
           node.name = originalNodeName;

@@ -50,6 +50,8 @@ module.exports = (context, styledComponents, rule, name) => ({
               parent: nodeNameProperties.parent,
             };
             atr.parent.attributes = allAttrs;
+            // if we haven't discovered what type of tag the component is based off, bail
+            if (!(asProp || tag)) return;
             rule.create(context).JSXAttribute(atr, func);
           } finally {
             atr.loc = originalAtrLoc;

@@ -1,7 +1,6 @@
 const { rules } = require('eslint-plugin-jsx-a11y');
 const path = require('path');
 
-const { inspect } = require('util');
 const collectStyledComponentData = require(process.env.NODE_ENV === 'test'
   ? '../../lib/utils/collectStyledComponentData.js'
   : './collectStyledComponentData');
@@ -17,16 +16,16 @@ module.exports = (name) => ({
     const parserMapping = {
       JSXOpeningElement: 'JSXOpeningElement',
       JSXElement: 'JSXElement',
-      JSXAttribute: 'JSXOpeningElement'
+      JSXAttribute: 'JSXOpeningElement',
     };
     const parsedElement = parserMapping[ruleNameToTypeDict[name]];
     return {
-      ...(collectStyledComponentData(styledComponents, context, name)),
+      ...collectStyledComponentData(styledComponents, context, name),
       [parsedElement]: (node) => nodesArray.push(node),
-      "Program:exit": () => {
+      'Program:exit': () => {
         const parser = require(nodeParserPath)(context, styledComponents, rule, name);
-        nodesArray.forEach((node) => parser[parsedElement](node))
-      }
+        nodesArray.forEach((node) => parser[parsedElement](node));
+      },
     };
   },
 });
