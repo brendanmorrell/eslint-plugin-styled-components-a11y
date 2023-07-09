@@ -1,3 +1,9 @@
+## 2.1.3 (July 9th, 2023)
+
+- [fixed](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/commit/b1e8fbd92a6c016f7744abea7413968255b149b2)
+  bug with combined component objects (such as animated.div) which would end up causin html-has-lang and
+  iframe-has-title errors to show where they shouldn't have.
+
 ## 2.1.1 (July 9th, 2023)
 
 - [fixed](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/commit/b1e8fbd92a6c016f7744abea7413968255b149b2)
