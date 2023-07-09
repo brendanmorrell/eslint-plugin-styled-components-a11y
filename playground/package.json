@@ -19,6 +19,6 @@
     "eslint": "^7.1.0",
     "eslint-config-airbnb": "17.1.0",
     "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-styled-components-a11y": "file:.."
+    "eslint-plugin-styled-components-a11y": "file:../"
   }
 }

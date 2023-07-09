@@ -1,6 +1,6 @@
 const parserOptionsMapper = require('./parserOptionsMapper');
 
-const getCustomComponentName = tag => tag.toUpperCase();
+const getCustomComponentName = (tag) => tag.toUpperCase();
 
 const makeRuleMaker =
   (func) =>
@@ -9,7 +9,7 @@ const makeRuleMaker =
     const code = func(args);
 
     const settings = {
-      "jsx-a11y": {
+      'jsx-a11y': {
         components: {
           [getCustomComponentName(tag)]: tag,
         },
@@ -30,6 +30,13 @@ const regular = ({ tag, props, children, siblings }) =>
 const withStringArgument = ({ tag, props, children, siblings }) =>
   `
   const STYLED = styled('${tag}')\`\`;
+  const Func = () => ${
+    children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
+  };
+`;
+const withCombinedComponentObject = ({ tag, props, children, siblings }) =>
+  `
+  const STYLED = styled(animated.${tag})\`\`;
   const Func = () => ${
     children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
   };
@@ -143,6 +150,7 @@ const makeStyledTestCases = (args) =>
     regular,
     regularAsObject,
     withStringArgument,
+    withCombinedComponentObject,
     withStyledAttrs,
     withStringArgumentAndAttrs,
     withStyledComponent,

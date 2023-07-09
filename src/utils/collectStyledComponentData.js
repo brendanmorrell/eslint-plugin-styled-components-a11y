@@ -9,6 +9,8 @@ const isStyledStringArgumentFuncWithAttrs = (node) =>
 const isStyledComponentArgumentFuncWithAttrs = (node) =>
   isStyledFuncWithAttrs(node) && node.tag.callee?.object?.arguments?.[0]?.type === 'Identifier';
 
+const styledCallElementObjectMapArgumentTag = (node) => node.tag?.arguments?.[0]?.property?.name;
+
 const isPlainSTE = (node) => node.tag.type === 'MemberExpression' && node.tag?.object?.name === 'styled';
 const isAttrs = ({ tag }) => tag.callee?.property?.name === 'attrs';
 
@@ -27,6 +29,8 @@ const { __UNKNOWN_IDENTIFER__ } = require('./constants');
 
 module.exports = (styledComponentsDict, context, name) => ({
   TaggedTemplateExpression(node) {
+    const func = (inspectee) =>
+      name.includes('html-has-lang') && context.report(node, `made it here: ${inspect(inspectee || node)}`);
     let scName = node.parent.id && node.parent.id.name;
 
     if (!scName) {
@@ -39,12 +43,15 @@ module.exports = (styledComponentsDict, context, name) => ({
 
     let attrs = [];
     let tag = '';
-    const func = (inspectee) => name.includes('anchor-is-valid') && context.report(node, inspect(inspectee || node));
 
     // styled(Component)`` || styled.div.attrs(...)`` || styled('div')``
     if (isStyledCallExpression(node)) {
+      // styled(animated.div)``
+      if (styledCallElementObjectMapArgumentTag(node)) {
+        tag = styledCallElementObjectMapArgumentTag(node);
+      }
       // styled('div')``;
-      if (isStyledFuncStringArgument(node)) {
+      else if (isStyledFuncStringArgument(node)) {
         tag = node.tag.arguments?.[0]?.value || '';
       }
 
@@ -98,6 +105,7 @@ module.exports = (styledComponentsDict, context, name) => ({
         } else if (attrsType === 'object') {
           attrsPropertiesArr = attrsNode?.properties || [];
         }
+
         const arithmeticUnaryOperators = ['+', '-'];
         // filter out spread elements (which have no key nor value)
         attrs = attrs.concat(
@@ -131,6 +139,7 @@ module.exports = (styledComponentsDict, context, name) => ({
 
       styledComponentsDict[scName] = { name: scName, attrs, tag };
     }
+
     // const A = styled.div``
     if (isPlainSTE(node)) {
       tag = node.tag.property.name;
