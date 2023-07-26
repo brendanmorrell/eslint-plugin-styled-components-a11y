@@ -1,3 +1,8 @@
+## 2.1.31 (July 9th, 2023)
+
+- [add](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/58)
+  eslint to peer dependencies
+
 ## 2.1.3 (July 9th, 2023)
 
 - [fixed](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/commit/1a5243062cbe95bd3423dd7e2b00411893e24053)
