@@ -1,3 +1,8 @@
+## 2.1.32 (January 27th, 2024)
+
+- [update](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/60)
+  yarn lock
+
 ## 2.1.31 (July 9th, 2023)
 
 - [add](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/58)
