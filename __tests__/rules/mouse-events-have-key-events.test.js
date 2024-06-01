@@ -1,10 +1,8 @@
 const mouseOverError = {
   message: 'onMouseOver must be accompanied by onFocus for accessibility.',
-  type: 'JSXOpeningElement',
 };
 const mouseOutError = {
   message: 'onMouseOut must be accompanied by onBlur for accessibility.',
-  type: 'JSXOpeningElement',
 };
 
 const { RuleTester } = require('eslint');
