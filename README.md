@@ -168,14 +168,16 @@ const Component = () => <Component>some text</Component>;
 - the same thing but using an extended component
 
 ```jsx
-const FUNC = styled.a.attrs({ onClick: () => 0, onKeyDown: foo })`; const Extended = styled(FUNC)`;
+const FUNC = styled.a.attrs({ onClick: () => 0, onKeyDown: foo })``;
+const Extended = styled(FUNC)``;
 const Component = () => <Extended>some text</Extended>;
 ```
 
 - the same thing but with the as prop (the initial component is just anything other than what you put in as the tag)
 
 ```jsx
-const FUNC = styled.div.attrs({ onClick: () => 0, onKeyDown: foo })`; const Extended = styled(FUNC)`;
+const FUNC = styled.div.attrs({ onClick: () => 0, onKeyDown: foo })``;
+const Extended = styled(FUNC)``;
 const Component = () => <Extended as="a">some text</Extended>;
 ```
 
