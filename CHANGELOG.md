@@ -1,4 +1,4 @@
-## 2.1.33 (Jun 1st, 2024)
+## 2.1.34 (Jun 1st, 2024)
 
 - [fix tests](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/64)
 
