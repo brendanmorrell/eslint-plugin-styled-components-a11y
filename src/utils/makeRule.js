@@ -8,6 +8,7 @@ const collectStyledComponentData = require(process.env.NODE_ENV === 'test'
 const ruleNameToTypeDict = require('./ruleNameToTypeDict');
 
 module.exports = (name) => ({
+  meta: rules[name]?.meta,
   create(context) {
     const nodeParserPath = path.join(__dirname, 'nodeParsers', ruleNameToTypeDict[name]);
     const rule = rules[name];
