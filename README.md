@@ -72,7 +72,7 @@ or
 
     npm i --save-dev eslint-plugin-styled-components-a11y
 
-### Configuration
+### Configuration - Legacy Config (`.eslintrc`)
 
 Add styled-components-a11y to the plugins section of your .eslintrc configuration file. You can omit the eslint-plugin- prefix:
 
@@ -98,6 +98,41 @@ Alternatively, you can configure individual rules under the rules section.
     "styled-components-a11y/rule-name": 2
   }
 }
+```
+
+### Configuration - Flat Config
+
+The default export is a plugin object:
+
+```js
+import styledA11y from 'eslint-plugin-styled-components-a11y';
+
+export default [
+  {
+    plugins: {
+      'styled-components-a11y': styledA11y,
+    },
+    rules: {
+      'styled-components-a11y/rule-name': 2,
+    },
+  },
+];
+```
+
+#### Shareable Configs
+
+There are two shareable configs provided by the plugin:
+
+- `flatConfigs.recommended`
+- `flatConfigs.strict`
+
+```js
+import styledA11y from 'eslint-plugin-styled-components-a11y';
+
+export default [
+  styledA11y.flatConfigs.recommended,
+  // ... additional configs
+];
 ```
 
 ## Examples
