@@ -1,6 +1,8 @@
+const { name, version } = require('../package.json');
 const makeRule = require('./utils/makeRule');
 
-module.exports = {
+const pluginBase = {
+  meta: { name, version },
   rules: {
     'accessible-emoji': makeRule('accessible-emoji'),
     'alt-text': makeRule('alt-text'),
@@ -39,205 +41,219 @@ module.exports = {
     scope: makeRule('scope'),
     'tabindex-no-positive': makeRule('tabindex-no-positive'),
   },
-  configs: {
-    recommended: {
-      plugins: ['styled-components-a11y'],
-      extends: ['plugin:jsx-a11y/recommended'],
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
-        },
-      },
-      rules: {
-        'styled-components-a11y/alt-text': 'error',
-        'styled-components-a11y/anchor-has-content': 'error',
-        'styled-components-a11y/anchor-is-valid': 'error',
-        'styled-components-a11y/aria-activedescendant-has-tabindex': 'error',
-        'styled-components-a11y/aria-props': 'error',
-        'styled-components-a11y/aria-proptypes': 'error',
-        'styled-components-a11y/aria-role': 'error',
-        'styled-components-a11y/aria-unsupported-elements': 'error',
-        'styled-components-a11y/autocomplete-valid': 'error',
-        'styled-components-a11y/click-events-have-key-events': 'error',
-        'styled-components-a11y/control-has-associated-label': [
-          'off',
-          {
-            ignoreElements: ['audio', 'canvas', 'embed', 'input', 'textarea', 'tr', 'video'],
-            ignoreRoles: [
-              'grid',
-              'listbox',
-              'menu',
-              'menubar',
-              'radiogroup',
-              'row',
-              'tablist',
-              'toolbar',
-              'tree',
-              'treegrid',
-            ],
-            includeRoles: ['alert', 'dialog'],
-          },
-        ],
-        'styled-components-a11y/heading-has-content': 'error',
-        'styled-components-a11y/html-has-lang': 'error',
-        'styled-components-a11y/iframe-has-title': 'error',
-        'styled-components-a11y/img-redundant-alt': 'error',
-        'styled-components-a11y/interactive-supports-focus': [
-          'error',
-          {
-            tabbable: ['button', 'checkbox', 'link', 'searchbox', 'spinbutton', 'switch', 'textbox'],
-          },
-        ],
-        'styled-components-a11y/label-has-associated-control': 'error',
-        'styled-components-a11y/label-has-for': 'off',
-        'styled-components-a11y/media-has-caption': 'error',
-        'styled-components-a11y/mouse-events-have-key-events': 'error',
-        // 'styled-components-a11y/no-access-key': 'error',
-        'styled-components-a11y/no-autofocus': 'error',
-        'styled-components-a11y/no-distracting-elements': 'error',
-        'styled-components-a11y/no-interactive-element-to-noninteractive-role': [
-          'error',
-          {
-            tr: ['none', 'presentation'],
-            canvas: ['img'],
-          },
-        ],
-        'styled-components-a11y/no-noninteractive-element-interactions': [
-          'error',
-          {
-            handlers: [
-              'onClick',
-              'onError',
-              'onLoad',
-              'onMouseDown',
-              'onMouseUp',
-              'onKeyPress',
-              'onKeyDown',
-              'onKeyUp',
-            ],
-            alert: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
-            body: ['onError', 'onLoad'],
-            dialog: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
-            iframe: ['onError', 'onLoad'],
-            img: ['onError', 'onLoad'],
-          },
-        ],
-        'styled-components-a11y/no-noninteractive-element-to-interactive-role': [
-          'error',
-          {
-            ul: ['listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid'],
-            ol: ['listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid'],
-            li: ['menuitem', 'option', 'row', 'tab', 'treeitem'],
-            table: ['grid'],
-            td: ['gridcell'],
-            fieldset: ['radiogroup', 'presentation'],
-          },
-        ],
-        'styled-components-a11y/no-noninteractive-tabindex': [
-          'error',
-          {
-            tags: [],
-            roles: ['tabpanel'],
-            allowExpressionValues: true,
-          },
-        ],
-        'styled-components-a11y/no-redundant-roles': 'error',
-        'styled-components-a11y/no-static-element-interactions': [
-          'error',
-          {
-            allowExpressionValues: true,
-            handlers: ['onClick', 'onMouseDown', 'onMouseUp', 'onKeyPress', 'onKeyDown', 'onKeyUp'],
-          },
-        ],
-        'styled-components-a11y/role-has-required-aria-props': 'error',
-        'styled-components-a11y/role-supports-aria-props': 'error',
-        'styled-components-a11y/scope': 'error',
-        'styled-components-a11y/tabindex-no-positive': 'error',
+};
+
+const configs = {
+  recommended: {
+    plugins: ['styled-components-a11y'],
+    extends: ['plugin:jsx-a11y/recommended'],
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true,
       },
     },
-    strict: {
-      plugins: ['styled-components-a11y'],
-      extends: ['plugin:jsx-a11y/strict'],
-      parserOptions: {
-        ecmaFeatures: {
-          jsx: true,
+    rules: {
+      'styled-components-a11y/alt-text': 'error',
+      'styled-components-a11y/anchor-has-content': 'error',
+      'styled-components-a11y/anchor-is-valid': 'error',
+      'styled-components-a11y/aria-activedescendant-has-tabindex': 'error',
+      'styled-components-a11y/aria-props': 'error',
+      'styled-components-a11y/aria-proptypes': 'error',
+      'styled-components-a11y/aria-role': 'error',
+      'styled-components-a11y/aria-unsupported-elements': 'error',
+      'styled-components-a11y/autocomplete-valid': 'error',
+      'styled-components-a11y/click-events-have-key-events': 'error',
+      'styled-components-a11y/control-has-associated-label': [
+        'off',
+        {
+          ignoreElements: ['audio', 'canvas', 'embed', 'input', 'textarea', 'tr', 'video'],
+          ignoreRoles: [
+            'grid',
+            'listbox',
+            'menu',
+            'menubar',
+            'radiogroup',
+            'row',
+            'tablist',
+            'toolbar',
+            'tree',
+            'treegrid',
+          ],
+          includeRoles: ['alert', 'dialog'],
         },
+      ],
+      'styled-components-a11y/heading-has-content': 'error',
+      'styled-components-a11y/html-has-lang': 'error',
+      'styled-components-a11y/iframe-has-title': 'error',
+      'styled-components-a11y/img-redundant-alt': 'error',
+      'styled-components-a11y/interactive-supports-focus': [
+        'error',
+        {
+          tabbable: ['button', 'checkbox', 'link', 'searchbox', 'spinbutton', 'switch', 'textbox'],
+        },
+      ],
+      'styled-components-a11y/label-has-associated-control': 'error',
+      'styled-components-a11y/label-has-for': 'off',
+      'styled-components-a11y/media-has-caption': 'error',
+      'styled-components-a11y/mouse-events-have-key-events': 'error',
+      // 'styled-components-a11y/no-access-key': 'error',
+      'styled-components-a11y/no-autofocus': 'error',
+      'styled-components-a11y/no-distracting-elements': 'error',
+      'styled-components-a11y/no-interactive-element-to-noninteractive-role': [
+        'error',
+        {
+          tr: ['none', 'presentation'],
+          canvas: ['img'],
+        },
+      ],
+      'styled-components-a11y/no-noninteractive-element-interactions': [
+        'error',
+        {
+          handlers: ['onClick', 'onError', 'onLoad', 'onMouseDown', 'onMouseUp', 'onKeyPress', 'onKeyDown', 'onKeyUp'],
+          alert: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
+          body: ['onError', 'onLoad'],
+          dialog: ['onKeyUp', 'onKeyDown', 'onKeyPress'],
+          iframe: ['onError', 'onLoad'],
+          img: ['onError', 'onLoad'],
+        },
+      ],
+      'styled-components-a11y/no-noninteractive-element-to-interactive-role': [
+        'error',
+        {
+          ul: ['listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid'],
+          ol: ['listbox', 'menu', 'menubar', 'radiogroup', 'tablist', 'tree', 'treegrid'],
+          li: ['menuitem', 'option', 'row', 'tab', 'treeitem'],
+          table: ['grid'],
+          td: ['gridcell'],
+          fieldset: ['radiogroup', 'presentation'],
+        },
+      ],
+      'styled-components-a11y/no-noninteractive-tabindex': [
+        'error',
+        {
+          tags: [],
+          roles: ['tabpanel'],
+          allowExpressionValues: true,
+        },
+      ],
+      'styled-components-a11y/no-redundant-roles': 'error',
+      'styled-components-a11y/no-static-element-interactions': [
+        'error',
+        {
+          allowExpressionValues: true,
+          handlers: ['onClick', 'onMouseDown', 'onMouseUp', 'onKeyPress', 'onKeyDown', 'onKeyUp'],
+        },
+      ],
+      'styled-components-a11y/role-has-required-aria-props': 'error',
+      'styled-components-a11y/role-supports-aria-props': 'error',
+      'styled-components-a11y/scope': 'error',
+      'styled-components-a11y/tabindex-no-positive': 'error',
+    },
+  },
+  strict: {
+    plugins: ['styled-components-a11y'],
+    extends: ['plugin:jsx-a11y/strict'],
+    parserOptions: {
+      ecmaFeatures: {
+        jsx: true,
       },
-      rules: {
-        'styled-components-a11y/alt-text': 'error',
-        'styled-components-a11y/anchor-has-content': 'error',
-        'styled-components-a11y/anchor-is-valid': 'error',
-        'styled-components-a11y/aria-activedescendant-has-tabindex': 'error',
-        'styled-components-a11y/aria-props': 'error',
-        'styled-components-a11y/aria-proptypes': 'error',
-        'styled-components-a11y/aria-role': 'error',
-        'styled-components-a11y/aria-unsupported-elements': 'error',
-        'styled-components-a11y/autocomplete-valid': 'error',
-        'styled-components-a11y/click-events-have-key-events': 'error',
-        'styled-components-a11y/control-has-associated-label': [
-          'off',
-          {
-            ignoreElements: ['audio', 'canvas', 'embed', 'input', 'textarea', 'tr', 'video'],
-            ignoreRoles: [
-              'grid',
-              'listbox',
-              'menu',
-              'menubar',
-              'radiogroup',
-              'row',
-              'tablist',
-              'toolbar',
-              'tree',
-              'treegrid',
-            ],
-            includeRoles: ['alert', 'dialog'],
-          },
-        ],
-        'styled-components-a11y/heading-has-content': 'error',
-        'styled-components-a11y/html-has-lang': 'error',
-        'styled-components-a11y/iframe-has-title': 'error',
-        'styled-components-a11y/img-redundant-alt': 'error',
-        'styled-components-a11y/interactive-supports-focus': [
-          'error',
-          {
-            tabbable: [
-              'button',
-              'checkbox',
-              'link',
-              'progressbar',
-              'searchbox',
-              'slider',
-              'spinbutton',
-              'switch',
-              'textbox',
-            ],
-          },
-        ],
-        'styled-components-a11y/label-has-for': 'off',
-        'styled-components-a11y/label-has-associated-control': 'error',
-        'styled-components-a11y/media-has-caption': 'error',
-        'styled-components-a11y/mouse-events-have-key-events': 'error',
-        'styled-components-a11y/no-access-key': 'error',
-        'styled-components-a11y/no-autofocus': 'error',
-        'styled-components-a11y/no-distracting-elements': 'error',
-        'styled-components-a11y/no-interactive-element-to-noninteractive-role': 'error',
-        'styled-components-a11y/no-noninteractive-element-interactions': [
-          'error',
-          {
-            body: ['onError', 'onLoad'],
-            iframe: ['onError', 'onLoad'],
-            img: ['onError', 'onLoad'],
-          },
-        ],
-        'styled-components-a11y/no-noninteractive-element-to-interactive-role': 'error',
-        'styled-components-a11y/no-noninteractive-tabindex': 'error',
-        'styled-components-a11y/no-redundant-roles': 'error',
-        'styled-components-a11y/no-static-element-interactions': 'error',
-        'styled-components-a11y/role-has-required-aria-props': 'error',
-        'styled-components-a11y/role-supports-aria-props': 'error',
-        'styled-components-a11y/scope': 'error',
-        'styled-components-a11y/tabindex-no-positive': 'error',
-      },
+    },
+    rules: {
+      'styled-components-a11y/alt-text': 'error',
+      'styled-components-a11y/anchor-has-content': 'error',
+      'styled-components-a11y/anchor-is-valid': 'error',
+      'styled-components-a11y/aria-activedescendant-has-tabindex': 'error',
+      'styled-components-a11y/aria-props': 'error',
+      'styled-components-a11y/aria-proptypes': 'error',
+      'styled-components-a11y/aria-role': 'error',
+      'styled-components-a11y/aria-unsupported-elements': 'error',
+      'styled-components-a11y/autocomplete-valid': 'error',
+      'styled-components-a11y/click-events-have-key-events': 'error',
+      'styled-components-a11y/control-has-associated-label': [
+        'off',
+        {
+          ignoreElements: ['audio', 'canvas', 'embed', 'input', 'textarea', 'tr', 'video'],
+          ignoreRoles: [
+            'grid',
+            'listbox',
+            'menu',
+            'menubar',
+            'radiogroup',
+            'row',
+            'tablist',
+            'toolbar',
+            'tree',
+            'treegrid',
+          ],
+          includeRoles: ['alert', 'dialog'],
+        },
+      ],
+      'styled-components-a11y/heading-has-content': 'error',
+      'styled-components-a11y/html-has-lang': 'error',
+      'styled-components-a11y/iframe-has-title': 'error',
+      'styled-components-a11y/img-redundant-alt': 'error',
+      'styled-components-a11y/interactive-supports-focus': [
+        'error',
+        {
+          tabbable: [
+            'button',
+            'checkbox',
+            'link',
+            'progressbar',
+            'searchbox',
+            'slider',
+            'spinbutton',
+            'switch',
+            'textbox',
+          ],
+        },
+      ],
+      'styled-components-a11y/label-has-for': 'off',
+      'styled-components-a11y/label-has-associated-control': 'error',
+      'styled-components-a11y/media-has-caption': 'error',
+      'styled-components-a11y/mouse-events-have-key-events': 'error',
+      'styled-components-a11y/no-access-key': 'error',
+      'styled-components-a11y/no-autofocus': 'error',
+      'styled-components-a11y/no-distracting-elements': 'error',
+      'styled-components-a11y/no-interactive-element-to-noninteractive-role': 'error',
+      'styled-components-a11y/no-noninteractive-element-interactions': [
+        'error',
+        {
+          body: ['onError', 'onLoad'],
+          iframe: ['onError', 'onLoad'],
+          img: ['onError', 'onLoad'],
+        },
+      ],
+      'styled-components-a11y/no-noninteractive-element-to-interactive-role': 'error',
+      'styled-components-a11y/no-noninteractive-tabindex': 'error',
+      'styled-components-a11y/no-redundant-roles': 'error',
+      'styled-components-a11y/no-static-element-interactions': 'error',
+      'styled-components-a11y/role-has-required-aria-props': 'error',
+      'styled-components-a11y/role-supports-aria-props': 'error',
+      'styled-components-a11y/scope': 'error',
+      'styled-components-a11y/tabindex-no-positive': 'error',
+    },
+  },
+};
+
+const flatConfigBase = {
+  languageOptions: { parserOptions: configs.parserOptions },
+  plugins: { 'styled-components-a11y': pluginBase },
+};
+
+module.exports = {
+  ...pluginBase,
+  configs,
+  flatConfigs: {
+    recommended: {
+      ...flatConfigBase,
+      name: 'styled-components-a11y/recommended',
+      rules: configs.recommended.rules,
+    },
+    strict: {
+      ...flatConfigBase,
+      name: 'styled-components-a11y/strict',
+      rules: configs.strict.rules,
     },
   },
 };
