@@ -1,4 +1,8 @@
-## 2.1.34 (Jun 1st, 2024)
+## 2.1.35 (July 10th, 2024)
+
+- [make compatible with eslint ^9](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/66)
+
+## 2.1.34 (June 1st, 2024)
 
 - [fix tests](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/64)
 
