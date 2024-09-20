@@ -143,7 +143,7 @@ a working repo can be found [here](https://github.com/brendanmorrell/styled-comp
 
 ## With your help, we can increase web accessibility for all!
 
-If you like the project and believe in the goal, it would bea **HUGE** help if you could **[give it a star on github](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y)** ans/or spread the word on
+If you like the project and believe in the goal, it would bea **HUGE** help if you could **[give it a star on github](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y)** and/or spread the word on
 social/with coworkers so we could get more people using it, testing it, and contributing (any bump would help, as this
 is solely a pet project of mine, and I have limited time to work on it).
 
