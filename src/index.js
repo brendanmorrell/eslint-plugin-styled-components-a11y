@@ -43,15 +43,17 @@ const pluginBase = {
   },
 };
 
+const parserOptions = {
+  ecmaFeatures: {
+    jsx: true,
+  },
+};
+
 const configs = {
   recommended: {
     plugins: ['styled-components-a11y'],
     extends: ['plugin:jsx-a11y/recommended'],
-    parserOptions: {
-      ecmaFeatures: {
-        jsx: true,
-      },
-    },
+    parserOptions,
     rules: {
       'styled-components-a11y/alt-text': 'error',
       'styled-components-a11y/anchor-has-content': 'error',
@@ -153,11 +155,7 @@ const configs = {
   strict: {
     plugins: ['styled-components-a11y'],
     extends: ['plugin:jsx-a11y/strict'],
-    parserOptions: {
-      ecmaFeatures: {
-        jsx: true,
-      },
-    },
+    parserOptions,
     rules: {
       'styled-components-a11y/alt-text': 'error',
       'styled-components-a11y/anchor-has-content': 'error',
@@ -237,8 +235,8 @@ const configs = {
 };
 
 const flatConfigBase = {
-  languageOptions: { parserOptions: configs.parserOptions },
   plugins: { 'styled-components-a11y': pluginBase },
+  languageOptions: { parserOptions },
 };
 
 module.exports = {
