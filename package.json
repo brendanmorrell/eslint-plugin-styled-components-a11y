@@ -37,6 +37,10 @@
     "css in js"
   ],
   "author": "https://github.com/brendanmorrell",
+  "repository": {
+    "url": "https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y",
+    "type": "git"
+  },
   "license": "ISC",
   "dependencies": {
     "@babel/parser": "^7.8.4",
