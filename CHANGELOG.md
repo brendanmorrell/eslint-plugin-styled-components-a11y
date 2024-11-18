@@ -1,3 +1,7 @@
+## 2.1.36 (November 17th, 2024)
+
+- [fix parserOptions error for recommended config in eslint 9](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/68)
+
 ## 2.1.35 (July 10th, 2024)
 
 - [make compatible with eslint ^9](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/66)
