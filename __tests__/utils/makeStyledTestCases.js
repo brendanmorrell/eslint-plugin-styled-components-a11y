@@ -34,6 +34,20 @@ const withStringArgument = ({ tag, props, children, siblings }) =>
     children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
   };
 `;
+const withObjectArgument = ({ tag, props, children, siblings }) =>
+  `
+  const STYLED = styled('${tag}')({ color: 'blue' });
+  const Func = () => ${
+    children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
+  };
+`;
+const withObjectArgumentAsExpression = ({ tag, props, children, siblings }) =>
+  `
+  const STYLED = styled.${tag}({ color: 'blue' });
+  const Func = () => ${
+    children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
+  };
+`;
 const withCombinedComponentObject = ({ tag, props, children, siblings }) =>
   `
   const STYLED = styled(animated.${tag})\`\`;
@@ -139,6 +153,14 @@ const withCustomComponent = ({ tag, props, children, siblings }) =>
   };
 `;
 
+const withCustomComponentAndObject = ({ tag, props, children, siblings }) =>
+  `
+  const STYLED = styled(${getCustomComponentName(tag)})({});
+  const Func = () => ${
+    children ? `<>${siblings}<STYLED ${props}>${children}</STYLED></>` : `<>${siblings}<STYLED ${props} /></>`
+  };
+`;
+
 const withCustomComponentAttrs = ({ tag, attrs, children, siblings }) =>
   `
   const STYLED = styled(${getCustomComponentName(tag)}).attrs(${attrs})\`\`;
@@ -150,6 +172,8 @@ const makeStyledTestCases = (args) =>
     regular,
     regularAsObject,
     withStringArgument,
+    withObjectArgument,
+    withObjectArgumentAsExpression,
     withCombinedComponentObject,
     withStyledAttrs,
     withStringArgumentAndAttrs,
@@ -162,6 +186,7 @@ const makeStyledTestCases = (args) =>
     withStyledComponentsAsOtherWithComponentDefinedAfterInstantiation,
     withStringArgumentStyledComponentsAsOtherWithComponentDefinedAfterInstantiation,
     withCustomComponent,
+    withCustomComponentAndObject,
     withCustomComponentAttrs,
   ]
     .map(makeRuleMaker)
