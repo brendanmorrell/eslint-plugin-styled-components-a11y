@@ -40,8 +40,9 @@ const ButtonAsDiv = styled.button({});
 ```
 
 ```jsx
-const CustomComponent = styled(Component)({});
-<CustomComponent />;
+const Div = styled.div``;
+const CustomComponent = styled(Div)({});
+<CustomComponent onClick={() => null} />;
 ```
 
 Elements can also be defined within objects:
@@ -207,7 +208,7 @@ const Component = () => (
 
 ```jsx
 const FUNC = styled.a.attrs({ onClick: () => 0, onKeyDown: foo })``;
-const Component = () => <Component>some text</Component>;
+const Component = () => <FUNC>some text</FUNC>;
 ```
 
 - the same thing but using an extended component
