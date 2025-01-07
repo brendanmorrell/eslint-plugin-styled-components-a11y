@@ -1,3 +1,7 @@
+## 2.2.0 (anuary 7th, 2025)
+
+- [Add support for object styles syntax](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/70)
+
 ## 2.1.36 (November 17th, 2024)
 
 - [fix parserOptions error for recommended config in eslint 9](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/68)
