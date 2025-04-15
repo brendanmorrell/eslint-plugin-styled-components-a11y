@@ -1,6 +1,50 @@
 const { name, version } = require('../package.json');
 const makeRule = require('./utils/makeRule');
 
+/**
+ * @typedef {Object} Rule
+ * @property {string} meta - Metadata about the rule.
+ * @property {Function} create - Function to create the rule.
+ */
+
+/**
+ * @typedef {Object} PluginBase
+ * @property {Object} meta - Metadata about the plugin.
+ * @property {string} meta.name - The name of the plugin.
+ * @property {string} meta.version - The version of the plugin.
+ * @property {Object<string, Rule>} rules - The rules provided by the plugin.
+ */
+
+/**
+ * @typedef {Object} ParserOptions
+ * @property {Object} ecmaFeatures - ECMAScript features configuration.
+ * @property {boolean} ecmaFeatures.jsx - Whether JSX is enabled.
+ */
+
+/**
+ * @typedef {Object} Config
+ * @property {string[]} plugins - List of plugins used in the configuration.
+ * @property {string[]} extends - List of configurations to extend.
+ * @property {ParserOptions} parserOptions - Parser options for the configuration.
+ * @property {Object<string, string | [string, Object]>} rules - Rules defined in the configuration.
+ */
+
+/**
+ * @typedef {Object} FlatConfig
+ * @property {string} name - The name of the configuration.
+ * @property {Object<string, PluginBase>} plugins - The plugins used in the configuration.
+ * @property {Object} languageOptions - The language options for the configuration.
+ * @property {ParserOptions} languageOptions.parserOptions - Parser options for the configuration.
+ * @property {Object<string, string | [string, Object]>} rules - Rules defined in the configuration.
+ */
+
+/**
+ * @typedef {Object} ModuleExports
+ * @property {PluginBase} meta - Metadata about the plugin.
+ * @property {Object<string, Config>} configs - The configurations provided by the plugin.
+ * @property {Object<string, FlatConfig>} flatConfigs - The flat configurations provided by the plugin.
+ */
+
 const pluginBase = {
   meta: { name, version },
   rules: {
@@ -239,7 +283,7 @@ const flatConfigBase = {
   languageOptions: { parserOptions },
 };
 
-module.exports = {
+module.exports = /** @type {ModuleExports} */ ({
   ...pluginBase,
   configs,
   flatConfigs: {
@@ -254,4 +298,4 @@ module.exports = {
       rules: configs.strict.rules,
     },
   },
-};
+});
