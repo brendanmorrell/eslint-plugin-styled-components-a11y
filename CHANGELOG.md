@@ -1,4 +1,8 @@
-## 2.2.0 (anuary 7th, 2025)
+## 2.2.1 (May 6th, 2025)
+
+- [Add types for flat config](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/commit/3550795e2bafd9a06f40dfd3e66cdf14881a2dea)
+
+## 2.2.0 (January 7th, 2025)
 
 - [Add support for object styles syntax](https://github.com/brendanmorrell/eslint-plugin-styled-components-a11y/pull/70)
 
